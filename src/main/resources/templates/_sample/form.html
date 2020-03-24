@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>
+    <a th:href="@{/}">トップに戻る</a>
+</p>
+<!--/*@thymesVar id="action" type="example.domain.model._sample.Action"*/-->
+<form th:action="@{/sample}" method="post" th:object="${action}">
+    <input type="text" th:field="*{name}">
+    <input type="submit">
+
+</form>
+<ul>
+    <!--/*@thymesVar id="actions" type="example.domain.model._sample.Actions"*/-->
+    <li th:each="each : ${actions.list()}">
+        <!--/*@thymesVar id="each" type="example.domain.model._sample.Action"*/-->
+        <a th:text="${each.show()}"></a>
+ </li>
+</ul>
+</body>
+</html>
