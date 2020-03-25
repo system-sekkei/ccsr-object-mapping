@@ -1,4 +1,4 @@
-package example.datasource._sample;
+package example.infrastructure.datasource._sample;
 
 import example.application._sample.ActionRepository;
 import example.domain.model._sample.Action;
@@ -20,7 +20,6 @@ public class ActionDatasource implements ActionRepository {
     @Override
     public Actions listActions() {
         List<Action> result = actionMapper.list();
-        System.out.println(result);
         return new Actions(result);
     }
 

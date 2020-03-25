@@ -1,4 +1,4 @@
-package example.datasource._sample;
+package example.infrastructure.datasource._sample;
 
 import example.domain.model._sample.Action;
 import org.apache.ibatis.annotations.Mapper;
