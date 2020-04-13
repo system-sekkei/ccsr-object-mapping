@@ -22,16 +22,20 @@ public class SampleController {
         this.actionService = actionService;
     }
 
-    @GetMapping
-    String form(Model model) {
-        Actions actions = actionService.listActions();
-        model.addAttribute("actions", actions);
-        return "_sample/form";
-    }
 
     @ModelAttribute("action")
     Action action() {
         return new Action("既定のアクション");
+    }
+
+    @ModelAttribute("actions")
+    Actions actions() {
+        return actionService.listActions();
+    }
+
+    @GetMapping
+    String form(Model model) {
+        return "_sample/form";
     }
 
     @PostMapping
@@ -39,7 +43,10 @@ public class SampleController {
             @Validated @ModelAttribute("action") Action action,
             BindingResult bindingResult,
             Model model) {
+        if (bindingResult.hasErrors()) return "_sample/form";
+
         actionService.register(action);
+        // 登録後の一覧を再取得してモデルを更新
         Actions actions = actionService.listActions();
         model.addAttribute("actions", actions);
         return "_sample/form";

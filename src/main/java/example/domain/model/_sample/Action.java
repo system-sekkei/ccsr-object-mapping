@@ -1,8 +1,10 @@
 package example.domain.model._sample;
 
+import javax.validation.constraints.NotEmpty;
 import java.util.UUID;
 
 public class Action {
+    @NotEmpty(message = "入力必須")
     String name;
     String identity = UUID.randomUUID().toString().substring(0,6).toUpperCase();
 

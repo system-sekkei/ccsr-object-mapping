@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>商品の一覧</title>
+    <link th:replace="_fragments/head :: css">
 </head>
 <body>
 <p>
     <a th:href="@{/}">トップに戻る</a>
 
 </p>
-<h1>商品に一覧（新し順）</h1>
+<h1>商品の一覧（新しい順）</h1>
 <!--/*@thymesVar id="productList" type="example.domain.model.product.ProductList"*/-->
 <p th:text="${productList}"></p>
 <p th:text="${productList.count()}"></p>

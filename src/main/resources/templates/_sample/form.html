@@ -2,24 +2,40 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>入力フォームの例</title>
+    <!-- /templates/_frments/head.html で定義した部品と置き換える -->
+    <link th:replace="_fragments/head :: css">
 </head>
 <body>
 <p>
     <a th:href="@{/}">トップに戻る</a>
 </p>
-<!--/*@thymesVar id="action" type="example.domain.model._sample.Action"*/-->
-<form th:action="@{/sample}" method="post" th:object="${action}">
-    <input type="text" th:field="*{name}">
-    <input type="submit">
+<!--/*
+th:action属性　リンクURL式 (@{...}を指定すると、変数式 ${...}を使って動的に組み立て可能
+静的に記述する場合は、action属性でよい
+(HTML5から)　from要素のaction属性は省略可能。現在のURLがデフォルトのaction属性になる
 
+th:object属性　選択変数式 *{...} の親, Spring MVC Modelの属性名を指定する
+th:field属性　変数式　${...}または 選択変数記法 *{...}でバインドするフィールドを指定
+変数式 ${...}はSpring MVC Modelのキー名からフルで指定
+選択変数式 *{...}は Spring MVC Modelのキー名は th:object属性して指定して、th:field属性では省略する
+*/-->
+<!--/*@thymesVar id="action" type="example.domain.model._sample.Action"*/-->
+<form th:object="${action}" method="post">
+    <fieldset>
+        <legend>アクションの登録</legend>
+        <label>アクション内容</label>
+        <input type="text" th:field="*{name}">
+        <mark><span th:errors="*{name}"></span></mark>
+        <input type="submit">
+    </fieldset>
 </form>
 <ul>
     <!--/*@thymesVar id="actions" type="example.domain.model._sample.Actions"*/-->
     <li th:each="each : ${actions.list()}">
         <!--/*@thymesVar id="each" type="example.domain.model._sample.Action"*/-->
         <a th:text="${each.show()}"></a>
- </li>
+    </li>
 </ul>
 </body>
 </html>

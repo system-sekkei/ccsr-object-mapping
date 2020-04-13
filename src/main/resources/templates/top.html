@@ -2,10 +2,17 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>トップ</title>
+    <link th:replace="_fragments/head :: css">
 </head>
 <body>
-<a th:href="@{/sample}">サンプル画面</a>
-<a th:href="@{/products}">商品一覧</a>
+<ul>
+    <li>
+        <a th:href="@{/sample}">サンプル画面</a>
+    </li>
+    <li>
+        <a th:href="@{/products}">商品一覧</a>
+    </li>
+</ul>
 </body>
 </html>
