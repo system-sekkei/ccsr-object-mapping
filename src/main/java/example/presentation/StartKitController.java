@@ -1,6 +1,6 @@
 package example.presentation;
 
-import example.application.service.ProductService;
+import example.application.service.StarterKitService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,16 +8,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/products")
-public class ProductController {
-    ProductService productService;
+public class StartKitController {
+    StarterKitService starterKitService;
 
-    public ProductController(ProductService productService) {
-        this.productService = productService;
+    public StartKitController(StarterKitService starterKitService) {
+        this.starterKitService = starterKitService;
     }
 
     @GetMapping("")
     String listAll(Model model) {
-        model.addAttribute("productList", productService.listAll());
+        model.addAttribute("startKitList", starterKitService.listAll());
         return "product/list";
     }
 }

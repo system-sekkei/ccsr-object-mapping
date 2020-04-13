@@ -1,7 +1,7 @@
 package example.infrastructure.datasource.product;
 
-import example.domain.identity.ProductNumber;
-import example.domain.model.product.Product;
+import example.domain.identity.KitNumber;
+import example.domain.model.product.StarterKit;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -11,9 +11,8 @@ import java.util.List;
  */
 
 @Mapper // ← データアクセスオブジェクトを自動生成するアノテーション
+public interface StarterKitMapper {
+    List<StarterKit> listAll();
 
-public interface ProductMapper {
-    List<Product> listAll();
-
-    Product findBy(ProductNumber productNumber);
+    StarterKit findBy(KitNumber kitNumber);
 }

@@ -8,14 +8,17 @@
 <body>
 <p>
     <a th:href="@{/}">トップに戻る</a>
-
 </p>
-<h1>商品の一覧（新しい順）</h1>
-<!--/*@thymesVar id="productList" type="example.domain.model.product.ProductList"*/-->
-<p th:text="${productList}"></p>
-<p th:text="${productList.count()}"></p>
+<h1>栽培キットの一覧（新しい順）</h1>
+<!--/*
+Spring MVC Modelの表示
+th:text属性に変数式 ${...}で、Modelに追加したattribute名を参照する
+*/-->
+<!--/*@thymesVar id="startKitList" type="example.domain.model.product.StarterKitList"*/-->
+<p th:text="${startKitList}"></p>
+<p th:text="${startKitList.count()}"></p>
 <ul>
-    <li th:each="each : ${productList.asList()}">
+    <li th:each="each : ${startKitList.asList()}">
         <span th:text="${each}"></span>
     </li>
 </ul>

@@ -5,14 +5,14 @@ import example.infrastructure.identity.IdentityGenerator;
 /**
  * 商品番号
  */
-public class ProductNumber {
+public class KitNumber {
     String value;
 
-    private ProductNumber(String value) {
+    private KitNumber(String value) {
         this.value = value;
     }
 
-    private ProductNumber() {};
+    private KitNumber() {};
 
     @Override
     public String toString() {
@@ -20,7 +20,7 @@ public class ProductNumber {
     }
 
     static String format = "PN-%s-%sx";
-    public static ProductNumber numbering() {
-        return new ProductNumber(IdentityGenerator.generate(format));
+    public static KitNumber numbering() {
+        return new KitNumber(IdentityGenerator.generate(format));
     }
 }

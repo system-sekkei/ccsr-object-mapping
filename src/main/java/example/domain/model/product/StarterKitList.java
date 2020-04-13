@@ -3,10 +3,10 @@ package example.domain.model.product;
 import java.util.Collections;
 import java.util.List;
 
-public class ProductList {
-    List<Product> list;
+public class StarterKitList {
+    List<StarterKit> list;
 
-    private ProductList(List<Product> source) {
+    private StarterKitList(List<StarterKit> source) {
         list = source;
     }
 
@@ -15,7 +15,7 @@ public class ProductList {
         return String.format("%d点", list.size());
     }
 
-    public List<Product> asList() {
+    public List<StarterKit> asList() {
         return list;
     }
 
@@ -26,11 +26,11 @@ public class ProductList {
                 '}';
     }
 
-    public static ProductList from(List<Product> source) {
-        return new ProductList(source);
+    public static StarterKitList from(List<StarterKit> source) {
+        return new StarterKitList(source);
     }
 
-    public static ProductList empty() {
-        return new ProductList(Collections.emptyList());
+    public static StarterKitList empty() {
+        return new StarterKitList(Collections.emptyList());
     }
 }
