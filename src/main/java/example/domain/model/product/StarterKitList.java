@@ -3,6 +3,9 @@ package example.domain.model.product;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * 栽培キット一覧
+ */
 public class StarterKitList {
     List<StarterKit> list;
 

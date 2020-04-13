@@ -1,6 +1,6 @@
 package example.domain.model.product;
 
-import example.domain.primivites.Feature;
+import example.domain.type.Feature;
 
 import java.util.List;
 

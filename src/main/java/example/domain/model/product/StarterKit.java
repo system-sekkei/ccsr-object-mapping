@@ -1,9 +1,9 @@
 package example.domain.model.product;
 
 import example.domain.identity.KitNumber;
-import example.domain.primivites.Cover;
-import example.domain.primivites.DateOfSeed;
-import example.domain.primivites.Type;
+import example.domain.type.Cover;
+import example.domain.type.DateOfSeed;
+import example.domain.type.Type;
 
 /**
  * ハーブ栽培キット

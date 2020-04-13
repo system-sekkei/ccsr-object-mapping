@@ -17,6 +17,9 @@ public class StarterKitService {
         this.starterKitRepository = starterKitRepository;
     }
 
+    /**
+     * キットを一覧する
+     */
     public StarterKitList listAll() {
         return starterKitRepository.listAll();
     }

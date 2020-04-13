@@ -6,6 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/**
+ * 栽培キット画面
+ */
 @Controller
 @RequestMapping("/products")
 public class StartKitController {

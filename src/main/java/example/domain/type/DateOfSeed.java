@@ -1,4 +1,4 @@
-package example.domain.primivites;
+package example.domain.type;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
