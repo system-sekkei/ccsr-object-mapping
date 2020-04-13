@@ -5,7 +5,7 @@ VALUES
 ;
 
 INSERT INTO 商品.栽培キット
-(キット番号,種まき日)
+(キット番号,種まき日,カバー,種類)
 VALUES
-('PN-X123-Y9',CURRENT_DATE - 10)
+('PN-X123-Y9',CURRENT_DATE - 10,'無','プラスチック')
 ;

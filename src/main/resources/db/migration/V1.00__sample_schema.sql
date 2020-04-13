@@ -12,5 +12,7 @@ CREATE SCHEMA 商品;
 CREATE TABLE 商品.栽培キット
 (
     キット番号 CHARACTER (10) PRIMARY KEY,
-    種まき日 DATE NOT NULL
+    種まき日 DATE NOT NULL,
+    カバー CHAR (1) NOT NULL,
+    種類 VARCHAR (6)
 )

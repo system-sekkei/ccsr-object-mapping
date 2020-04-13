@@ -1,7 +1,5 @@
 package example.domain.identity;
 
-import example.infrastructure.identity.IdentityGenerator;
-
 /**
  * 商品番号
  */

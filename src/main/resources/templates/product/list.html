@@ -22,5 +22,28 @@ th:text属性に変数式 ${...}で、Modelに追加したattribute名を参照�
         <span th:text="${each}"></span>
     </li>
 </ul>
+
+<h2>栽培キット一覧</h2>
+
+<table>
+    <thead>
+    <tr>
+        <th>種まき日</th>
+        <th>カバー</th>
+        <th>種類</th>
+        <th>Features</th>
+        <th>Rows</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="each : ${startKitList.asList()}">
+        <td th:text="${each.dateOfSeed()}"></td>
+        <td th:text="${each.cover()}"></td>
+        <td th:text="${each.type()}"></td>
+        <td></td>
+        <td></td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>
