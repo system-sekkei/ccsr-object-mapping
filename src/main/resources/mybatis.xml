@@ -6,4 +6,9 @@
   <settings>
     <setting name="mapUnderscoreToCamelCase" value="true"/>
   </settings>
+
+  <typeAliases>
+    <package name="example.domain.model.product"/>
+    <package name="example.domain.type"/>
+  </typeAliases>
 </configuration>

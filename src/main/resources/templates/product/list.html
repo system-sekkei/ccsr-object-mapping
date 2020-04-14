@@ -30,7 +30,7 @@ th:text属性に変数式 ${...}で、Modelに追加したattribute名を参照�
     <tr>
         <th>種まき日</th>
         <th>カバー</th>
-        <th>種類</th>
+        <th>素材</th>
         <th>特徴</th>
         <th>Rows</th>
     </tr>
@@ -40,7 +40,7 @@ th:text属性に変数式 ${...}で、Modelに追加したattribute名を参照�
         <td th:text="${each.dateOfSeed()}"></td>
         <td th:text="${each.cover()}"></td>
         <td th:text="${each.type()}"></td>
-        <td></td>
+        <td th:text="${each.features()}"></td>
         <td></td>
     </tr>
     </tbody>

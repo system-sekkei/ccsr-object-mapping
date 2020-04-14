@@ -11,13 +11,12 @@ public class Action {
     public Action(String name) {
         this.name = name;
     }
-    public Action() {
-
-    }
+    public Action() {}
     public String show() {
         return String.format("%s (%s)", name, identity);
     }
 
+    public String getName() { return name;}
     @Override
     public String toString() {
         return "Action{" +

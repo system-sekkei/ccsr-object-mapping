@@ -9,6 +9,7 @@ version '1.0-SNAPSHOT'
 
 sourceCompatibility = '1.8'
 
+//　myBatisのMapper.xmlを、Mapper.javaと同じディレクトリに置く
 sourceSets {
     main {
         resources.srcDirs = ["src/main/java", "src/main/resources"]
@@ -41,3 +42,6 @@ test {
 
 [compileJava, processResources]*.shouldRunAfter(clean)
 jigReports.dependsOn(clean, classes)
+
+def defaultEncoding = 'UTF-8'
+tasks.withType(org.springframework.boot.gradle.tasks.run.BootRun) { defaultCharacterEncoding = defaultEncoding }

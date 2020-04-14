@@ -1,9 +1,10 @@
-package example.infrastructure.datasource.product;
+package example.infrastructure.datasource.product.kit;
 
 import example.application.repository.StarterKitRepository;
 import example.domain.identity.KitNumber;
 import example.domain.model.product.StarterKit;
 import example.domain.model.product.StarterKitList;
+import example.infrastructure.datasource.product.feature.FeatureMapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -12,10 +13,12 @@ import java.util.List;
 public class StarterKitDatasource implements StarterKitRepository {
 
     StarterKitMapper starterKitMapper;
+    FeatureMapper featureMapper;
 
     @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
-    public StarterKitDatasource(StarterKitMapper starterKitMapper) {
+    public StarterKitDatasource(StarterKitMapper starterKitMapper, FeatureMapper featureMapper) {
         this.starterKitMapper = starterKitMapper;
+        this.featureMapper = featureMapper;
     }
 
     @Override

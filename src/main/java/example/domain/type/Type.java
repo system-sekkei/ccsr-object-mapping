@@ -5,5 +5,5 @@ package example.domain.type;
  */
 public enum Type {
     プラスチック,
-    木
+    木製
 }

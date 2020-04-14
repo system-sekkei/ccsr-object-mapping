@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="example.infrastructure.datasource.product.feature.FeatureMapper">
+    <select id="featuresFor" resultType="Feature">
+        SELECT
+            特徴
+        FROM 商品.キットの特徴
+        WHERE
+            キット番号 = #{value}
+        ORDER BY
+          順序番号 ASC
+    </select>
+</mapper>

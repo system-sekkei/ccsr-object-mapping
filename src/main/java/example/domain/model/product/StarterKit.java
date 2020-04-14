@@ -3,7 +3,10 @@ package example.domain.model.product;
 import example.domain.identity.KitNumber;
 import example.domain.type.Cover;
 import example.domain.type.DateOfSeed;
+import example.domain.type.Feature;
 import example.domain.type.Type;
+
+import java.util.List;
 
 /**
  * ハーブ栽培キット
@@ -14,7 +17,13 @@ public class StarterKit {
     Cover cover;
     Type type;
 
+    Features features;
+
     public StarterKit() {}
+
+    public KitNumber kitNumber() {
+        return kitNumber;
+    }
 
     public String dateOfSeed() {
         return dateOfSeed.when();
@@ -28,6 +37,9 @@ public class StarterKit {
         return type;
     }
 
+    public String features() {
+        return features.show();
+    }
     @Override
     public String toString() {
         return "StarterKit{" +
@@ -35,6 +47,7 @@ public class StarterKit {
                 ", dateOfSeed=" + dateOfSeed +
                 ", cover=" + cover +
                 ", type=" + type +
+                ", features=" + features +
                 '}';
     }
 }

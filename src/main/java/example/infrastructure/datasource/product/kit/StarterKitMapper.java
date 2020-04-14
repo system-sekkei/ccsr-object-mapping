@@ -1,4 +1,4 @@
-package example.infrastructure.datasource.product;
+package example.infrastructure.datasource.product.kit;
 
 import example.domain.identity.KitNumber;
 import example.domain.model.product.StarterKit;
