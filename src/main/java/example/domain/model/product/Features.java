@@ -5,6 +5,9 @@ import example.domain.type.Feature;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 特徴
+ */
 public class Features {
     List<Feature> list;
 

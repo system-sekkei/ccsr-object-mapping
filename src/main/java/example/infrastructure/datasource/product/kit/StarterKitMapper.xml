@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="example.infrastructure.datasource.product.kit.StarterKitMapper">
+<!--    ↑ namespace属性は、対尾する Mapperインタフェース名を指定する-->
+
+    <resultMap id="kit" type="example.domain.model.product.StarterKit">
+        <collection property="features.list" column="kitNumber.value" ofType="example.domain.type.Feature"
+                    select="example.infrastructure.datasource.product.feature.FeatureMapper.featuresFor"/>
+            <!-- フィールド List<Feature> features に、kitNumber.valueを検索キーにした SQL featuresFor の実行結果を設定する        -->
+    </resultMap>
+<!-- as句でフィールドへのパスを指定すると、resultMapの記述を省略できる -->
+    <select id="listAll" resultMap="kit">
+        SELECT
+            キット番号 as "kitNumber.value",
+            種まき日 as "dateOfSeed.value",
+            カバー as "cover",
+               種類 as "type"
+        FROM 商品.栽培キット
+        ORDER BY 種まき日 ASC
+    </select>
+
+    <select id="findBy" resultType="example.domain.model.product.StarterKit"> -- 完全修飾名
+        SELECT
+            キット番号 as "kitNumber.value",
+            種まき日 as "dateOfSeed.value"
+        FROM 商品.栽培キット
+        WHERE
+            キット番号 = #{value}
+    </select>
+</mapper>
