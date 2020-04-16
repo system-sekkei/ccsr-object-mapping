@@ -8,6 +8,10 @@ import java.util.List;
 public class Rows {
     List<Row> list;
 
+    public List<Row> asList() {
+        return list;
+    }
+
     @Override
     public String toString() {
         return "Rows{" +

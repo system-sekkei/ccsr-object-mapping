@@ -10,9 +10,11 @@
 
     <select id="rowsFor" resultType="&列;">
         SELECT
-            品種番号 as "variety.varietyNumber.value",
+            品種.品種番号 as "variety.varietyNumber.value",
+            品種.名前 as "variety.name",
             種の数 as "seedsPerCell"
         FROM 商品.列
+        INNER JOIN 商品.品種 ON 列.品種番号 = 品種.品種番号
         WHERE
             キット番号 = #{value}
         ORDER BY

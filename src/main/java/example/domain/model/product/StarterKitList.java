@@ -24,7 +24,7 @@ public class StarterKitList {
 
     @Override
     public String toString() {
-        return "ProductList{" +
+        return "StarterKitList{" +
                 "list=" + list +
                 '}';
     }

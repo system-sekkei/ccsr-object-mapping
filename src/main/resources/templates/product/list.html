@@ -14,14 +14,12 @@
 Spring MVC Modelの表示
 th:text属性に変数式 ${...}で、Modelに追加したattribute名を参照する
 */-->
+
+<!--/* 型注釈 : 参照しているモデルの型をIntelliJ IDEAに認識させる */-->
 <!--/*@thymesVar id="startKitList" type="example.domain.model.product.StarterKitList"*/-->
+<h2>デバッグ情報</h2>
 <p th:text="${startKitList}"></p>
 <p th:text="${startKitList.count()}"></p>
-<ul>
-    <li th:each="each : ${startKitList.asList()}">
-        <span th:text="${each}"></span>
-    </li>
-</ul>
 
 <h2>栽培キット一覧</h2>
 
@@ -41,7 +39,17 @@ th:text属性に変数式 ${...}で、Modelに追加したattribute名を参照�
         <td th:text="${each.cover()}"></td>
         <td th:text="${each.type()}"></td>
         <td th:text="${each.features()}"></td>
-        <td></td>
+        <td>
+            <table>
+                <tbody>
+                <tr th:each="row,rowStat : ${each.rows()}">
+                    <td th:text="${rowStat.count}">1</td>
+                    <td th:text="${row.variety()}">タイム</td>
+                    <td th:text="${row.seedsPerCell()}">12</td>
+                </tr>
+                </tbody>
+            </table>
+        </td>
     </tr>
     </tbody>
 </table>

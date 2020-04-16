@@ -2,9 +2,12 @@ package example.domain.model.product;
 
 import example.domain.identity.KitNumber;
 import example.domain.model.product.feature.Features;
+import example.domain.model.product.row.Row;
 import example.domain.model.product.row.Rows;
 import example.domain.type.Cover;
 import example.domain.type.Type;
+
+import java.util.List;
 
 /**
  * ハーブ栽培キット
@@ -38,6 +41,10 @@ public class StarterKit {
 
     public String features() {
         return features.show();
+    }
+
+    public List<Row> rows() {
+        return rows.asList();
     }
 
     @Override
