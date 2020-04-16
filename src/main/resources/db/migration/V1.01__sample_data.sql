@@ -34,19 +34,19 @@ INSERT INTO 商品.品種
 INSERT INTO 商品.栽培キット
     (キット番号, 種まき日, カバー, 種類)
 VALUES
-   ('PN-X123-Y9', CURRENT_DATE - 10, '無', 'プラスチック')
+   ('KN-X123-Y9XD', CURRENT_DATE - 10, '無', 'プラスチック')
     ;
 
 INSERT INTO 商品.キットの特徴
   (キット番号,順序番号,特徴)
 VALUES
-  ('PN-X123-Y9',1, '肥料'),
-  ('PN-X123-Y9',2, 'PH調整剤')
+  ('KN-X123-Y9XD',1, '肥料'),
+  ('KN-X123-Y9XD',2, 'PH調整剤')
   ;
 
 INSERT INTO 商品.列
 (キット番号,列番号,品種番号,種の数)
 VALUES
-('PN-X123-Y9',1,'SN-1234', 10),
-('PN-X123-Y9',2,'SN-040Z', 5)
+('KN-X123-Y9XD',1,'SN-1234', 10),
+('KN-X123-Y9XD',2,'SN-040Z', 5)
 ;

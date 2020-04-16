@@ -10,14 +10,14 @@ public class KitNumber {
         this.value = value;
     }
 
-    private KitNumber() {};
+    public KitNumber() {};
 
     @Override
     public String toString() {
         return value;
     }
 
-    static String format = "PN-%s-%sx";
+    static String format = "KN-%s-%s";
     public static KitNumber numbering() {
         return new KitNumber(IdentityGenerator.generate(format));
     }

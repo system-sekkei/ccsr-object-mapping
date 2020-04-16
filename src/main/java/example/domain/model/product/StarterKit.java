@@ -21,6 +21,10 @@ public class StarterKit {
     Features features;
     Rows rows;
 
+    private StarterKit(KitNumber kitNumber) {
+        this.kitNumber = kitNumber;
+    }
+
     public StarterKit() {}
 
     public KitNumber kitNumber() {
@@ -57,5 +61,9 @@ public class StarterKit {
                 ", features=" + features +
                 ", rows=" + rows +
                 '}';
+    }
+
+    public static StarterKit prototype() {
+        return new StarterKit(KitNumber.numbering());
     }
 }

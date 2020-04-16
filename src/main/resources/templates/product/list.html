@@ -16,10 +16,10 @@ th:text属性に変数式 ${...}で、Modelに追加したattribute名を参照�
 */-->
 
 <!--/* 型注釈 : 参照しているモデルの型をIntelliJ IDEAに認識させる */-->
-<!--/*@thymesVar id="startKitList" type="example.domain.model.product.StarterKitList"*/-->
+<!--/*@thymesVar id="starterKitList" type="example.domain.model.product.StarterKitList"*/-->
 <h2>デバッグ情報</h2>
-<p th:text="${startKitList}"></p>
-<p th:text="${startKitList.count()}"></p>
+<p th:text="${starterKitList}"></p>
+<p th:text="${starterKitList.count()}"></p>
 
 <h2>栽培キット一覧</h2>
 
@@ -34,7 +34,7 @@ th:text属性に変数式 ${...}で、Modelに追加したattribute名を参照�
     </tr>
     </thead>
     <tbody>
-    <tr th:each="each : ${startKitList.asList()}">
+    <tr th:each="each : ${starterKitList.asList()}">
         <td th:text="${each.dateOfSeed()}"></td>
         <td th:text="${each.cover()}"></td>
         <td th:text="${each.type()}"></td>
@@ -53,5 +53,16 @@ th:text属性に変数式 ${...}で、Modelに追加したattribute名を参照�
     </tr>
     </tbody>
 </table>
+
+<div>
+    <h2>栽培キットの追加</h2>
+    <p th:text="${starterKit}"></p>
+    <form action="#" th:action="@{/products}" th:object="${starterKit}" method="post">
+        <fieldset>
+            <input type="text" th:field="*{kitNumber.value}">
+            <button type="submit" name="register">登録する</button>
+        </fieldset>
+    </form>
+</div>
 </body>
 </html>
