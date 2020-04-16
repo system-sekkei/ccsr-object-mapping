@@ -1,4 +1,4 @@
-package example.domain.type;
+package example.domain.model.product;
 
 import org.springframework.format.annotation.DateTimeFormat;
 

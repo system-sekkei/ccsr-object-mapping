@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd"
+        [
+        <!ENTITY 名前空間 "example.infrastructure.datasource.product.row.RowMapper">
+        <!ENTITY 列 "example.domain.model.product.row.Row">
+        ]>
+<mapper namespace="&名前空間;">
+
+    <select id="rowsFor" resultType="&列;">
+        SELECT
+            品種番号 as "variety.varietyNumber.value",
+            種の数 as "seedsPerCell"
+        FROM 商品.列
+        WHERE
+            キット番号 = #{value}
+        ORDER BY
+          列番号 ASC
+    </select>
+
+</mapper>

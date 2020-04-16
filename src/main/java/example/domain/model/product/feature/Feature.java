@@ -1,4 +1,4 @@
-package example.domain.type;
+package example.domain.model.product.feature;
 
 /**
  * 特徴

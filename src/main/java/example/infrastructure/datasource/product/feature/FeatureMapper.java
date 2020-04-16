@@ -1,8 +1,7 @@
 package example.infrastructure.datasource.product.feature;
 
 import example.domain.identity.KitNumber;
-import example.domain.model.product.StarterKit;
-import example.domain.type.Feature;
+import example.domain.model.product.feature.Feature;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

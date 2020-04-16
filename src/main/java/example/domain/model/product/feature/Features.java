@@ -1,6 +1,4 @@
-package example.domain.model.product;
-
-import example.domain.type.Feature;
+package example.domain.model.product.feature;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +9,7 @@ import java.util.List;
 public class Features {
     List<Feature> list;
 
-    String show() {
+    public String show() {
         List<String> result = new ArrayList<>();
         for (Feature each : list) result.add(each.toString());
         return String.join("、", result);
