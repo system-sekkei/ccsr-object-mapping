@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
  * 種をまいた日
  */
 public class DateOfSeed {
-    @NotNull
+    @NotNull(message = "必須")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     LocalDate value;
 

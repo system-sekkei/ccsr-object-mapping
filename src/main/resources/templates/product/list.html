@@ -17,9 +17,11 @@ th:text属性に変数式 ${...}で、Modelに追加したattribute名を参照�
 
 <!--/* 型注釈 : 参照しているモデルの型をIntelliJ IDEAに認識させる */-->
 <!--/*@thymesVar id="starterKitList" type="example.domain.model.product.StarterKitList"*/-->
+<div th:if="false">
 <h2>デバッグ情報</h2>
 <p th:text="${starterKitList}"></p>
 <p th:text="${starterKitList.count()}"></p>
+</div>
 
 <h2>栽培キット一覧</h2>
 
@@ -36,7 +38,7 @@ th:text属性に変数式 ${...}で、Modelに追加したattribute名を参照�
     <tbody>
     <tr th:each="each : ${starterKitList.asList()}">
         <td th:text="${each.dateOfSeed()}"></td>
-        <td th:text="${each.cover()}"></td>
+        <td th:text="${each.covered()}"></td>
         <td th:text="${each.type()}"></td>
         <td th:text="${each.features()}"></td>
         <td>
@@ -56,11 +58,65 @@ th:text属性に変数式 ${...}で、Modelに追加したattribute名を参照�
 
 <div>
     <h2>栽培キットの追加</h2>
-    <p th:text="${starterKit}"></p>
     <form action="#" th:action="@{/products}" th:object="${starterKit}" method="post">
+        <mark th:if="${#fields.hasAnyErrors()}"><span>エラーがあります</span></mark>
         <fieldset>
+            <p>
             <input type="text" th:field="*{kitNumber.value}">
-            <button type="submit" name="register">登録する</button>
+            </p>
+
+            <p>
+            <label th:for="dateOfSeed.value">種を植えた日</label>
+            <input type="date" th:field="*{dateOfSeed.value}">
+            <mark><span th:errors="*{dateOfSeed.value}"></span></mark>
+            </p>
+
+            <!-- booleanではなく2値の列挙型で対応の試み -->
+            <!-- th:field 以外に value の明示的な設定が必要 -->
+            <!-- 未選択の送信に hidden で同じnameで valueの既定値を設定 -->
+            <!-- アンダースコア（_fieldName)に対応した処理は、
+                Spring MVC WebDataBinder#getEmptyValue() booleanかコレクションのみ -->
+            <!-- todo th:checkedがうまく動作しない -->
+            <p>
+            <!--　checkbox のidの生成 -->
+            <label th:for="${#ids.next('covered')}">カバー</label>
+            <input type="hidden" name="covered" value="無"/> <!--/* チェックされないときの既定値 */-->
+            <input type="checkbox" value="有" th:field="*{covered}"/>
+            <mark><span th:errors="*{covered}"></span></mark>
+            </p>
+
+            <p>
+            <label>素材</label>
+            <div th:with="element='radio'">
+            <ul th:if="${element == 'radio'}" style="list-style-type: none">
+                <li th:each="each : ${allTypes}">
+                    <input type="radio" th:field="*{type}" th:value="${each}" />
+                    <label th:for="${#ids.prev('type')}" th:text="${each}">Wireframe</label>
+                </li>
+                <mark><span th:errors="*{type}"></span></mark>
+            </ul>
+            <select th:if="${element == 'select'}"
+                    th:field="*{type}">
+                <option th:each="each : ${allTypes}"
+                        th:value="${each}"
+                        th:text="${each}">Wireframe</option>
+            </select>
+            </div>
+                </p>
+
+
+            <p>
+            <label>特徴</label>
+            <ul style="list-style-type: none">
+            <li th:each="each : ${allFeatures}">
+            <input type="checkbox" th:field="*{features.list}" th:value="${each}" />
+            <label th:for="${#ids.prev('features.list')}"
+            th:text="${each}"></label>
+            </li>
+            </ul>
+            </p>
+
+            <input type="submit" value="登録する">
         </fieldset>
     </form>
 </div>

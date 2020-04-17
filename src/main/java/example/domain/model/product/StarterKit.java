@@ -4,9 +4,12 @@ import example.domain.identity.KitNumber;
 import example.domain.model.product.feature.Features;
 import example.domain.model.product.row.Row;
 import example.domain.model.product.row.Rows;
-import example.domain.type.Cover;
+import example.domain.type.Covered;
 import example.domain.type.Type;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -14,8 +17,11 @@ import java.util.List;
  */
 public class StarterKit {
     KitNumber kitNumber;
+    @Valid
     DateOfSeed dateOfSeed;
-    Cover cover;
+    @NotNull
+    Covered covered = Covered.無;
+    @NotNull(message = "必須")
     Type type;
 
     Features features;
@@ -35,8 +41,11 @@ public class StarterKit {
         return dateOfSeed.when();
     }
 
-    public Cover cover() {
-        return cover;
+    public Covered covered() {
+        return covered;
+    }
+    public boolean isCovered() {
+        return covered.isCovered();
     }
 
     public Type type() {
@@ -56,7 +65,7 @@ public class StarterKit {
         return "StarterKit{" +
                 "kitNumber=" + kitNumber +
                 ", dateOfSeed=" + dateOfSeed +
-                ", cover=" + cover +
+                ", covered=" + covered +
                 ", type=" + type +
                 ", features=" + features +
                 ", rows=" + rows +
