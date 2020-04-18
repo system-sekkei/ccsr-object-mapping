@@ -62,7 +62,7 @@ as句でフィールドへのパスを指定すると、resultMapのproperty要�
         SELECT
             キット番号 as "kitNumber.value",
             種まき日 as "dateOfSeed.value",
-            カバー as "cover",
+            カバー as "covered",
             種類 as "type"
         FROM 商品.栽培キット
         ORDER BY 種まき日 ASC

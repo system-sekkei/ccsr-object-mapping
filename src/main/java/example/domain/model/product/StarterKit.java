@@ -16,16 +16,16 @@ import java.util.List;
  * ハーブ栽培キット
  */
 public class StarterKit {
-    KitNumber kitNumber;
+    KitNumber kitNumber = KitNumber.numbering();
     @Valid
-    DateOfSeed dateOfSeed;
-    @NotNull
+    DateOfSeed dateOfSeed = DateOfSeed.today();
     Covered covered = Covered.無;
     @NotNull(message = "必須")
-    Type type;
+    Type type = Type.プラスチック;
 
+    @NotNull
     Features features;
-    Rows rows;
+    Rows rows = new Rows();
 
     private StarterKit(KitNumber kitNumber) {
         this.kitNumber = kitNumber;
@@ -44,9 +44,6 @@ public class StarterKit {
     public Covered covered() {
         return covered;
     }
-    public boolean isCovered() {
-        return covered.isCovered();
-    }
 
     public Type type() {
         return type;
@@ -60,6 +57,10 @@ public class StarterKit {
         return rows.asList();
     }
 
+    public void addRow() {
+        rows.addRow();
+    }
+
     @Override
     public String toString() {
         return "StarterKit{" +
@@ -70,9 +71,5 @@ public class StarterKit {
                 ", features=" + features +
                 ", rows=" + rows +
                 '}';
-    }
-
-    public static StarterKit prototype() {
-        return new StarterKit(KitNumber.numbering());
     }
 }

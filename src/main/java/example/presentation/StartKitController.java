@@ -32,30 +32,39 @@ public class StartKitController {
     Feature[] allFeatures() {
         return Feature.values();
     }
+
     @ModelAttribute("allTypes")
     Type[] allTypes() {
         return Type.values();
     }
 
     @GetMapping("")
-    String listAll(Model model) {
-        return newForm(model);
+    String listAll(@ModelAttribute("starterKit") StarterKit starterKit) {
+        // 以下が追加された modelを参照して view が生成される
+        // メソッドレベルの@ModelAttributeで追加された各オブジェクト
+        // このメソッドの引数として生成された StarterKitのオブジェクト
+        return "product/list";
     }
 
-    @PostMapping("")
+    @PostMapping(value = "", params = "save")
     String register(@ModelAttribute("starterKit") @Validated StarterKit starterKit,
-                    BindingResult bindingResult,
-                    Model model) {
+                    BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "product/list";
         }
+        // Modelに追加された StarterKitオブジェクト（バインド済）
         System.out.println(starterKit);
         // 登録
-        return newForm(model);
+        return "product/list";
     }
 
-    String newForm(Model model) {
-        model.addAttribute("starterKit", StarterKit.prototype());
+    @PostMapping(value = "", params = "addRow")
+    String addRow(@ModelAttribute("starterKit") @Validated StarterKit starterKit,
+                  BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "product/list";
+        }
+        starterKit.addRow();
         return "product/list";
     }
 }

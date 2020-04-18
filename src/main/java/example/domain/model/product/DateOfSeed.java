@@ -14,6 +14,12 @@ public class DateOfSeed {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     LocalDate value;
 
+    private DateOfSeed(LocalDate value) {
+        this.value = value;
+    }
+
+    public DateOfSeed() {}
+
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M月d日");
     public String when() {
         return value.format(formatter);
@@ -21,5 +27,9 @@ public class DateOfSeed {
     @Override
     public String toString() {
         return value.toString();
+    }
+
+    public static DateOfSeed today() {
+        return new DateOfSeed(LocalDate.now());
     }
 }

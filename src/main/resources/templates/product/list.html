@@ -78,10 +78,11 @@ th:text属性に変数式 ${...}で、Modelに追加したattribute名を参照�
                 Spring MVC WebDataBinder#getEmptyValue() booleanかコレクションのみ -->
             <!-- todo th:checkedがうまく動作しない -->
             <p>
-            <!--　checkbox のidの生成 -->
+            <!--/* チェックボックスで列挙型 (有,無 )の値を設定する */-->
+            <!--/*　input type=checkboxの時、th:fieldで生成される番号付きid属性を指定する */-->
             <label th:for="${#ids.next('covered')}">カバー</label>
-            <input type="hidden" name="covered" value="無"/> <!--/* チェックされないときの既定値 */-->
-            <input type="checkbox" value="有" th:field="*{covered}"/>
+            <input type="checkbox" value="checked" th:field="*{covered}" /> <!--/* チェックされた時だけ送る */-->
+            <input type="hidden" value="unchecked" name="covered" /> <!--/* チェックされないときの既定値を常に送る */-->
             <mark><span th:errors="*{covered}"></span></mark>
             </p>
 
@@ -116,7 +117,39 @@ th:text属性に変数式 ${...}で、Modelに追加したattribute名を参照�
             </ul>
             </p>
 
-            <input type="submit" value="登録する">
+            <table>
+                <thead>
+                <tr>
+                    <th>Row</th>
+                    <th>Variety</th>
+                    <th>Seeds per cell</th>
+                    <th>
+                        <button type="submit" name="addRow">Add row</button>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="row,rowStat : ${starterKit.rows()}">
+                    <td th:text="${rowStat.count}">1</td>
+                    <td>
+                        <select name="empty">
+                            <option th:each="var : ${allVarieties}"
+                                    th:value="${var}"
+                                    th:text="${var}">Thymus Thymi</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="text" name="dummy"/>
+                    </td>
+                    <td>
+                        <button type="submit" name="removeRow"
+                                th:value="${rowStat.index}">Remove row</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <button type="submit" name="save">登録する</button>
         </fieldset>
     </form>
 </div>
