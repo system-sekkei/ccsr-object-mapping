@@ -11,9 +11,9 @@ CREATE SCHEMA 商品;
 
 -- 区分
 
-CREATE TABLE 商品.種類
+CREATE TABLE 商品.素材
 (
-    種類 VARCHAR (6) PRIMARY KEY
+    素材 VARCHAR (6) PRIMARY KEY
 );
 
 CREATE TABLE 商品.特徴
@@ -35,7 +35,7 @@ CREATE TABLE 商品.栽培キット
     キット番号 CHARACTER (12) PRIMARY KEY,
     種まき日 DATE NOT NULL,
     カバー CHAR (1) NOT NULL,
-    種類 VARCHAR (6) NOT NULL REFERENCES 商品.種類
+    素材 VARCHAR (6) NOT NULL REFERENCES 商品.素材
 );
 
 CREATE TABLE 商品.キットの特徴
@@ -53,5 +53,5 @@ CREATE TABLE 商品.列
     列番号 NUMERIC (1) NOT NULL,
     PRIMARY KEY(キット番号,列番号),
     品種番号 CHARACTER (7) NOT NULL REFERENCES 商品.品種,
-    種の数 NUMERIC(2) NOT NULL
+    種の数 NUMERIC(2) NOT NULL CHECK (種の数 BETWEEN 1 AND 20 )
 );

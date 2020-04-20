@@ -36,7 +36,7 @@ column属性 : コレクションを取得するSELECT文の渡すパラメー�
 select属性 : コレクションを取得するためのselect要素の識別名
 
 -->
-    <resultMap id="栽培キット" type="&栽培キット;">
+    <resultMap id="栽培キットマッピング" type="&栽培キット;">
         <collection property="features.list" ofType="&特徴;"
                     column="kitNumber.value"
                     select="&特徴マッパー;.featuresFor"/>
@@ -58,17 +58,17 @@ SELECT 文
 as句でフィールドへのパスを指定すると、resultMapのproperty要素の記述を省略できる
 #{...}式で、パラメータで渡されたオブジェクトを参照できる ( OGNL )
 -->
-    <select id="listAll" resultMap="栽培キット">
+    <select id="listAll" resultMap="栽培キットマッピング">
         SELECT
             キット番号 as "kitNumber.value",
             種まき日 as "dateOfSeed.value",
             カバー as "covered",
-            種類 as "type"
+            素材 as "type"
         FROM 商品.栽培キット
         ORDER BY 種まき日 ASC
     </select>
 
-    <select id="findBy" resultType="&栽培キット;">
+    <select id="findBy">
         SELECT
             キット番号 as "kitNumber.value",
             種まき日 as "dateOfSeed.value"
@@ -76,4 +76,11 @@ as句でフィールドへのパスを指定すると、resultMapのproperty要�
         WHERE
             キット番号 = #{value}
     </select>
+
+    <insert id="register">
+        INSERT INTO 商品.栽培キット
+        (キット番号, 種まき日, カバー, 素材)
+        VALUES
+        (#{kitNumber.value}, #{dateOfSeed.value}, #{covered}, #{type})
+    </insert>
 </mapper>

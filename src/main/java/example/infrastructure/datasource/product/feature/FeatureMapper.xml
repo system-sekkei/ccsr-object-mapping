@@ -5,6 +5,7 @@
         [
         <!ENTITY 名前空間 "example.infrastructure.datasource.product.feature.FeatureMapper">
         <!ENTITY 特徴 "example.domain.model.product.feature.Feature">
+        <!ENTITY 特徴一覧 "example.domain.model.product.feature.Features">
         ]>
 <mapper namespace="&名前空間;">
     <select id="featuresFor" resultType="&特徴;">
@@ -16,4 +17,15 @@
         ORDER BY
           順序番号 ASC
     </select>
+
+    <insert id="recordFeatures">
+        INSERT INTO 商品.キットの特徴
+            (キット番号, 順序番号, 特徴)
+        VALUES
+        <foreach item="each" collection="features.list" index="index" separator=",">
+            (
+            #{kitNumber.value}, #{index} + 1,#{each}
+            )
+        </foreach>
+    </insert>
 </mapper>

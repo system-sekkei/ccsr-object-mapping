@@ -5,11 +5,11 @@ VALUES
     ;
 
 -- 区分
-INSERT INTO 商品.種類
-  (種類)
+INSERT INTO 商品.素材
+  (素材)
 VALUES
   ('プラスチック'),
-  ('木')
+  ('木製')
   ;
 
 INSERT INTO 商品.特徴
@@ -32,7 +32,7 @@ INSERT INTO 商品.品種
 
 -- 商品
 INSERT INTO 商品.栽培キット
-    (キット番号, 種まき日, カバー, 種類)
+    (キット番号, 種まき日, カバー, 素材)
 VALUES
    ('KN-X123-Y9XD', CURRENT_DATE - 10, '無', 'プラスチック')
     ;

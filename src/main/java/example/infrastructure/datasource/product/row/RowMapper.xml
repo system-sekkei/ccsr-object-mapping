@@ -21,4 +21,14 @@
           列番号 ASC
     </select>
 
+    <insert id="recordRows">
+        INSERT INTO 商品.列
+        (キット番号, 列番号, 品種番号,種の数)
+        VALUES
+        <foreach item="each" collection="rows.list" index="index" separator=",">
+            (
+            #{kitNumber.value}, #{index} + 1,#{each.variety.varietyNumber.value}, #{each.seedsPerCell}
+            )
+        </foreach>
+    </insert>
 </mapper>

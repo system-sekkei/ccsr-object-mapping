@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>品種の管理</title>
+    <link th:replace="_fragments/head :: css">
+</head>
+<body>
+<p>
+    <a th:href="@{/}">トップに戻る</a>
+</p>
+<h2>品種の一覧</h2>
+
+<table>
+    <thead>
+    <tr>
+        <th>品種名 [品種番号]</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="each : ${allVarieties}">
+        <td th:text="${each.show()}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>品種の登録</h2>
+<form th:aciton="@{/varieties}" th:object="${variety}" method="post">
+    <block th:if="${#fields.hasAnyErrors()}">
+        <mark><span th:text="${#fields.allErrors()}"></span></mark>
+    </block>
+    <fieldset>
+        <!--/*@thymesVar id="varietyNumber" type="example.domain.identity.VarietyNumber"*/-->
+        <p>
+            <label th:for="varietyNumber.value">登録番号</label>
+            <input type="text" disabled="disabled" th:field="*{varietyNumber.value}">
+        </p>
+        <p>
+            <label th:for="name">名称</label>
+            <input type="text" th:field="*{name}">
+            <mark><span th:errors="*{name}"></span></mark>
+        </p>
+
+        <p>
+            <button type="submit">登録する</button>
+        </p>
+    </fieldset>
+
+</form>
+</body>
+</html>

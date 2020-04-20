@@ -9,7 +9,6 @@ import example.domain.type.Type;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -25,6 +24,7 @@ public class StarterKit {
 
     @NotNull
     Features features;
+    @Valid
     Rows rows = new Rows();
 
     private StarterKit(KitNumber kitNumber) {
@@ -53,12 +53,20 @@ public class StarterKit {
         return features.show();
     }
 
+    public boolean hasFeatures() {
+        return features.hasFeatures();
+    }
+
     public List<Row> rows() {
         return rows.asList();
     }
 
     public void addRow() {
         rows.addRow();
+    }
+
+    public void removeRow(int index) {
+        rows.removeRow(index);
     }
 
     @Override

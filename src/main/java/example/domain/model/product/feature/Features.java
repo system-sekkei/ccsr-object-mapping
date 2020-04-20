@@ -14,6 +14,11 @@ public class Features {
         for (Feature each : list) result.add(each.toString());
         return String.join("、", result);
     }
+
+    public boolean hasFeatures() {
+        return list.size() > 0 ;
+    }
+
     @Override
     public String toString() {
         return "Features{" +

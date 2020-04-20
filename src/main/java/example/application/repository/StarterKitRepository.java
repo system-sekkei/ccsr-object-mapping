@@ -8,4 +8,6 @@ public interface StarterKitRepository {
     StarterKitList listAll();
 
     StarterKit findBy(KitNumber kitNumber);
+
+    void register(StarterKit starterKit);
 }

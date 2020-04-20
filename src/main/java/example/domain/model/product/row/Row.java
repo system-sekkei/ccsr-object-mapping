@@ -1,10 +1,17 @@
 package example.domain.model.product.row;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
 /**
  * 列
  */
 public class Row {
+    @NotNull(message = "必須") // @Validは指定しない (名前の必須チェックはStarterKit登録時には不要）
     Variety variety;
+    @Min(value = 1, message = "最低1粒")
+    @Max(value = 20, message = "最大２０粒")
     int seedsPerCell;
 
     public String variety() {

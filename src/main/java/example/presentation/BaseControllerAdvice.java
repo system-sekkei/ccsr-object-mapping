@@ -1,7 +1,7 @@
 package example.presentation;
 
 import example.domain.type.Covered;
-import example.presentation._support.CoveredEditor;
+import example.presentation._support.EditorForCovered;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -17,7 +17,7 @@ public class BaseControllerAdvice {
         binder.initDirectFieldAccess();
         binder.registerCustomEditor(String.class, new StringTrimmerEditor(false));
 
-        binder.registerCustomEditor(Covered.class, new CoveredEditor());
+        binder.registerCustomEditor(Covered.class, new EditorForCovered());
 
 
     }

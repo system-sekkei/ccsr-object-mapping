@@ -9,7 +9,7 @@
 <p>
     <a th:href="@{/}">トップに戻る</a>
 </p>
-<h1>栽培キットの一覧（新しい順）</h1>
+
 <!--/*
 Spring MVC Modelの表示
 th:text属性に変数式 ${...}で、Modelに追加したattribute名を参照する
@@ -32,7 +32,7 @@ th:text属性に変数式 ${...}で、Modelに追加したattribute名を参照�
         <th>カバー</th>
         <th>素材</th>
         <th>特徴</th>
-        <th>Rows</th>
+        <th>列の構成</th>
     </tr>
     </thead>
     <tbody>
@@ -59,12 +59,12 @@ th:text属性に変数式 ${...}で、Modelに追加したattribute名を参照�
 <div>
     <h2>栽培キットの追加</h2>
     <form action="#" th:action="@{/products}" th:object="${starterKit}" method="post">
-        <mark th:if="${#fields.hasAnyErrors()}"><span>エラーがあります</span></mark>
-        <fieldset>
-            <p>
-            <input type="text" th:field="*{kitNumber.value}">
-            </p>
+        <block th:if="${#fields.hasAnyErrors()}">
+            <mark><span th:text="${#fields.allErrors()}"></span></mark>
+        </block>
 
+        <fieldset>
+            <input type="hidden" th:field="*{kitNumber.value}">
             <p>
             <label th:for="dateOfSeed.value">種を植えた日</label>
             <input type="date" th:field="*{dateOfSeed.value}">
@@ -120,30 +120,30 @@ th:text属性に変数式 ${...}で、Modelに追加したattribute名を参照�
             <table>
                 <thead>
                 <tr>
-                    <th>Row</th>
-                    <th>Variety</th>
-                    <th>Seeds per cell</th>
+                    <th>列</th>
+                    <th>品種</th>
+                    <th>セルあたりの種の数</th>
                     <th>
-                        <button type="submit" name="addRow">Add row</button>
+                        <button type="submit" name="addRow">列の追加</button>
                     </th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="row,rowStat : ${starterKit.rows()}">
-                    <td th:text="${rowStat.count}">1</td>
+                <tr th:each="eachRow,iterationStatus : ${starterKit.rows()}">
+                    <td th:text="${iterationStatus.count}">1</td>
                     <td>
-                        <select name="empty">
-                            <option th:each="var : ${allVarieties}"
-                                    th:value="${var}"
-                                    th:text="${var}">Thymus Thymi</option>
+                        <select th:field="*{rows.list[__${iterationStatus.index}__].variety.varietyNumber.value}">
+                            <option th:each="eachVariety : ${allVarieties}"
+                                    th:value="${eachVariety.number()}"
+                                    th:text="${eachVariety.show()}">Thymus Thymi</option>
                         </select>
                     </td>
                     <td>
-                        <input type="text" name="dummy"/>
+                        <input type="text" th:field="*{rows.list[__${iterationStatus.index}__].seedsPerCell}"/>
                     </td>
                     <td>
                         <button type="submit" name="removeRow"
-                                th:value="${rowStat.index}">Remove row</button>
+                                th:value="${iterationStatus.index}">列の削除</button>
                     </td>
                 </tr>
                 </tbody>
