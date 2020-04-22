@@ -11,7 +11,7 @@
 <h3>概要</h3>
 <p>
   ハーブの栽培キットを登録したり一覧できるアプリケーションです。<br/>
-  <a target="_blank" href="https://www.thymeleaf.org/doc/tutorials/3.0/thymeleafspring.html#spring-thyme-seed-starter-manager">
+  <a target="Thymeleaf-Spring Document" href="https://www.thymeleaf.org/doc/tutorials/3.0/thymeleafspring.html#spring-thyme-seed-starter-manager">
     Thymeleaf-Springのドキュメント(英語)
   </a>
   で使われているサンプルアプリケーションを参考にして作成しました。
@@ -19,10 +19,10 @@
 <h2>サンプルアプリケーション</h2>
 <ul>
   <li>
-    <a th:href="@{/varieties}">品種の一覧・登録</a> (単純な例)
+    <a target="Simple Form" th:href="@{/varieties}">品種の一覧・登録</a> (単純な例)
   </li>
   <li>
-    <a th:href="@{/products}">栽培キットの一覧・登録</a> (複雑な例)
+    <a target="StarterKit Manager" th:href="@{/products}">栽培キットの一覧・登録</a> (複雑な例)
   </li>
 </ul>
 <h2>三種類のマッピング</h2>
@@ -46,9 +46,13 @@
 <p>class要素を指定しないで、HTML要素だけでシンプルに記述する。
 <a th:href="@{/guides}">HTMLの記述例（マッピングなし）</a></p>
 <h2>データベースとSQLマッピング</h2>
-<p><a target="_blank" th:href="@{/h2-console}">データベースへの接続</a></p>
+  <p><a target="h2-console" th:href="@{${@environment.getProperty('spring.h2.console.path')}}">データベースへの接続</a></p>
 <p >
   JDBC URL <span th:text="${@environment.getProperty('spring.datasource.url')}"></span>
+</p>
+<h2>API</h2>
+<p>
+  <a target="swagger-ui" th:href="@{/swagger-ui.html}">API 仕様</a>
 </p>
 </body>
 </html>

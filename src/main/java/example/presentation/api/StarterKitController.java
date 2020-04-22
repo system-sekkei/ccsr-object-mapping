@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController("API栽培キット")
-@RequestMapping("/api/products")
+@RequestMapping("/api/starterkits")
 public class StarterKitController {
 
     StarterKitService starterKitService;

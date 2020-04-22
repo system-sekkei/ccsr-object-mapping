@@ -1,5 +1,6 @@
 package example.domain.model.product;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotNull;
@@ -20,6 +21,7 @@ public class DateOfSeed {
 
     public DateOfSeed() {}
 
+    @JsonIgnore
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M月d日");
     public String when() {
         return value.format(formatter);

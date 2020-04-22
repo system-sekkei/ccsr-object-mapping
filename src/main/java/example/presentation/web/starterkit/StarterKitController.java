@@ -1,4 +1,4 @@
-package example.presentation.web.product;
+package example.presentation.web.starterkit;
 
 import example.application.service.StarerKitRegisterService;
 import example.application.service.StarterKitService;
