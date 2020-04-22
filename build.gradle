@@ -1,11 +1,16 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '2.2.5.RELEASE'
+    id 'idea'
+    id 'org.springframework.boot' version '2.2.6.RELEASE'
     id 'org.dddjava.jig-gradle-plugin' version '2020.4.1'
 }
 
 group 'org.example'
 version '1.0-SNAPSHOT'
+
+description = 'mapping sample'
+
+sourceCompatibility = '1.8'
 
 //　myBatisのMapper.xmlを、Mapper.javaと同じディレクトリに置く
 sourceSets {
@@ -19,19 +24,25 @@ repositories {
 }
 
 dependencies {
-    implementation platform("org.springframework.boot:spring-boot-dependencies:2.2.5.RELEASE")
+    implementation platform("org.springframework.boot:spring-boot-dependencies:2.2.6.RELEASE")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
 
     implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.2")
 
     runtimeOnly("com.h2database:h2")
+    implementation 'org.postgresql:postgresql'
 
     implementation("org.flywaydb:flyway-core")
+
+//    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
+    implementation 'io.springfox:springfox-swagger2:2.9.2'
+    implementation 'io.springfox:springfox-swagger-ui:2.9.2'
 
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude(group: 'org.junit.vintage')
     }
+
 }
 
 test {
@@ -41,5 +52,5 @@ test {
 [compileJava, processResources]*.shouldRunAfter(clean)
 jigReports.dependsOn(clean, classes)
 
-def defaultEncoding = 'UTF-8'
-tasks.withType(org.springframework.boot.gradle.tasks.run.BootRun) { defaultCharacterEncoding = defaultEncoding }
+//def defaultEncoding = 'UTF-8'
+//tasks.withType(org.springframework.boot.gradle.tasks.run.BootRun) { defaultCharacterEncoding = defaultEncoding }

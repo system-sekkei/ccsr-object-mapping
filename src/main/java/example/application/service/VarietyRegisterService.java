@@ -4,6 +4,9 @@ import example.application.repository.VarietyRepository;
 import example.domain.model.product.row.Variety;
 import org.springframework.stereotype.Service;
 
+/**
+ * 品種の登録サービス
+ */
 @Service
 public class VarietyRegisterService {
     VarietyRepository varietyRepository;
@@ -12,6 +15,10 @@ public class VarietyRegisterService {
         this.varietyRepository = varietyRepository;
     }
 
+    /**
+     * 品種を登録する
+     * @param variety
+     */
     public void register(Variety variety) {
         varietyRepository.register(variety);
     }

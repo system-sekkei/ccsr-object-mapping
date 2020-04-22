@@ -3,7 +3,6 @@ package example.domain.model.product.row;
 import example.domain.identity.VarietyNumber;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**

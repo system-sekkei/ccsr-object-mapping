@@ -9,7 +9,7 @@
 <p>
     <a th:href="@{/}">トップに戻る</a>
 </p>
-<h2>品種の一覧</h2>
+<h2>登録済の品種</h2>
 
 <table>
     <thead>
@@ -32,11 +32,11 @@
     <fieldset>
         <!--/*@thymesVar id="varietyNumber" type="example.domain.identity.VarietyNumber"*/-->
         <p>
-            <label th:for="varietyNumber.value">登録番号</label>
+            <label th:for="varietyNumber.value">ハーブの品種番号</label>
             <input type="text" disabled="disabled" th:field="*{varietyNumber.value}">
         </p>
         <p>
-            <label th:for="name">名称</label>
+            <label th:for="name">ハーブの名称</label>
             <input type="text" th:field="*{name}">
             <mark><span th:errors="*{name}"></span></mark>
         </p>

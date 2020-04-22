@@ -1,11 +1,4 @@
-CREATE SCHEMA サンプル;
-
-CREATE TABLE サンプル.アクション
-(
-    管理番号 CHARACTER(6) PRIMARY KEY,
-    名称 VARCHAR(20) NOT NULL,
-    created_at  TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
+-- スキーマとテーブルの定義
 
 CREATE SCHEMA 商品;
 

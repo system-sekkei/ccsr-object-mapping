@@ -1,4 +1,4 @@
-package example.presentation.product;
+package example.presentation.web.product;
 
 import example.application.service.StarerKitRegisterService;
 import example.application.service.StarterKitService;
@@ -8,6 +8,7 @@ import example.domain.model.product.StarterKitList;
 import example.domain.model.product.feature.Feature;
 import example.domain.model.product.row.Variety;
 import example.domain.model.product.row.validation.AddRow;
+import example.domain.model.product.row.validation.RemoveRow;
 import example.domain.type.Type;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -15,7 +16,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * 栽培キット画面
+ * 栽培キットの一覧・登録
  */
 @Controller
 @RequestMapping("/products")
@@ -50,6 +51,11 @@ public class StarterKitController {
         return varietyService.listAll();
     }
 
+    /**
+     * 一覧表示と登録フォーム
+     * @param starterKit
+     * @return
+     */
     @GetMapping("")
     String listAll(@ModelAttribute("starterKit") StarterKit starterKit) {
         // 以下が追加された modelを参照して view が生成される
@@ -80,7 +86,7 @@ public class StarterKitController {
     }
 
     @PostMapping(value = "", params = "removeRow")
-    String removeRow(@ModelAttribute("starterKit") @Validated StarterKit starterKit,
+    String removeRow(@ModelAttribute("starterKit") @Validated(RemoveRow.class) StarterKit starterKit,
                      BindingResult bindingResult,
                      @RequestParam("removeRow") int index) {
         if (bindingResult.hasErrors()) {

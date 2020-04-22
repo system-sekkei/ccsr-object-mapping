@@ -1,21 +1,54 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>トップ</title>
-    <link th:replace="_fragments/head :: css">
+  <meta charset="UTF-8">
+  <title>トップ</title>
+  <link th:replace="_fragments/head :: css">
 </head>
 <body>
+<h1>サンプルアプリケーション</h1>
+<h2>オブジェクトと外部形式のマッピング</h2>
+<h3>概要</h3>
+<p>
+  ハーブの栽培キットを登録したり一覧できるアプリケーションです。<br/>
+  <a target="_blank" href="https://www.thymeleaf.org/doc/tutorials/3.0/thymeleafspring.html#spring-thyme-seed-starter-manager">
+    Thymeleaf-Springのドキュメント(英語)
+  </a>
+  で使われているサンプルアプリケーションを参考にして作成しました。
+</p>
+<h2>サンプルアプリケーション</h2>
 <ul>
-    <li>
-        <a th:href="@{/sample}">サンプル画面</a>
-    </li>
-    <li>
-        <a th:href="@{/products}">栽培キットの一覧/登録</a>
-    </li>
-    <li>
-        <a th:href="@{/varieties}">品種の管理</a>
-    </li>
+  <li>
+    <a th:href="@{/varieties}">品種の一覧・登録</a> (単純な例)
+  </li>
+  <li>
+    <a th:href="@{/products}">栽培キットの一覧・登録</a> (複雑な例)
+  </li>
 </ul>
+<h2>三種類のマッピング</h2>
+<p>オブジェクトと画面、オブジェクトとデータベース、オブジェクトとJSON形式の三種類のマッピングの参照実装です。</p>
+<dl>
+  <dt><h3>オブジェクト ⇔ HTML</h3></dt>
+  <dd>使用技術：Spring MVC Web Data Binder, Thymeleaf</dd>
+  <dd><a>説明</a></dd>
+  <dt><h3>オブジェクト ⇔ SQL</h3></dt>
+  <dd>myBatis SQL Mapper</dd>
+  <dt><h3>オブジェクト ⇔ JSON</h3></dt>
+  <dd>Spring MVC Jackson Object Mapper, Swagger UI</dd>
+</dl>
+<hr>
+
+<h2>オブジェクトと画面のマッピング</h2>
+<h3>概要</h3>
+<p>オブジェクトを画面に表示する</p>
+<p>画面の入力をオブジェクトのバインドする</p>
+<h3>最小限のHTMLコーディング</h3>
+<p>class要素を指定しないで、HTML要素だけでシンプルに記述する。
+<a th:href="@{/guides}">HTMLの記述例（マッピングなし）</a></p>
+<h2>データベースとSQLマッピング</h2>
+<p><a target="_blank" th:href="@{/h2-console}">データベースへの接続</a></p>
+<p >
+  JDBC URL <span th:text="${@environment.getProperty('spring.datasource.url')}"></span>
+</p>
 </body>
 </html>

@@ -1,4 +1,4 @@
-package example.presentation.product;
+package example.presentation.web.product;
 
 import example.application.service.VarietyRegisterService;
 import example.application.service.VarietyService;
@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/**
+ * 品種の一覧・登録
+ */
 @Controller
 @RequestMapping("/varieties")
 public class VarietyController {

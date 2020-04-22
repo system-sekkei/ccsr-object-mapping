@@ -1,10 +1,8 @@
-package example.presentation._support;
+package example.presentation.web._support;
 
 import example.domain.type.Covered;
 
 import java.beans.PropertyEditorSupport;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Set;
 
 public class EditorForCovered extends PropertyEditorSupport {
