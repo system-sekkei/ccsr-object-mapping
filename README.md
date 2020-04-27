@@ -9,25 +9,44 @@ CCSR(Continuous Concurrent Stepwise Refinement)のためのテンプレートプ
 * オブジェクトと画面・JSON・テーブルとのマッピング
 * Jigを活用するための規約
 
-### レイヤ構成
-
+### プロジェクトのレイアウト
 <details>
- <summary>application</summary>
-  * coordinator
-  * repository
-  * service 
+ <summary>src/main</summary>
+<ul>
+ <li>java</li>
+<details>
+ <summary>application　アプリケーション層</summary>
+ <ul>
+ <li>coordinator ← 複合サービス</li>
+ <li>repository ← リポジトリ</li>
+ <li>service ← サービス</li>
+ </ul>
 </details>
-
-* application層
-* domain層
-  * model
-  * type
-* infrastructure層
-  * datasource
-  * transfer
-* presentation層
-  * api
-  * web
+<details>
+ <summary>domain ドメイン層</summary>
+ <ul>
+ <li>identity ← 識別情報</li>
+ <li>model ← ドメインモデル</li>
+ <li>type ← 基本型</li>
+ </ul>
+</details>
+<details>
+ <summary>infrastructure インフラストラクチャ層</summary>
+ <ul>
+ <li>datasource ← データソース</li>
+ <li>transfer ← 通信</li>
+ </ul>
+</details>
+<details>
+ <summary>presentation プレゼンテーション層</summary>
+ <ul>
+ <li>api ← API</li>
+ <li>web ← 画面</li>
+ </ul>
+</details>
+ <li>resources</li>
+</ul>
+</details>
   
 ### 要素技術
 
