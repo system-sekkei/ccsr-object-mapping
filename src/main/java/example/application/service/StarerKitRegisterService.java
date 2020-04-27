@@ -1,7 +1,7 @@
 package example.application.service;
 
 import example.application.repository.StarterKitRepository;
-import example.domain.model.product.StarterKit;
+import example.domain.model.kit.StarterKit;
 import org.springframework.stereotype.Service;
 
 /**

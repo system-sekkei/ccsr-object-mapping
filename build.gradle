@@ -2,7 +2,7 @@ plugins {
     id 'java'
     id 'idea'
     id 'org.springframework.boot' version '2.2.6.RELEASE'
-    id 'org.dddjava.jig-gradle-plugin' version '2020.4.1'
+    id 'org.dddjava.jig-gradle-plugin' version '2020.4.4'
 }
 
 group 'org.example'

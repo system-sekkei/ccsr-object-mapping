@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>オブジェクトとHTMLのマッピング</title>
+  <link th:replace="_fragments/head :: css-light">
+</head>
+<body>
+<header>
+  <nav>
+    <a target="top" th:href="@{/}">トップに戻る</a>
+    | <a target="_self" th:href="@{/guides/object-html}">オブジェクト ⇔ HTML</a>
+    | <a target="object-sql" th:href="@{/guides/object-sql}">オブジェクト ⇔ SQL</a>
+    | <a target="object-json" th:href="@{/guides/object-json}">オブジェクト ⇔ JSON</a>
+  </nav>
+</header>
+<h1>オブジェクト ⇔ HTMLのマッピング</h1>
+<p>
+  <a target="varieties" th:href="@{/varieties}">ハーブの品種を一覧・登録する画面</a>を例に、オブジェクトとHTMLとのマッピングを説明します。<br />
+  マッピングの対象は、下記のVarietyクラスです。
+</p>
+<pre>
+  <code>
+package example.domain.model.kit.row;
+
+/**
+* ハーブの品種を表現するクラス
+*/
+public class Variety {
+    VarietyNumber varietyNumber;
+    String name = "";
+
+    public String show() {
+        return String.format("%s [%s]", name, varietyNumber);
+    }
+}
+  </code>
+</pre>
+<hr>
+<h2>依存ライブラリ</h2>
+<p>必要な依存ライブラリをビルドツールの設定ファイル（build.gradle）で指定します。</p>
+<ul>
+  <li>フレームワーク：Spring MVC</li>
+  <li>テンプレートエンジン：Thymeleaf</li>
+  <li>ビルドツール：Gradle（設定ファイル build.gradle）</li>
+</ul>
+<p>
+  Spring MVC・Thymeleaf・Gradleの一般的な説明は公式ドキュメントや解説記事を参考にしてください。<br/>
+  このガイドではサンプルに固有の内容を説明します。
+</p>
+<details>
+  <summary><em>ソースコード</em></summary>
+  <pre>
+  <code>
+dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+}
+  </code>
+</pre>
+</details>
+<h2 id="direct-field-access">ダイレクトフィールドアクセスの設定</h2>
+<p>
+  HTTPリクエストをオブジェクトにバインドする方式として<strong>ダイレクトフィールドアクセス</strong>を指定します。<br />
+  対象クラスのフィールドに直接バインドするので、getter/setterメソッドを書く必要がありません。<br />
+  ドメイン層のクラスの記述をシンプルにできます。
+</p>
+  <pre>
+    <code>
+package example.presentation.web;
+
+<mark>@ControllerAdvice</mark>(basePackageClasses = BaseControllerAdvice.class)
+public class BaseControllerAdvice {
+
+    <mark>@InitBinder</mark>
+    public void initBinder(WebDataBinder binder) {
+        binder.initDirectFieldAccess();
+        binder.setAllowedFields(""); //どのフィールドも許可しない
+    }
+}
+    </code>
+  </pre>
+  <p>
+    コントローラクラスに共通の設定は<code>@ControllerAdvice</code>クラスに記述します。
+    このサンプルでは<code>WebDataBinder#setAllowsFields(String ...)</code>で、バインドを許可するフィールド（複数可）を指定しています。<br />
+    既定値として空白文字列を指定することで、原則、どのフィールドにもバインドを許可しない設定にしておきます。<br />
+    各コントローラでバインドを許可するフィールドを、setAllowsFields()メソッドで<a href="#allow-fields">個別に指定</a>します。
+  </p>
+<hr>
+<h2>コントローラクラス</h2>
+<p>HTTPリクエストを受け取り処理するクラスです。</p>
+<p>
+  Spring MVCに用意されたアノテーションを使うことで、HTTPリクエストの処理方法を簡潔に記述できます。<br />
+  このハーブの一覧・登録のコントローラで使うアノテーションは次の通りです。
+</p>
+<ul>
+  <li>@Controllerと@RequestMapping（クラスレベル）</li>
+  <li>@GetMappingと@PostMapping（メソッドレベル）</li>
+  <li>@ModelAttribute（引数レベル）</li>
+  <li>@Validated（引数レベル）</li>
+  <li>@ModelAttribute（メソッドレベル）</li>
+  <li>@InitBinder（メソッドレベル）</li>
+</ul>
+<h3>コントローラクラスのソースコード</h3>
+<p>
+  ハーブの品種の一覧と登録のコントローラクラスです。<br />
+  アノテーションを強調表示しています。
+</p>
+<pre>
+  <code>
+package example.presentation.web.kit;
+
+/**
+ * ハーブ品種の一覧と登録
+ */
+<mark>@Controller</mark>
+<mark>@RequestMapping("/varieties")</mark>
+public class VarietyController {
+
+    VarietyService varietyService;
+    VarietyRegisterService varietyRegisterService;
+
+    // コンストラクタでインジェクション @Autowiredは記述不要
+    public VarietyController(VarietyService varietyService, VarietyRegisterService varietyRegisterService) {
+        this.varietyService = varietyService;
+        this.varietyRegisterService = varietyRegisterService;
+    }
+
+    <mark>@ModelAttribute("allVarieties")</mark>
+    Variety[] allVarieties() {
+        return varietyService.listAll();
+    }
+
+    <mark>@GetMapping</mark>
+    public String list(<mark>@ModelAttribute("variety")</mark> Variety variety) {
+        return "variety/listAndForm";
+    }
+
+    <mark>@PostMapping</mark>
+    public String register(
+    <mark>@ModelAttribute("variety")</mark> <mark>@Validated</mark> Variety variety,
+            BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) return "variety/listAndForm";
+
+        varietyRegisterService.register(variety);
+        return "redirect:/varieties";
+    }
+
+    <mark>@InitBinder</mark>
+    public void initBinder(WebDataBinder binder) {
+        binder.setAllowedFields("name");
+    }
+}
+  </code>
+</pre>
+<hr>
+<h2>コントローラクラスの宣言</h2>
+<pre>
+  <code>
+<mark>@Controller</mark>
+<mark>@RequestMapping("/varieties")</mark>
+public class VarietyController {
+    ...
+}
+  </code>
+</pre>
+<p>
+  @Controllerは、このクラスがコントローラクラスであることを宣言しています。<br />
+  @RequestMappingは、パラメータ<code>"/varieties"</code>で指定したURLへのリクエストを処理することを宣言します。
+</p>
+<hr>
+<h2>表示用のデータを準備する：メソッドレベルの@ModelAttribute</h2>
+<p>
+  テンプレートエンジン(Thymeleaf)に値を渡すための準備です。<br />
+  HTMLテンプレートから参照したい値を、Spring MVCが用意する<code>Model</code>クラスのオブジェクトに追加します。
+</p>
+<P>
+  Spring MVCの<code>Model</code>クラスは、ビューのためのモデルを表現します。<br />
+  プレゼンテーション層に固有のクラスです。ドメイン層のモデルとは意味の異なるクラスです。
+</P>
+<pre>
+  <code>
+<mark>@ModelAttribute("allVarieties")</mark>
+Variety[] allVarieties() {
+  return varietyService.listAll();
+}
+  </code>
+</pre>
+<p>
+  このコードは、一覧に表示するVarietyの配列を、参照名<code>"allVarieties"</code>でModel型のmodelオブジェクトに登録しています。<br />
+  Varietyの配列は、一覧を表示するHTMLテンプレートの中で、<code>${allVarieties}</code>で参照できます。
+</p>
+<p>
+  @ModelAttributeを宣言したメソッドは、@GetMappingまたは@PostMappingを宣言したメソッドを呼び出す前に、毎回実行されます。
+</p>
+<p>
+  このメソッドは次のように書いても同じ意味です。
+</p>
+<pre>
+  <code>
+<mark>@ModelAttribute()</mark>
+void allVarieties(Model model) {
+    Variety[] result = varietyService.listAll();
+    model.addAttribute("allVarieties", result);
+}
+  </code>
+</pre>
+<p>
+  Model型のオブジェクトをmodelとして明示的に引数として宣言する書き方です。
+</p>
+<hr>
+<h2>GETリクエストの処理：@GetMapping</h2>
+<p>
+  HTTPリクエストがGETの場合に実行する処理を記述します。
+</p>
+<pre>
+  <code>
+<mark>@GetMapping("")</mark>
+    public String list(<mark>@ModelAttribute("variety")</mark> Variety variety) {
+    return "variety/listAndForm";
+}
+  </code>
+</pre>
+<h3>表示するオブジェクトの準備</h3>
+<p>
+  一覧表示するVarietyオブジェクトの配列は<code>allVarieties()</code>メソッドで、Model型のオブジェクト(model)に追加しています。
+</p>
+<p>
+  登録フォームの初期表示に使うVarietyオブジェクトも<code>model</code>に追加します。<br />
+  引数に<code>@ModelAttribute("variety") Variety variety</code>と宣言することで、VarietyオブジェクトをHTMLテンプレートで<code>${variety}</code>で参照可能になります。
+</p>
+<details>
+  <summary><em>引数レベルの@ModelAttributeの補足</em></summary>
+  <p>
+    引数レベルの<code>@ModelAttribute("variety")</code>は、さまざまな機能を実行します。<br />
+    modelに参照名<code>"variety"</code>でオブジェクトが追加済であれば、そのオブジェクトを再利用します。<br />
+    HTTPリクエストでパラメータが渡された場合は、Varietyクラスに対応するフィールドがあると自動でマッピングします。<br />
+  </p>
+  <p>
+    引数レベルの<code>@ModelAttribute("variety")</code>は省略可能ですが、明示したほうがHTMLテンプレートで使う変数名との対応が明確になります。
+  </p>
+</details>
+<h3 id="http-response">HTTPレスポンスの生成</h3>
+<p>
+  <code>return "variety/listAndForm</code>で、HTTPレスポンスを、HTMLテンプレートファイル<code>listAndForm.html</code>を使って生成します。<br />
+  テンプレートファイルの中では、modelオブジェクトに追加したハーブ品種の一覧を<code>${allVarieties}</code>、登録フォームの初期値を<code>${variety}</code>で参照しています。
+</p>
+<p>
+  HTMLテンプレートファイルは<code>/resource/templates</code>以下に配置します。<br />
+  テンプレートファイルを指定する文字列<code>"variety/listAndForm"</code>では、先頭に<code>"/"</code>を記述しません。<br />
+  ファイルの拡張子<code>.html</code>も記述しません。<br />
+</p>
+<details>
+  <summary><em>HTMLテンプレートのソースコード</em></summary>
+  <h4>resources/templates/variety/listAndForm.html</h4>
+  <pre>
+    <code>
+&lt;!DOCTYPE html&gt;
+&lt;html xmlns:th="http://www.thymeleaf.org"&gt;
+&lt;head&gt;
+    &lt;title&gt;品種の管理&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h2&gt;登録済の品種&lt;/h2&gt;
+&lt;table&gt;
+    &lt;thead&gt;
+    &lt;tr&gt;
+        &lt;th&gt;品種名 [品種番号]&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+      &lt;tr th:each="each : <mark>${allVarieties}</mark>"&gt;
+        &lt;td th:text="${each.show()}"&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2&gt;品種の登録&lt;/h2&gt;
+      &lt;form th:aciton="@{/varieties}" th:object="<mark>${variety}</mark>" method="post"&gt;
+    &lt;fieldset&gt;
+        &lt;p&gt;
+            &lt;label th:for="varietyNumber.value"&gt;ハーブの品種番号&lt;/label&gt;
+            &lt;input type="text" disabled="disabled" th:field="*{varietyNumber.value}"&gt;
+        &lt;/p&gt;
+        &lt;p&gt;
+            &lt;label th:for="name"&gt;ハーブの名称&lt;/label&gt;
+            &lt;input type="text" th:field="*{name}"&gt;
+            &lt;mark&gt;&lt;span th:errors="*{name}"&gt;&lt;/span&gt;&lt;/mark&gt;
+        &lt;/p&gt;
+
+        &lt;p&gt;
+            &lt;button type="submit"&gt;登録する&lt;/button&gt;
+        &lt;/p&gt;
+    &lt;/fieldset&gt;
+&lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+    </code>
+  </pre>
+</details>
+<p>
+  このサンプルアプリケーションの画面は最小限のスタイルだけを指定した<code>Water.css</code>で作成しています。<br />
+  <code>Water.css</code>を使った画面の例：<a target="plain-html" th:href="@{/guides/plain-html}">シンプルなHTMLを書く</a>
+</p>
+<hr>
+<h2>POSTリクエストの処理：@PostMapping</h2>
+<p>
+  HTTPリクエストのメソッドがPOSTの場合に実行する処理を記述します。
+</p>
+<pre>
+  <code>
+<mark>@PostMapping("")</mark>
+public String register(
+        <mark>@ModelAttribute("variety")</mark> <mark>@Validated</mark> Variety variety,
+        BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) return "variety/listAndForm";
+
+    varietyRegisterService.register(variety);
+    return "redirect:/varieties";
+}
+  </code>
+</pre>
+<h3>引数レベルの@ModelAttribute</h3>
+<p>
+  引数に<code>@ModelAttribute("variety") Variety variety</code>を宣言します。<br />
+  Varietyクラスのオブジェクトを生成して、そのオブジェクトにHTTPリクエストのデータをバインドします。
+</p>
+<p>
+  バインドを許可するフィールド（へのパス名）は<code>@InitBinder</code>を宣言したメソッドで指定します。（後述）<br />
+  外部から渡されるHTTPリクエストからバインドするフィールドを限定することで、内部のオブジェクトの状態を適切に保ちます。
+</p>
+<h3>バリデーション</h3>
+<p>
+  引数に<code>@Validated</code>を宣言すると、オブジェクトの妥当性検査が行われます。
+<h4>Varietyクラスのnameフィールドのバリデーション制約の記述</h4>
+<pre>
+  <code>
+package example.domain.model.kit.row;
+
+public class Variety {
+    ....
+
+    @NotNull(message = "必須")
+    @Size(min=3, message = "{min}字以上")
+    @Size(max=20, message = "{max}字以内")
+    String name = "";
+
+    ....
+}
+  </code>
+</pre>
+<p>
+  nameがバインドできなかった時、3文字未満の時、20文字を超える時に、バリデーションエラーになります。
+</p>
+<h3>エラー内容の表示</h3>
+<p>
+  エラーの有無は<code>BindingResult#hasErrors()</code>メソッドで判断します。<br />
+  エラーがあった場合、エラーを表示する画面のHTMLテンプレートを指定します。(<code>return "variety/listAndForm"</code>)
+</p>
+<p>
+  HTMLテンプレートでは、<code>BindingResult#hasErrors()</code>でエラーの有無を判断できます。<br />
+  すべてのエラーの内容は、<code>${#fields.allErrors()}</code>で表示できます。<br />
+  フィールドのエラー内容は<code>th:errors=*{name}</code>で表示します。
+</p>
+<h3>Varietyオブジェクトの保存</h3>
+<p>
+  バリデーションエラーがなかった場合<code>varietyRegisterService.register(variety)</code>でオブジェクトを保存します。
+</p>
+<p>
+  オブジェクトをデータベースに保存する方法は
+  <a target="object-sql" th:href="@{/guides/object-sql}">オブジェクト ⇔ SQL</a>
+  の説明を参照してください。
+</p>
+<h3>POST処理後の画面遷移</h3>
+<p>
+  POSTリクエストを処理した後は<code>return "redirect:/varieties"</code>で、URL<code>/varieties</code>へのリダイレクトを要求するレスポンスをブラウザに返却します。<br />
+  ブラウザはURL<code>/varieties</code>へGETメソッドでリクエストします。
+</p>
+<p>
+  POSTのあとにリダイレクトでページを表示するこのやり方をPGR(Post-Redirect-Get)パターンと呼びます。<br />
+  同じ内容のPOSTリクエストを二重に送信しない仕組みです。<br />
+  このサンプルでは、登録結果を反映した一覧を表示し、次の登録をするために、元の一覧・登録画面にリダイレクトしています。<br />
+  確認画面や完了画面、あるいはまったく別の画面にリダイレクトすることも、もちろん可能です。
+</p>
+<hr>
+<h2 id="allow-fields">バインドを許可するフィールドを指定する：@InitBinder</h2>
+<p>
+  <a href="#direct-field-access">ダイレクトフィールドアクセス</a>で説明したように基本の設定では、フィールドへのバインドを禁止しています。<br />
+  フィールドへのバインドを許可するのは、各コントローラの責任です。
+</p>
+<pre>
+  <code>
+@InitBinder
+public void initBinder(WebDataBinder binder) {
+    binder.setAllowedFields("name");
+}
+  </code>
+</pre>
+<p>
+  <code>WebDataBinder#setAllowFields()</code>メソッドを使って、バインドを許可するフィールドを明示します。<br />
+  このメソッドの引数は可変長です。複数のフィールドを必要なだけ記述できます。
+</p>
+<p>
+  <a href="#">ページの先頭に戻る</a>
+</p>
+</body>
+</html>

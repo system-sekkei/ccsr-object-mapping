@@ -1,8 +1,8 @@
 package example.application.repository;
 
 import example.domain.identity.KitNumber;
-import example.domain.model.product.StarterKit;
-import example.domain.model.product.StarterKitList;
+import example.domain.model.kit.StarterKit;
+import example.domain.model.kit.StarterKitList;
 
 public interface StarterKitRepository {
     StarterKitList listAll();

@@ -12,11 +12,10 @@ public class BaseControllerAdvice {
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
-
-
         binder.initDirectFieldAccess();
-        binder.registerCustomEditor(String.class, new StringTrimmerEditor(false));
+        binder.setAllowedFields(""); //どのフィールドも許可しない
 
+        binder.registerCustomEditor(String.class, new StringTrimmerEditor(false));
         binder.registerCustomEditor(Covered.class, new EditorForCovered());
     }
 }

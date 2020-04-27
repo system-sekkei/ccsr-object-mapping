@@ -1,5 +1,8 @@
 package example.domain.identity;
 
+/**
+ * ハーブの品種番号
+ */
 public class VarietyNumber {
     String value;
 

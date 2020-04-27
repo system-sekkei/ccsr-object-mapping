@@ -1,7 +1,7 @@
 package example.domain.identity;
 
 /**
- * 商品番号
+ * 栽培キット番号
  */
 public class KitNumber {
     String value;

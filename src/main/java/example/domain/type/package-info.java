@@ -1,4 +1,4 @@
 /**
- * ビジネスルールを表現する基本型 : primitives
+ * ビジネスルールの基本型(domain primitives)
  */
 package example.domain.type;

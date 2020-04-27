@@ -2,12 +2,16 @@ package example.presentation.api;
 
 import example.application.service.VarietyRegisterService;
 import example.application.service.VarietyService;
-import example.domain.model.product.row.Variety;
+import example.domain.model.kit.row.Variety;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
-@RestController("API品種")
+/**
+ * API ハーブの品種
+ */
+@RestController("APIハーブの品種")
 @RequestMapping("/api/varieties")
 public class VarietyController {
     VarietyService varietyService;

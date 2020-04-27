@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd"
+        [
+        <!ENTITY 名前空間 "example.infrastructure.datasource.kit.feature.FeatureMapper">
+        <!ENTITY 特徴 "example.domain.model.kit.feature.Feature">
+        <!ENTITY 特徴一覧 "example.domain.model.kit.feature.Features">
+        ]>
+<mapper namespace="&名前空間;">
+    <select id="featuresFor" resultType="&特徴;">
+        SELECT
+            特徴
+        FROM 商品.キットの特徴
+        WHERE
+            キット番号 = #{value}
+        ORDER BY
+          順序番号 ASC
+    </select>
+
+    <insert id="recordFeatures">
+        INSERT INTO 商品.キットの特徴
+            (キット番号, 順序番号, 特徴)
+        VALUES
+        <foreach item="each" collection="features.list" index="index" separator=",">
+            (
+            #{kitNumber.value}, #{index} + 1,#{each}
+            )
+        </foreach>
+    </insert>
+</mapper>

@@ -1,4 +1,4 @@
 /**
- * ドメインモデル：ビジネスルール表現
+ * ドメインモデル（ビジネスルール）
  */
 package example.domain.model;

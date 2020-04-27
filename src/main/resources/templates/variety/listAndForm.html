@@ -3,12 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>品種の管理</title>
-    <link th:replace="_fragments/head :: css">
+    <link th:replace="_fragments/head :: css-dark">
 </head>
 <body>
-<p>
-    <a th:href="@{/}">トップに戻る</a>
-</p>
+<header>
+    <nav>
+        <a target="top" th:href="@{/}">トップに戻る</a>
+        | <a target="object-html" th:href="@{/guides/object-html}">この画面の実装ガイド</a>
+    </nav>
+</header>
 <h2>登録済の品種</h2>
 
 <table>
@@ -27,6 +30,7 @@
 <h2>品種の登録</h2>
 <form th:aciton="@{/varieties}" th:object="${variety}" method="post">
     <block th:if="${#fields.hasAnyErrors()}">
+        <mark><span>エラーがあります：</span></mark>
         <mark><span th:text="${#fields.allErrors()}"></span></mark>
     </block>
     <fieldset>

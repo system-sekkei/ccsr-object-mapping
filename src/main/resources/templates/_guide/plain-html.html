@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>シンプルなHTMLコーディング</title>
+  <link th:replace="_fragments/head :: css-dark">
+</head>
+<body>
+<h1>シンプルなHTMLを書く</h1>
+<p>
+  この画面は、最小限のスタイルを指定した
+  <a href="https://kognise.github.io/water.css/" target="_blank">Water.css</a>
+  を使用しています。<br />
+  HTML要素を記述するだけで、このような画面を作成できます。<br />
+  class属性は不要です。
+</p>
+<p>
+  <a target="object-html" th:href="@{/guides/object-html#http-response}">オブジェクト ⇔ HTMLに戻る</a>
+</p>
+<hr>
+<header>
+  <h2>ナビゲーション</h2>
+  <nav>
+    <a target="top" th:href="@{/}">トップに戻る</a>
+    | <a target="object-html" th:href="@{/guides/object-html}">オブジェクト ⇔ HTML</a>
+    | <a target="object-sql"  th:href="@{/guides/object-sql}">オブジェクト ⇔ SQL</a>
+    | <a target="object-json"  th:href="@{/guides/object-json}">オブジェクト ⇔ JSON</a>
+  </nav>
+</header>
+<p>
+<details>
+  <summary><em>ソースコード</em></summary>
+<pre>
+  <code>
+&lt;header&gt;
+  &lt;h2&gt;ナビゲーション&lt;/h2&gt;
+  &lt;nav&gt;
+    &lt;a href="/"&gt;トップに戻る&lt;/a&gt;
+    | &lt;a href="/guides/object-html"&gt;オブジェクト ⇔ HTML&lt;/a&gt;
+    | &lt;a href="/guides/object-sql"&gt;オブジェクト ⇔ SQL&lt;/a&gt;
+    | &lt;a href="/guides/object-json"&gt;オブジェクト ⇔ JSON&lt;/a&gt;
+  &lt;/nav&gt;
+&lt;/header&gt;
+  </code>
+</pre>
+</details>
+</p>
+
+<h2>入力フォーム</h2>
+<form>
+  <fieldset>
+    <legend>基本フォーム</legend>
+
+    <label for='email'>Email</label>
+    <input
+        type='email'
+        name='email'
+        id='email'
+        placeholder='somebody@example.com'
+    />
+
+    <label for='password'>Password</label>
+    <input
+        type='password'
+        name='password'
+        id='password'
+        placeholder='password'
+    />
+
+    <p>
+      <input type='checkbox' name='remember' id='remember' checked />
+      <label for='remember'>Remember me</label>
+    </p>
+
+    <input type='submit' />
+  </fieldset>
+
+  <fieldset>
+    <legend>その他の要素</legend>
+  <label for='id'>会員番号 (リードオンリー)</label>
+  <input readonly name='id' id='id' value='04D6H89Z' />
+
+  <label for='disabled'>disabled</label>
+  <input
+      disabled
+      name='disabled'
+      id='disabled'
+      placeholder='ここは選択できません'
+  />
+
+  <label for='about'>テキストエリア</label>
+  <textarea
+      name='about'
+      id='about'
+      placeholder='テキストエリアとは...'
+  ></textarea>
+
+  <label for='drink'>ドロップダウン</label>
+  <select name='drinks' id='drink'>
+    <option value='water'>水</option>
+    <option value='lemon'>レモンジュース</option>
+  </select>
+
+  <label>ラジオボタン</label>
+  <div>
+    <input type='radio' id='weekday' name='available' value='weekday' checked>
+    <label for='weekday'>平日</label>
+  </div>
+  <div>
+    <input type='radio' id='holiday' name='available' value='holiday' checked>
+    <label for='holiday'>休日</label>
+  </div>
+
+  <div>
+    <label for='volume'>スライドバー（ボリューム）</label>
+    <input type='range' name='volume' id='volume' min='0' max='11' />
+  </div>
+    </fieldset>
+</form>
+
+<p>
+  <details>
+    <summary><em>ソースコード</em></summary>
+    <pre>
+  <code>
+&lt;form&gt;
+  &lt;fieldset&gt;
+    &lt;legend&gt;基本フォーム&lt;/legend&gt;
+
+    &lt;label for='email'&gt;Email&lt;/label&gt;
+    &lt;input
+        type='email'
+        name='email'
+        id='email'
+        placeholder='somebody@example.com'
+    /&gt;
+
+    &lt;label for='password'&gt;Password&lt;/label&gt;
+    &lt;input
+        type='password'
+        name='password'
+        id='password'
+        placeholder='password'
+    /&gt;
+
+&lt;p&gt;
+  &lt;input type='checkbox' name='remember' id='remember' checked /&gt;
+  &lt;label for='remember'&gt;Remember me&lt;/label&gt;
+&lt;/p&gt;
+
+&lt;input type='submit' /&gt;
+&lt;/fieldset&gt;
+
+&lt;fieldset&gt;
+  &lt;legend&gt;その他の要素&lt;/legend&gt;
+  &lt;label for='id'&gt;会員番号 (リードオンリー)&lt;/label&gt;
+  &lt;input readonly name='id' id='id' value='04D6H89Z' /&gt;
+
+  &lt;label for='disabled'&gt;disabled&lt;/label&gt;
+  &lt;input
+      disabled
+      name='disabled'
+      id='disabled'
+      placeholder='ここは選択できません'
+  /&gt;
+
+  &lt;label for='about'&gt;テキストエリア&lt;/label&gt;
+  &lt;textarea
+      name='about'
+      id='about'
+      placeholder='テキストエリアとは...'
+  &gt;&lt;/textarea&gt;
+
+  &lt;label for='drink'&gt;ドロップダウン&lt;/label&gt;
+  &lt;select name='drinks' id='drink'&gt;
+    &lt;option value='water'&gt;水&lt;/option&gt;
+    &lt;option value='lemon'&gt;レモンジュース&lt;/option&gt;
+  &lt;/select&gt;
+
+  &lt;label&gt;ラジオボタン&lt;/label&gt;
+  &lt;div&gt;
+    &lt;input type='radio' id='weekday' name='available' value='weekday' checked&gt;
+    &lt;label for='weekday'&gt;平日&lt;/label&gt;
+  &lt;/div&gt;
+  &lt;div&gt;
+    &lt;input type='radio' id='holiday' name='available' value='holiday' checked&gt;
+    &lt;label for='holiday'&gt;休日&lt;/label&gt;
+  &lt;/div&gt;
+
+  &lt;div&gt;
+    &lt;label for='volume'&gt;スライドバー（ボリューム）&lt;/label&gt;
+    &lt;input type='range' name='volume' id='volume' min='0' max='11' /&gt;
+  &lt;/div&gt;
+&lt;/fieldset&gt;
+&lt;/form&gt;
+  </code>
+    </pre>
+  </details>
+</p>
+    
+<h2>テーブル</h2>
+<table>
+  <caption>
+    <p>偶数行の背景が変わる</p>
+  </caption>
+  <thead>
+  <tr>
+    <th>名称</th>
+    <th>数量</th>
+    <th>値段</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>本体</td>
+    <td>1</td>
+    <td>200,000円</td>
+  </tr>
+  <tr>
+    <td>ディスプレイ</td>
+    <td>1</td>
+    <td>10,000円</td>
+  </tr>
+  <tr>
+    <td>キーボード</td>
+    <td>2</td>
+    <td>30,000円</td>
+  </tr>
+  </tbody>
+</table>
+
+<p>
+<details>
+  <summary><em>ソースコード</em></summary>
+  <pre>
+  <code>
+&lt;table&gt;
+&lt;caption&gt;
+&lt;p&gt;偶数行の背景が変わる&lt;/p&gt;
+&lt;/caption&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+  &lt;th&gt;名称&lt;/th&gt;
+  &lt;th&gt;数量&lt;/th&gt;
+  &lt;th&gt;値段&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+  &lt;td&gt;本体&lt;/td&gt;
+  &lt;td&gt;1&lt;/td&gt;
+  &lt;td&gt;200,000円&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;ディスプレイ&lt;/td&gt;
+  &lt;td&gt;1&lt;/td&gt;
+  &lt;td&gt;10,000円&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;td&gt;キーボード&lt;/td&gt;
+  &lt;td&gt;2&lt;/td&gt;
+  &lt;td&gt;30,000円&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+  </code>
+  </pre>
+</details>
+</p>
+
+<h2>文字の修飾</h2>
+<ul>
+  <li>mark要素で囲むと<mark>ハイライト表示ができる</mark></li>
+  <li>strong要素で囲むと<strong>太字</strong>になる</li>
+  <li>em要素で囲むと<em>斜体</em>になる</li>
+</ul>
+
+<p>
+  <details>
+    <summary><em>ソースコード</em></summary>
+  <pre>
+  <code>
+&lt;ul&gt;
+  &lt;li&gt;mark要素で囲むと&lt;mark&gt;ハイライト表示ができる&lt;/mark&gt;&lt;/li&gt;
+  &lt;li&gt;strong要素で囲むと&lt;strong&gt;太字&lt;/strong&gt;になる&lt;/li&gt;
+  &lt;li&gt;em要素で囲むと&lt;em&gt;斜体&lt;/em&gt;になる&lt;/li&gt;
+&lt;/ul&gt;    
+  </code>
+  </pre>
+  </details>
+</p>
+
+<h2>引用</h2>
+<blockquote>
+  blockquote要素で囲むと、引用として表示できる
+</blockquote>
+
+<p>
+  <details>
+    <summary><em>ソースコード</em></summary>
+    <pre>
+  <code>
+&lt;blockquote&gt;
+  blockquote要素で囲むと、引用として表示できる
+&lt;/blockquote&gt;
+  </code>
+  </pre>
+  </details>
+</p>
+    
+<h2>ソースコード</h2>
+<pre>
+  <code>
+    @Annotated
+    class SomeType() { ... }
+  </code>
+</pre>
+
+<p>
+  <details>
+    <summary><em>ソースコード</em></summary>
+  <pre>
+  <code>
+&lt;pre&gt;
+  &lt;code&gt;
+    @Annotated
+    class SomeType() { ... }
+  &lt;/code&gt;
+&lt;/pre&gt;
+
+  </code>
+  </pre>
+  </details>
+</p>
+
+
+  <h2>サマリーと詳細</h2>
+  <h3>詳細を閉じている</h3>
+  <details>
+    <summary>サマリー（クリックで詳細を表示／非表示）</summary>
+    <dl>
+      <dt>details要素</dt>
+      <dd>summary要素と他の詳細情報の記述をまとめる</dd>
+      <dt>summary要素</dt>
+      <dd>サマリー情報</dd>
+      <dd>先頭の▽アイコンで開閉を表現する</dd>
+    </dl>
+  </details>
+  <h3>詳細を開いている</h3>
+  <details open>
+    <summary>サマリー（クリックで詳細を表示／非表示）</summary>
+    <ul>
+      <li>詳細情報を開閉する</li>
+      <li>details要素にopen属性を指定すると、初期状態は詳細表示になる</li>
+    </ul>
+  </details>
+
+<p>
+  <details>
+    <summary><em>ソースコード</em></summary>
+    <pre>
+  <code>
+&lt;h3&gt;詳細を閉じている&lt;/h3&gt;
+  &lt;details&gt;
+    &lt;summary&gt;サマリー（クリックで詳細を表示／非表示）&lt;/summary&gt;
+    &lt;dl&gt;
+      &lt;dt&gt;details要素&lt;/dt&gt;
+      &lt;dd&gt;summary要素と他の詳細情報の記述をまとめる&lt;/dd&gt;
+      &lt;dt&gt;summary要素&lt;/dt&gt;
+      &lt;dd&gt;サマリー情報&lt;/dd&gt;
+      &lt;dd&gt;先頭の▽アイコンで開閉を表現する&lt;/dd&gt;
+    &lt;/dl&gt;
+  &lt;/details&gt;
+  &lt;h3&gt;詳細を開いている&lt;/h3&gt;
+  &lt;details open&gt;
+    &lt;summary&gt;サマリー（クリックで詳細を表示／非表示）&lt;/summary&gt;
+    &lt;ul&gt;
+      &lt;li&gt;詳細情報を開閉する&lt;/li&gt;
+      &lt;li&gt;details要素にopen属性を指定すると、初期状態は詳細表示になる&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/details&gt;
+  </code>
+  </pre>
+  </details>
+</p>
+
+
+<h2>フッター</h2>
+<footer>
+  <address>
+    <a href='mailto:somebody@example.com'>somebody@example.com</a><br />
+    <a href='tel:778-330-2389'>778-330-2389</a><br />
+    <a href='sms:666-666-6666'>666-666-6666</a>
+  </address>
+</footer>
+
+<p>
+  <details>
+    <summary><em>ソースコード</em></summary>
+    <pre>
+  <code>
+&lt;footer&gt;
+  &lt;address&gt;
+    &lt;a href='mailto:somebody@example.com'&gt;somebody@example.com&lt;/a&gt;&lt;br /&gt;
+    &lt;a href='tel:778-330-2389'&gt;778-330-2389&lt;/a&gt;&lt;br /&gt;
+    &lt;a href='sms:666-666-6666'&gt;666-666-6666&lt;/a&gt;
+  &lt;/address&gt;
+&lt;/footer&gt;
+  </code>
+  </pre>
+  </details>
+</p>
+
+</body>
+</html>

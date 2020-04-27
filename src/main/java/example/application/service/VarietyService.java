@@ -1,7 +1,7 @@
 package example.application.service;
 
 import example.application.repository.VarietyRepository;
-import example.domain.model.product.row.Variety;
+import example.domain.model.kit.row.Variety;
 import org.springframework.stereotype.Service;
 
 /**

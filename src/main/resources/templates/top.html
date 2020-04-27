@@ -3,56 +3,58 @@
 <head>
   <meta charset="UTF-8">
   <title>トップ</title>
-  <link th:replace="_fragments/head :: css">
+  <link th:replace="_fragments/head :: css-light">
 </head>
 <body>
-<h1>サンプルアプリケーション</h1>
-<h2>オブジェクトと外部形式のマッピング</h2>
-<h3>概要</h3>
+<header>
+  <nav>
+    <a target="_self" th:href="@{/}">トップに戻る</a>
+    | <a target="object-html" th:href="@{/guides/object-html}">オブジェクト ⇔ HTML</a>
+    | <a target="object-sql" th:href="@{/guides/object-sql}">オブジェクト ⇔ SQL</a>
+    | <a target="object-json" th:href="@{/guides/object-json}">オブジェクト ⇔ JSON</a>
+  </nav>
+</header>
+
+<h1>オブジェクトのマッピング</h1>
+<h2>オブジェクトとHTML・SQL・JSONのマッピング</h2>
+<h2>サンプルアプリケーション</h2>
 <p>
-  ハーブの栽培キットを登録したり一覧できるアプリケーションです。<br/>
+  ハーブの栽培キットを一覧・登録するアプリケーションです。<br/>
+  オブジェクト ⇔ HTML、オブジェクト ⇔ SQL、オブジェクト ⇔ JSONのそれぞれのマッピングのやり方のサンプルコードです。
   <a target="Thymeleaf-Spring Document" href="https://www.thymeleaf.org/doc/tutorials/3.0/thymeleafspring.html#spring-thyme-seed-starter-manager">
     Thymeleaf-Springのドキュメント(英語)
   </a>
   で使われているサンプルアプリケーションを参考にして作成しました。
 </p>
-<h2>サンプルアプリケーション</h2>
-<ul>
-  <li>
-    <a target="Simple Form" th:href="@{/varieties}">品種の一覧・登録</a> (単純な例)
-  </li>
-  <li>
-    <a target="StarterKit Manager" th:href="@{/products}">栽培キットの一覧・登録</a> (複雑な例)
-  </li>
-</ul>
-<h2>三種類のマッピング</h2>
-<p>オブジェクトと画面、オブジェクトとデータベース、オブジェクトとJSON形式の三種類のマッピングの参照実装です。</p>
 <dl>
-  <dt><h3>オブジェクト ⇔ HTML</h3></dt>
-  <dd>使用技術：Spring MVC Web Data Binder, Thymeleaf</dd>
-  <dd><a>説明</a></dd>
-  <dt><h3>オブジェクト ⇔ SQL</h3></dt>
-  <dd>myBatis SQL Mapper</dd>
-  <dt><h3>オブジェクト ⇔ JSON</h3></dt>
-  <dd>Spring MVC Jackson Object Mapper, Swagger UI</dd>
+  <dt>説明に使う、簡単な例</dt>
+  <dd>
+    <a target="varieties" th:href="@{/varieties}">品種の一覧・登録</a>
+  </dd>
+  <dt>より複雑なマッピングの例</dt>
+  <dd>
+    <a target="kits" th:href="@{/kits}">栽培キットの一覧・登録</a>
+  </dd>
 </dl>
 <hr>
-
-<h2>オブジェクトと画面のマッピング</h2>
-<h3>概要</h3>
-<p>オブジェクトを画面に表示する</p>
-<p>画面の入力をオブジェクトのバインドする</p>
-<h3>最小限のHTMLコーディング</h3>
-<p>class要素を指定しないで、HTML要素だけでシンプルに記述する。
-<a th:href="@{/guides}">HTMLの記述例（マッピングなし）</a></p>
-<h2>データベースとSQLマッピング</h2>
-  <p><a target="h2-console" th:href="@{${@environment.getProperty('spring.h2.console.path')}}">データベースへの接続</a></p>
-<p >
-  JDBC URL <span th:text="${@environment.getProperty('spring.datasource.url')}"></span>
-</p>
-<h2>API</h2>
+<h2>オブジェクトとHTMLのマッピング</h2>
 <p>
-  <a target="swagger-ui" th:href="@{/swagger-ui.html}">API 仕様</a>
+  Web画面とオブジェクトのマッピングについて説明します。<br />
+  <a target="object-html" th:href="@{/guides/object-html}">オブジェクト ⇔ HTML</a>
+</p>
+<h2>オブジェクトとSQLのマッピング</h2>
+<p>
+  データベースとオブジェクトのマッピングについて説明します。<br />
+  <a target="object-sql" th:href="@{/guides/object-sql}">オブジェクト ⇔ SQL</a>
+</p>
+<h2>オブジェクトとJSONのマッピング</h2>
+<p>
+  API(JSONデータ)とオブジェクトとのマッピングについて説明します。<br />
+  <a target="object-json" th:href="@{/guides/object-json}">オブジェクト ⇔ JSON</a>
+</p>
+<h2>設計可視化ツール：Jigレポート</h2>
+<p>
+  ソースコードから、設計内容を可視化するツールを説明します。
 </p>
 </body>
 </html>
