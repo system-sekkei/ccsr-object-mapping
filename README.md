@@ -10,11 +10,11 @@ CCSR(Continuous Concurrent Stepwise Refinement)のためのテンプレートプ
 * Jigを活用するための規約
 
 ### プロジェクトのレイアウト
-<details>
+<details open>
  <summary>src/main</summary>
-<ul>
- <li>java</li>
-<details>
+<details open>
+ <summary>java</summary>
+<details open>
  <summary>application　アプリケーション層</summary>
  <ul>
  <li>coordinator ← 複合サービス</li>
@@ -44,8 +44,10 @@ CCSR(Continuous Concurrent Stepwise Refinement)のためのテンプレートプ
  <li>web ← 画面</li>
  </ul>
 </details>
- <li>resources</li>
-</ul>
+ <details open>
+  <summary>resources</summary>
+ </details>
+</details>
 </details>
   
 ### 要素技術
