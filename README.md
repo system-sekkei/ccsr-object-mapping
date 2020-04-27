@@ -9,15 +9,9 @@ CCSR(Continuous Concurrent Stepwise Refinement)のためのテンプレートプ
 * オブジェクトと画面・JSON・テーブルとのマッピング
 * Jigを活用するための規約
 
-### プロジェクトのレイアウト
+### 三層＋ドメインロジック
 <details open>
- <summary>src/main</summary>
- <ul>
- <li>
-<details open>
- <summary>java</summary>
-<details open>
- <summary>application　アプリケーション層</summary>
+<summary>application　アプリケーション層</summary>
  <ul>
  <li>coordinator ← 複合サービス</li>
  <li>repository ← リポジトリ</li>
@@ -25,7 +19,7 @@ CCSR(Continuous Concurrent Stepwise Refinement)のためのテンプレートプ
  </ul>
 </details>
 <details>
- <summary>domain ドメイン層</summary>
+ <summary>domain ドメインロジック</summary>
  <ul>
  <li>identity ← 識別情報</li>
  <li>model ← ドメインモデル</li>
@@ -45,15 +39,6 @@ CCSR(Continuous Concurrent Stepwise Refinement)のためのテンプレートプ
  <li>api ← API</li>
  <li>web ← 画面</li>
  </ul>
-</details>
-</details>
-</li>
-<li>
- <details open>
-  <summary>resources</summary>
- </details>
-</li>
-</ul>
 </details>
   
 ### 要素技術
