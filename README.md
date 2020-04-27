@@ -1,15 +1,26 @@
-# template
+# CCSR オブジェクトマッピング
 
-## 概要
+CCSR(Continuous Concurrent Stepwise Refinement)のための参照プロジェクトです。
 
-CCSR(Continuous Concurrent Stepwise Refinement)のためのテンプレートプロジェクト
+このプロジェクトでは、ドメインオブジェクトとHTML/SQL/JSONとのマッピングの実装例を紹介します。
 
-* レイヤ構成
-* 要素技術
-* オブジェクトと画面・JSON・テーブルとのマッピング
-* Jigを活用するための規約
+### 起動方法
+```
+>./gradlew bootRun
+```
 
-### 三層＋ドメインロジック
+### オブジェクトとのマッピング
+
+以下の３つのマッピング技術の実装例です。
+
+* オブジェクト ⇔　HTML
+* オブジェクト ⇔ JSON
+* オブジェクト ⇔ SQL(テーブル)
+
+アプリケーションを起動して ```http://localhost:8080```をブラウザで開くと実装内容の説明画面が表示されます。
+
+### アーキテクチャ
+レイヤ構造は **三層＋ドメインロジック** です。
 <details open>
 <summary>application　アプリケーション層</summary>
  <ul>
@@ -43,34 +54,6 @@ CCSR(Continuous Concurrent Stepwise Refinement)のためのテンプレートプ
   
 ### 要素技術
 
-* Spring Boot , Gradle
-* Spring MVC, Thymeleaf
-* myBatis, flyway
-
-### オブジェクトとのマッピング
-
-* オブジェクト ⇔　画面
-* オブジェクト ⇔ JSON
-* オブジェクト ⇔ SQL(テーブル)
-
-### Jigを活用するための規約
-
-* クラス名、メソッド名、パッケージ名
-* Spring アノテーション
-
-## オブジェクトと画面のマッピング
-
-## オブジェクトとJSONのマッピング
-
-## オブジェクトとSQL(テーブル)のマッピング
-
-## Jigを活用するための規約
-
-### ドキュメントとしての価値をあげる
-
-* enumの要素名を日本語に
-* スキーマ名・テーブル名・カラム名を日本語
-* クラス、メソッド、パッケージに日本語名を付加する
-
-### Java Docコメント　日本語名
-### package-info.java の Java Docコメント日本語名
+* 全体　：　Spring Boot , Gradle
+* プレゼンテーション層　：　Spring MVC, Thymeleaf
+* データソース層とデータベース　：　myBatis, flyway, H2Database
