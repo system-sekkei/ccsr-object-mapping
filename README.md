@@ -12,6 +12,8 @@ CCSR(Continuous Concurrent Stepwise Refinement)のためのテンプレートプ
 ### プロジェクトのレイアウト
 <details open>
  <summary>src/main</summary>
+ <ul>
+ <li>
 <details open>
  <summary>java</summary>
 <details open>
@@ -44,10 +46,14 @@ CCSR(Continuous Concurrent Stepwise Refinement)のためのテンプレートプ
  <li>web ← 画面</li>
  </ul>
 </details>
+</details>
+</li>
+<li>
  <details open>
   <summary>resources</summary>
  </details>
-</details>
+</li>
+</ul>
 </details>
   
 ### 要素技術
