@@ -11,10 +11,14 @@ CCSR(Continuous Concurrent Stepwise Refinement)のためのテンプレートプ
 
 ### レイヤ構成
 
-* application層
+<details>
+ <summary>application</summary>
   * coordinator
   * repository
   * service 
+</details>
+
+* application層
 * domain層
   * model
   * type
