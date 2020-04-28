@@ -48,6 +48,6 @@ public class VarietyController {
     // バインドを許可するフィールドを指定する
     @InitBinder
     public void initBinder(WebDataBinder binder) {
-        binder.setAllowedFields("name");
+        binder.setAllowedFields("varietyName.value");
     }
 }

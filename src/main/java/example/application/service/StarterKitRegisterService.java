@@ -8,10 +8,10 @@ import org.springframework.stereotype.Service;
  * 栽培キット登録サービス
  */
 @Service
-public class StarerKitRegisterService {
+public class StarterKitRegisterService {
     StarterKitRepository starterKitRepository;
 
-    public StarerKitRegisterService(StarterKitRepository starterKitRepository) {
+    public StarterKitRegisterService(StarterKitRepository starterKitRepository) {
         this.starterKitRepository = starterKitRepository;
     }
 

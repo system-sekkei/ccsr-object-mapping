@@ -1,6 +1,6 @@
 package example.presentation.web.kit;
 
-import example.application.service.StarerKitRegisterService;
+import example.application.service.StarterKitRegisterService;
 import example.application.service.StarterKitService;
 import example.application.service.VarietyService;
 import example.domain.model.kit.StarterKit;
@@ -24,12 +24,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/kits")
 public class StarterKitController {
     StarterKitService starterKitService;
-    StarerKitRegisterService starerKitRegisterService;
+    StarterKitRegisterService starterKitRegisterService;
     VarietyService varietyService;
 
-    public StarterKitController(StarterKitService starterKitService, StarerKitRegisterService starerKitRegisterService, VarietyService varietyService) {
+    public StarterKitController(StarterKitService starterKitService, StarterKitRegisterService starterKitRegisterService, VarietyService varietyService) {
         this.starterKitService = starterKitService;
-        this.starerKitRegisterService = starerKitRegisterService;
+        this.starterKitRegisterService = starterKitRegisterService;
         this.varietyService = varietyService;
     }
 
@@ -70,7 +70,7 @@ public class StarterKitController {
             return "kit/listAndForm";
         }
 
-        starerKitRegisterService.register(starterKit);
+        starterKitRegisterService.register(starterKit);
         return "redirect:/kits";
     }
 

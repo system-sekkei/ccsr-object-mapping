@@ -2,7 +2,9 @@ package example.presentation.api;
 
 import example.application.service.VarietyRegisterService;
 import example.application.service.VarietyService;
+import example.domain.identity.VarietyNumber;
 import example.domain.model.kit.row.Variety;
+import example.domain.model.kit.row.validation.VarietyName;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
@@ -28,12 +30,13 @@ public class VarietyController {
     }
 
     @PostMapping
-    Variety register(@RequestBody @Validated Variety variety,
-                     BindingResult bindingResult) {
+    VarietyNumber register(@RequestBody @Validated VarietyName varietyName,
+                           BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             throw new IllegalArgumentException(bindingResult.toString());
         }
+        Variety variety = Variety.from(varietyName);
         varietyRegisterService.register(variety);
-        return variety;
+        return variety.number();
     }
 }

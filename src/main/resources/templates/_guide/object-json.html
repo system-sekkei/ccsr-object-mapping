@@ -15,8 +15,83 @@
   </nav>
 </header>
 <h1>オブジェクト ⇔ JSONのマッピング</h1>
+<p>
+  ハーブの品種の一覧APIと登録APIを例に、オブジェクトとJSONとのマッピングを説明します。<br />
+  マッピングの対象は、下記のVarietyクラスです。
+</p>
+<pre>
+  <code>
+package example.domain.model.kit.row;
+
+/**
+* ハーブの品種を表現するクラス
+*/
+public class Variety {
+    VarietyNumber varietyNumber;
+    String name = "";
+
+    public String show() {
+        return String.format("%s [%s]", name, varietyNumber);
+    }
+}
+  </code>
+</pre>
+<details open>
+  <summary>一覧結果のJSON</summary>
+<pre>
+  <code>
+{
+  "list": [
+    {
+      "covered": "有",
+      "dateOfSeed": {
+        "value": "string"
+      },
+      "features": {
+        "list": [
+          "専用培養土"
+        ]
+      },
+      "kitNumber": {
+        "value": "string"
+      },
+      "rows": {
+        "list": [
+          {
+            "seedsPerCell": 0,
+            "variety": {
+              "name": "string"
+            }
+          }
+        ]
+      },
+      "type": "プラスチック"
+    }
+  ]
+}
+  </code>
+</pre>
+</details>
+<details open>
+<summary>品種を登録するJSON</summary>
+<pre>
+  <code>
+{
+  "name": "string"
+}
+  </code>
+</pre>
+</details>
+<hr>
+<h2>APIドキュメント</h2>
+<p>
+  APIの仕様は
 <a target="swagger-ui" th:href="@{/swagger-ui.html}">APIドキュメント</a>
+  で参照できます。<br />
+  このドキュメントは、ソースコードから自動生成しています。（詳細は後述）
+</p>
 <h2>依存ライブラリ</h2>
+
 <h2>ダイレクトフィールドアクセス</h2>
 <h2>コントローラ</h2>
 <h2>APIドキュメントの自動生成</h2>

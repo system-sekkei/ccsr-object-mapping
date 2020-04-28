@@ -1,0 +1,55 @@
+<svg width="384px" height="276px"
+ viewBox="0.00 0.00 384.00 276.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="graph0" class="graph" transform=" rotate(0) translate(4 249)">
+<title>区分図</title>
+<polygon fill="white" stroke="none" points="-4,27 -4,-249 380,-249 380,27 -4,27"/>
+<text text-anchor="middle" x="188" y="15.2" font-family="Times New Roman,serif" font-size="14.00">区分図</text>
+<g id="clust1" class="cluster"><title>cluster_example.domain.type</title>
+<polygon fill="none" stroke="lightgray" points="0.144865,-21.7963 0.144865,-244.796 200.145,-244.796 200.145,-21.7963 0.144865,-21.7963"/>
+<text text-anchor="middle" x="100.145" y="-229.596" font-family="Times New Roman,serif" font-size="14.00">type</text>
+</g>
+<g id="clust2" class="cluster"><title>cluster_example.domain.model</title>
+<polygon fill="none" stroke="lightgray" points="242.145,-0.296263 242.145,-222.296 376.145,-222.296 376.145,-0.296263 242.145,-0.296263"/>
+<text text-anchor="middle" x="309.145" y="-207.096" font-family="Times New Roman,serif" font-size="14.00">model</text>
+</g>
+<g id="clust3" class="cluster"><title>cluster_example.domain.model.kit</title>
+<polygon fill="none" stroke="lightgray" points="250.29,-8.09253 250.29,-191.093 368.29,-191.093 368.29,-8.09253 250.29,-8.09253"/>
+<text text-anchor="middle" x="309.29" y="-175.893" font-family="Times New Roman,serif" font-size="14.00">kit</text>
+</g>
+<g id="clust4" class="cluster"><title>cluster_example.domain.model.kit.feature</title>
+<polygon fill="none" stroke="lightgray" points="258.435,-16.3888 258.435,-160.389 360.435,-160.389 360.435,-16.3888 258.435,-16.3888"/>
+<text text-anchor="middle" x="309.435" y="-145.189" font-family="Times New Roman,serif" font-size="14.00">feature</text>
+</g>
+<!-- example.domain.type.Covered -->
+<g id="node1" class="node"><title>example.domain.type.Covered</title>
+<polygon fill="#eedd82" stroke="black" points="192.29,-214.093 108.29,-214.093 108.29,-130.093 192.29,-130.093 192.29,-214.093"/>
+<text text-anchor="start" x="118.29" y="-196.893" font-family="Times New Roman,serif" font-size="14.00">カバー有無</text>
+<text text-anchor="start" x="125.79" y="-181.893" font-family="Times New Roman,serif" font-size="14.00">Covered</text>
+<polygon fill="none" stroke="black" points="116.29,-155.093 116.29,-176.093 184.29,-176.093 184.29,-155.093 116.29,-155.093"/>
+<text text-anchor="start" x="143.79" y="-161.893" font-family="Times New Roman,serif" font-size="14.00">有</text>
+<polygon fill="none" stroke="black" points="116.29,-134.093 116.29,-155.093 184.29,-155.093 184.29,-134.093 116.29,-134.093"/>
+<text text-anchor="start" x="143.79" y="-140.893" font-family="Times New Roman,serif" font-size="14.00">無</text>
+</g>
+<!-- example.domain.type.Type -->
+<g id="node2" class="node"><title>example.domain.type.Type</title>
+<polygon fill="#eedd82" stroke="black" points="106.79,-114.093 7.78973,-114.093 7.78973,-30.0925 106.79,-30.0925 106.79,-114.093"/>
+<text text-anchor="start" x="44.7897" y="-96.8925" font-family="Times New Roman,serif" font-size="14.00">素材</text>
+<text text-anchor="start" x="42.7897" y="-81.8925" font-family="Times New Roman,serif" font-size="14.00">Type</text>
+<polygon fill="none" stroke="black" points="16.2897,-55.0925 16.2897,-76.0925 99.2897,-76.0925 99.2897,-55.0925 16.2897,-55.0925"/>
+<text text-anchor="start" x="19.2897" y="-61.8925" font-family="Times New Roman,serif" font-size="14.00">プラスチック</text>
+<polygon fill="none" stroke="black" points="16.2897,-34.0925 16.2897,-55.0925 99.2897,-55.0925 99.2897,-34.0925 16.2897,-34.0925"/>
+<text text-anchor="start" x="44.7897" y="-40.8925" font-family="Times New Roman,serif" font-size="14.00">木製</text>
+</g>
+<!-- example.domain.model.kit.feature.Feature -->
+<g id="node3" class="node"><title>example.domain.model.kit.feature.Feature</title>
+<polygon fill="#eedd82" stroke="black" points="352.579,-129.185 266.579,-129.185 266.579,-24.1851 352.579,-24.1851 352.579,-129.185"/>
+<text text-anchor="start" x="296.579" y="-111.485" font-family="Times New Roman,serif" font-size="14.00">特徴</text>
+<text text-anchor="start" x="288.579" y="-96.4851" font-family="Times New Roman,serif" font-size="14.00">Feature</text>
+<polygon fill="none" stroke="black" points="274.579,-69.6851 274.579,-90.6851 344.579,-90.6851 344.579,-69.6851 274.579,-69.6851"/>
+<text text-anchor="start" x="277.579" y="-76.4851" font-family="Times New Roman,serif" font-size="14.00">専用培養土</text>
+<polygon fill="none" stroke="black" points="274.579,-48.6851 274.579,-69.6851 344.579,-69.6851 344.579,-48.6851 274.579,-48.6851"/>
+<text text-anchor="start" x="296.579" y="-55.4851" font-family="Times New Roman,serif" font-size="14.00">肥料</text>
+<polygon fill="none" stroke="black" points="274.579,-27.6851 274.579,-48.6851 344.579,-48.6851 344.579,-27.6851 274.579,-27.6851"/>
+<text text-anchor="start" x="281.079" y="-34.4851" font-family="Times New Roman,serif" font-size="14.00">PH調整剤</text>
+</g>
+</g>
+</svg>

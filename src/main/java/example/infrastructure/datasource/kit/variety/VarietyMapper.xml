@@ -10,7 +10,7 @@
     <select id="listAll" resultType="&品種;">
         SELECT
             品種番号 as "varietyNumber.value",
-            名前 as "name"
+            名前 as "varietyName.value"
         FROM 商品.品種
         ORDER BY
             名前 ASC
@@ -20,7 +20,7 @@
         INSERT INTO 商品.品種
         (品種番号, 名前)
         VALUES
-        (#{varietyNumber.value}, #{name})
+        (#{varietyNumber.value}, #{varietyName.value})
 
     </insert>
 </mapper>

@@ -1,14 +1,11 @@
 package example.domain.model.kit;
 
 import example.domain.identity.KitNumber;
-import example.domain.model.kit.feature.Features;
 import example.domain.model.kit.row.Row;
-import example.domain.model.kit.row.Rows;
 import example.domain.type.Covered;
 import example.domain.type.Type;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -16,25 +13,13 @@ import java.util.List;
  */
 public class StarterKit {
     KitNumber kitNumber = KitNumber.numbering();
-    @Valid
-    DateOfSeed dateOfSeed = DateOfSeed.today();
-    Covered covered = Covered.無;
-    @NotNull(message = "必須")
-    Type type = Type.プラスチック;
 
-    @NotNull
-    Features features;
     @Valid
-    Rows rows = new Rows();
+    Specification specification;
 
-    private StarterKit(KitNumber kitNumber, DateOfSeed dateOfSeed, Covered covered,
-                       Type type, Features features, Rows rows) {
+    private StarterKit(KitNumber kitNumber, Specification specification) {
         this.kitNumber = kitNumber;
-        this.dateOfSeed = dateOfSeed;
-        this.covered = covered;
-        this.type = type;
-        this.features = features;
-        this.rows = rows;
+        this.specification = specification;
     }
 
     public StarterKit() {}
@@ -44,56 +29,56 @@ public class StarterKit {
     }
 
     public String dateOfSeed() {
-        return dateOfSeed.when();
+        return specification.when();
     }
 
     public Covered covered() {
-        return covered;
+        return specification.covered;
     }
 
     public boolean hasCover() { // isCovered() は　coveredフィールドへのアクセサとして動作してしまうため名前を変更
-        return covered.isCovered();
+        return specification.hasCovered();
     }
 
     public Type type() {
-        return type;
+        return specification.type;
     }
 
     public String features() {
-        return features.show();
+        return specification.features();
     }
 
     public boolean hasFeatures() {
-        return features.hasFeatures();
+        return specification.hasFeatures();
     }
 
     public List<Row> rows() {
-        return rows.asList();
+        return specification.rows();
     }
 
     public StarterKit addRow() {
-        Rows result = rows.addRow();
-        return withRows(result);
+        Specification result = specification.addRow();
+        return withSpecification(result);
     }
 
     public StarterKit removeRow(int index) {
-        Rows result = rows.removeRow(index);
-        return withRows(result);
+        Specification result = specification.removeRow(index);
+        return withSpecification(result);
     }
 
-    private StarterKit withRows(Rows rows) {
-        return new StarterKit(this.kitNumber, this.dateOfSeed, this.covered, this.type, this.features, rows);
+    private StarterKit withSpecification(Specification specification) {
+        return new StarterKit(this.kitNumber, specification);
+    }
+
+    public StarterKit from(Specification specification) {
+        return new StarterKit(KitNumber.numbering(), specification);
     }
 
     @Override
     public String toString() {
         return "StarterKit{" +
                 "kitNumber=" + kitNumber +
-                ", dateOfSeed=" + dateOfSeed +
-                ", covered=" + covered +
-                ", type=" + type +
-                ", features=" + features +
-                ", rows=" + rows +
+                ", specification=" + specification +
                 '}';
     }
 }
