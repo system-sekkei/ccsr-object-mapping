@@ -16,18 +16,30 @@ public class Rows {
     @Size(min = 1, message = "少なくとも１列が必要")
     @Size(max = 3 - 1 , message = "多くて3列まで", groups = {AddRow.class})
     // addRowの要求時点で、(3-1)列までであれば追加可能。3列であれば追加できない
+
     List<@Valid Row> list = new ArrayList<>();
+
+    private Rows(List<Row> list) {
+        this.list = list;
+    }
+    public Rows() {}
 
     public List<Row> asList() {
         return list;
     }
 
-    public void addRow() {
-        list.add(new Row());
+    public Rows addRow() {
+        List<Row> result = new ArrayList<>(list);
+        result.add(new Row());
+
+        return new Rows(result);
     }
 
-    public void removeRow(int index) {
-        list.remove(index);
+    public Rows removeRow(int index) {
+        List<Row> result = new ArrayList<>(list);
+        result.remove(index);
+
+        return new Rows(result);
     }
 
     @Override

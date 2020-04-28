@@ -7,4 +7,8 @@ public enum Covered {
         有,
         無
     ;
+
+    public boolean isCovered() {
+        return this.equals(有);
+    }
 }

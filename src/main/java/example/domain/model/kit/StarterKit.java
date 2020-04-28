@@ -27,8 +27,14 @@ public class StarterKit {
     @Valid
     Rows rows = new Rows();
 
-    private StarterKit(KitNumber kitNumber) {
+    private StarterKit(KitNumber kitNumber, DateOfSeed dateOfSeed, Covered covered,
+                       Type type, Features features, Rows rows) {
         this.kitNumber = kitNumber;
+        this.dateOfSeed = dateOfSeed;
+        this.covered = covered;
+        this.type = type;
+        this.features = features;
+        this.rows = rows;
     }
 
     public StarterKit() {}
@@ -43,6 +49,10 @@ public class StarterKit {
 
     public Covered covered() {
         return covered;
+    }
+
+    public boolean hasCover() { // isCovered() は　coveredフィールドへのアクセサとして動作してしまうため名前を変更
+        return covered.isCovered();
     }
 
     public Type type() {
@@ -61,12 +71,18 @@ public class StarterKit {
         return rows.asList();
     }
 
-    public void addRow() {
-        rows.addRow();
+    public StarterKit addRow() {
+        Rows result = rows.addRow();
+        return withRows(result);
     }
 
-    public void removeRow(int index) {
-        rows.removeRow(index);
+    public StarterKit removeRow(int index) {
+        Rows result = rows.removeRow(index);
+        return withRows(result);
+    }
+
+    private StarterKit withRows(Rows rows) {
+        return new StarterKit(this.kitNumber, this.dateOfSeed, this.covered, this.type, this.features, rows);
     }
 
     @Override

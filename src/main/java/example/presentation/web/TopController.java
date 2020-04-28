@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class TopController {
     @GetMapping()
     String top() {
-        return "top";
+        return "redirect:/guides/top";
     }
 }

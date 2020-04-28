@@ -11,8 +11,10 @@ import example.domain.model.kit.row.validation.AddRow;
 import example.domain.model.kit.row.validation.RemoveRow;
 import example.domain.type.Type;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -58,9 +60,6 @@ public class StarterKitController {
      */
     @GetMapping("")
     String listAll(@ModelAttribute("starterKit") StarterKit starterKit) {
-        // 以下が追加された modelを参照して view が生成される
-        // メソッドレベルの@ModelAttributeで追加された各オブジェクト
-        // このメソッドの引数として生成された StarterKitのオブジェクト
         return "kit/listAndForm";
     }
 
@@ -77,22 +76,40 @@ public class StarterKitController {
 
     @PostMapping(value = "", params = "addRow")
     String addRow(@ModelAttribute("starterKit") @Validated(AddRow.class) StarterKit starterKit,
-                  BindingResult bindingResult) {
+                  BindingResult bindingResult,
+                  Model model) {
         if (bindingResult.hasErrors()) {
             return "kit/listAndForm";
         }
-        starterKit.addRow();
+        StarterKit result = starterKit.addRow();
+        model.addAttribute("starterKit", result);
+
         return "kit/listAndForm";
     }
 
     @PostMapping(value = "", params = "removeRow")
     String removeRow(@ModelAttribute("starterKit") @Validated(RemoveRow.class) StarterKit starterKit,
                      BindingResult bindingResult,
+                     Model model,
                      @RequestParam("removeRow") int index) {
         if (bindingResult.hasErrors()) {
             return "kit/listAndForm";
         }
-        starterKit.removeRow(index);
+
+        StarterKit result = starterKit.removeRow(index);
+        model.addAttribute("starterKit", result);
         return "kit/listAndForm";
+    }
+
+    @InitBinder
+    void initBinder(WebDataBinder binder) {
+        binder.setAllowedFields(
+                "kitNumber.value",
+                "dateOfSeed.value",
+                "covered",
+                "type",
+                "features.list",
+                "rows.list*" // 複数行
+        );
     }
 }

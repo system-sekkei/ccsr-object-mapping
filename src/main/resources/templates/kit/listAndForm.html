@@ -58,7 +58,7 @@ th:text属性に変数式 ${...}で、Modelに追加したattribute名を参照�
 
 <div>
     <h2>栽培キットの追加</h2>
-    <form action="#" th:action="@{/products}" th:object="${starterKit}" method="post">
+    <form action="#" th:action="@{/kits}" th:object="${starterKit}" method="post">
         <block th:if="${#fields.hasAnyErrors()}">
             <mark><span th:text="${#fields.allErrors()}"></span></mark>
         </block>
@@ -79,10 +79,11 @@ th:text属性に変数式 ${...}で、Modelに追加したattribute名を参照�
             <!-- todo th:checkedがうまく動作しない -->
             <p>
             <!--/* チェックボックスで列挙型 (有,無 )の値を設定する */-->
-            <!--/*　input type=checkboxの時、th:fieldで生成される番号付きid属性を指定する */-->
-            <label th:for="${#ids.next('covered')}">カバー</label>
-            <input type="checkbox" value="checked" th:field="*{covered}" /> <!--/* チェックされた時だけ送る */-->
-            <input type="hidden" value="unchecked" name="covered" /> <!--/* チェックされないときの既定値を常に送る */-->
+            <!--/* th:checkedを動作させるために、th:fieldを使わず、id要素とname要素を直接指定している */-->
+            <!--/* todo th:fieldを使うと、th:checkedが正しく動作しない */-->
+            <label for="covered">カバー</label>
+            <input type="checkbox" id="covered" name="covered" value="checked" th:checked="${starterKit.hasCover()}"/> <!--/* チェックされた時だけ送られる */-->
+            <input type="hidden" name="covered" value="unchecked"  /> <!--/* チェックされないときの既定値を常に送る */-->
             <mark><span th:errors="*{covered}"></span></mark>
             </p>
 
