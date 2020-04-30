@@ -37,14 +37,14 @@ th:text属性に変数式 ${...}で、Modelに追加したattribute名を参照�
     </thead>
     <tbody>
     <tr th:each="each : ${starterKitList.asList()}">
-        <td th:text="${each.dateOfSeed()}"></td>
-        <td th:text="${each.covered()}"></td>
-        <td th:text="${each.type()}"></td>
-        <td th:text="${each.features()}"></td>
+        <td th:text="${each.specification().when()}"></td>
+        <td th:text="${each.specification().covered()}"></td>
+        <td th:text="${each.specification().type()}"></td>
+        <td th:text="${each.specification().features()}"></td>
         <td>
             <table>
                 <tbody>
-                <tr th:each="row,rowStat : ${each.rows()}">
+                <tr th:each="row,rowStat : ${each.specification().rows()}">
                     <td th:text="${rowStat.count}">1</td>
                     <td th:text="${row.variety()}">タイム</td>
                     <td th:text="${row.seedsPerCell()}">12</td>
@@ -58,13 +58,12 @@ th:text属性に変数式 ${...}で、Modelに追加したattribute名を参照�
 
 <div>
     <h2>栽培キットの追加</h2>
-    <form action="#" th:action="@{/kits}" th:object="${starterKit}" method="post">
+    <form action="#" th:action="@{/kits}" th:object="${specification}" method="post">
         <block th:if="${#fields.hasAnyErrors()}">
             <mark><span th:text="${#fields.allErrors()}"></span></mark>
         </block>
 
         <fieldset>
-            <input type="hidden" th:field="*{kitNumber.value}">
             <p>
             <label th:for="dateOfSeed.value">種を植えた日</label>
             <input type="date" th:field="*{dateOfSeed.value}">
@@ -82,7 +81,7 @@ th:text属性に変数式 ${...}で、Modelに追加したattribute名を参照�
             <!--/* th:checkedを動作させるために、th:fieldを使わず、id要素とname要素を直接指定している */-->
             <!--/* todo th:fieldを使うと、th:checkedが正しく動作しない */-->
             <label for="covered">カバー</label>
-            <input type="checkbox" id="covered" name="covered" value="checked" th:checked="${starterKit.hasCover()}"/> <!--/* チェックされた時だけ送られる */-->
+            <input type="checkbox" id="covered" name="covered" value="checked" th:checked="${specification.hasCover()}"/> <!--/* チェックされた時だけ送られる */-->
             <input type="hidden" name="covered" value="unchecked"  /> <!--/* チェックされないときの既定値を常に送る */-->
             <mark><span th:errors="*{covered}"></span></mark>
             </p>
@@ -130,7 +129,7 @@ th:text属性に変数式 ${...}で、Modelに追加したattribute名を参照�
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="eachRow,iterationStatus : ${starterKit.rows()}">
+                <tr th:each="eachRow,iterationStatus : ${specification.rows()}">
                     <td th:text="${iterationStatus.count}">1</td>
                     <td>
                         <select th:field="*{rows.list[__${iterationStatus.index}__].variety.varietyNumber.value}">

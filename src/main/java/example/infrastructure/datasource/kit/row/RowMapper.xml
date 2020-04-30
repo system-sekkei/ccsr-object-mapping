@@ -8,7 +8,7 @@
         ]>
 <mapper namespace="&名前空間;">
 
-    <select id="rowsFor" resultType="&列;">
+    <select id="rows" resultType="&列;">
         SELECT
             品種.品種番号 as "variety.varietyNumber.value",
             品種.名前 as "variety.varietyName.value",
@@ -25,7 +25,7 @@
         INSERT INTO 商品.列
         (キット番号, 列番号, 品種番号,種の数)
         VALUES
-        <foreach item="each" collection="rows.list" index="index" separator=",">
+        <foreach item="each" collection="rows" index="index" separator=",">
             (
             #{kitNumber.value}, #{index} + 1,#{each.variety.varietyNumber.value}, #{each.seedsPerCell}
             )

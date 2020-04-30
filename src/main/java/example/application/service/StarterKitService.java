@@ -7,7 +7,7 @@ import example.domain.model.kit.StarterKitList;
 import org.springframework.stereotype.Service;
 
 /**
- * 栽培キット参照サービス
+ * ハーブ栽培キット参照サービス
  */
 @Service
 public class StarterKitService {
@@ -18,7 +18,7 @@ public class StarterKitService {
     }
 
     /**
-     * 栽培キットを一覧する
+     * ハーブ栽培キットを一覧する
      */
     public StarterKitList listAll() {
         return starterKitRepository.listAll();

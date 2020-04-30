@@ -37,50 +37,29 @@ select属性 : コレクションを取得するためのselect要素の識別�
 
 -->
     <resultMap id="栽培キットマッピング" type="&栽培キット;">
-        <collection property="features.list" ofType="&特徴;"
+        <collection property="specification.features.list" ofType="&特徴;"
                     column="kitNumber.value"
-                    select="&特徴マッパー;.featuresFor"/>
+                    select="&特徴マッパー;.features"/>
             <!-- フィールド List<Feature> features に、kitNumber.valueを検索キーにした SQL featuresFor の実行結果を設定する        -->
-        <collection property="rows.list" ofType="&列;"
+        <collection property="specification.rows.list" ofType="&列;"
                     column="kitNumber.value"
-                    select="&列マッパー;.rowsFor"/>
+                    select="&列マッパー;.rows"/>
     </resultMap>
 
-<!--
-select 要素  : SELECT文の記述
-
-    id 属性 : Mapperインタフェースで宣言したメソッド名
-    resultMap属性 : resultMap要素のid属性
--->
-<!--
-SELECT 文
-
-as句でフィールドへのパスを指定すると、resultMapのproperty要素の記述を省略できる
-#{...}式で、パラメータで渡されたオブジェクトを参照できる ( OGNL )
--->
     <select id="listAll" resultMap="栽培キットマッピング">
         SELECT
             キット番号 as "kitNumber.value",
-            種まき日 as "dateOfSeed.value",
-            カバー as "covered",
-            素材 as "type"
+            種まき日 as "specification.dateOfSeed.value",
+            カバー as "specification.covered",
+            素材 as "specification.type"
         FROM 商品.栽培キット
         ORDER BY 種まき日 ASC
-    </select>
-
-    <select id="findBy">
-        SELECT
-            キット番号 as "kitNumber.value",
-            種まき日 as "dateOfSeed.value"
-        FROM 商品.栽培キット
-        WHERE
-            キット番号 = #{value}
     </select>
 
     <insert id="register">
         INSERT INTO 商品.栽培キット
         (キット番号, 種まき日, カバー, 素材)
         VALUES
-        (#{kitNumber.value}, #{dateOfSeed.value}, #{covered}, #{type})
+        (#{kitNumber.value}, #{specification.dateOfSeed.value}, #{specification.covered}, #{specification.type})
     </insert>
 </mapper>

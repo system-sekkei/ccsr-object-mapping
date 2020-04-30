@@ -3,6 +3,7 @@ package example.presentation.web.kit;
 import example.application.service.StarterKitRegisterService;
 import example.application.service.StarterKitService;
 import example.application.service.VarietyService;
+import example.domain.model.kit.specification.Specification;
 import example.domain.model.kit.StarterKit;
 import example.domain.model.kit.StarterKitList;
 import example.domain.model.kit.feature.Feature;
@@ -18,7 +19,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * 栽培キットの一覧・登録 画面
+ * ハーブ栽培キットの管理画面
  */
 @Controller
 @RequestMapping("/kits")
@@ -55,40 +56,41 @@ public class StarterKitController {
 
     /**
      * 一覧表示と登録フォーム
-     * @param starterKit
+     * @param specification
      * @return
      */
     @GetMapping("")
-    String listAll(@ModelAttribute("starterKit") StarterKit starterKit) {
+    String listAll(@ModelAttribute("specification") Specification specification) {
         return "kit/listAndForm";
     }
 
     @PostMapping(value = "", params = "save")
-    String register(@ModelAttribute("starterKit") @Validated StarterKit starterKit,
+    String register(@ModelAttribute("specification") @Validated Specification specification,
                     BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "kit/listAndForm";
         }
 
+        StarterKit starterKit = StarterKit.from(specification);
         starterKitRegisterService.register(starterKit);
         return "redirect:/kits";
     }
 
     @PostMapping(value = "", params = "addRow")
-    String addRow(@ModelAttribute("starterKit") @Validated(AddRow.class) StarterKit starterKit,
+    String addRow(@ModelAttribute("specification") @Validated(AddRow.class) Specification specification,
                   BindingResult bindingResult,
                   Model model) {
         if (bindingResult.hasErrors()) {
             return "kit/listAndForm";
         }
-        StarterKit result = starterKit.addRow();
-        model.addAttribute("starterKit", result);
+        Specification result = specification.addRow();
+        model.addAttribute("specification", result);
 
         return "kit/listAndForm";
     }
 
     @PostMapping(value = "", params = "removeRow")
-    String removeRow(@ModelAttribute("starterKit") @Validated(RemoveRow.class) StarterKit starterKit,
+    String removeRow(@ModelAttribute("specification") @Validated(RemoveRow.class) Specification specification,
                      BindingResult bindingResult,
                      Model model,
                      @RequestParam("removeRow") int index) {
@@ -96,15 +98,14 @@ public class StarterKitController {
             return "kit/listAndForm";
         }
 
-        StarterKit result = starterKit.removeRow(index);
-        model.addAttribute("starterKit", result);
+        Specification result = specification.removeRow(index);
+        model.addAttribute("specification", result);
         return "kit/listAndForm";
     }
 
     @InitBinder
     void initBinder(WebDataBinder binder) {
         binder.setAllowedFields(
-                "kitNumber.value",
                 "dateOfSeed.value",
                 "covered",
                 "type",

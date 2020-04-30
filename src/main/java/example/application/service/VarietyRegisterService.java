@@ -5,7 +5,7 @@ import example.domain.model.kit.row.Variety;
 import org.springframework.stereotype.Service;
 
 /**
- * 品種の登録サービス
+ * ハーブ品種の登録サービス
  */
 @Service
 public class VarietyRegisterService {
@@ -16,7 +16,7 @@ public class VarietyRegisterService {
     }
 
     /**
-     * 品種を登録する
+     * ハーブ品種を登録する
      * @param variety
      */
     public void register(Variety variety) {

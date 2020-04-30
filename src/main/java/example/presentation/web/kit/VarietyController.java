@@ -10,7 +10,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * 品種の一覧・登録 画面
+ * ハーブ品種の管理画面
  */
 @Controller
 @RequestMapping("/varieties")

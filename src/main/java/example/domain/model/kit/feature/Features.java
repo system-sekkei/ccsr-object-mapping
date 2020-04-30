@@ -9,7 +9,7 @@ import java.util.List;
 public class Features {
     List<Feature> list;
 
-    public String show() {
+    private String show() {
         List<String> result = new ArrayList<>();
         for (Feature each : list) result.add(each.toString());
         return String.join("、", result);
@@ -21,9 +21,7 @@ public class Features {
 
     @Override
     public String toString() {
-        return "Features{" +
-                "list=" + list +
-                '}';
+        return show();
     }
 }
 

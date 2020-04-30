@@ -5,7 +5,7 @@ import example.domain.model.kit.StarterKit;
 import org.springframework.stereotype.Service;
 
 /**
- * 栽培キット登録サービス
+ * ハーブ栽培キット登録サービス
  */
 @Service
 public class StarterKitRegisterService {
@@ -16,7 +16,7 @@ public class StarterKitRegisterService {
     }
 
     /**
-     * 栽培キットを登録する
+     * ハーブ栽培キットを登録する
      * @param starterKit
      */
     public void register(StarterKit starterKit) {

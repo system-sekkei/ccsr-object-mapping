@@ -1,4 +1,4 @@
-package example.domain.model.kit;
+package example.domain.model.kit.specification;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.format.annotation.DateTimeFormat;

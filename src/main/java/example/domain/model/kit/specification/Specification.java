@@ -1,4 +1,4 @@
-package example.domain.model.kit;
+package example.domain.model.kit.specification;
 
 import example.domain.model.kit.feature.Features;
 import example.domain.model.kit.row.Row;
@@ -10,10 +10,14 @@ import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
+/**
+ * キットの仕様
+ */
 public class Specification {
     @Valid
     DateOfSeed dateOfSeed = DateOfSeed.today();
     Covered covered = Covered.無;
+
     @NotNull(message = "必須")
     Type type = Type.プラスチック;
 
@@ -30,19 +34,29 @@ public class Specification {
         this.rows = rows;
     }
 
-    String when() {
+    private Specification() {}
+
+    public Type type() {
+        return type;
+    }
+
+    public Covered covered() {
+        return covered;
+    }
+
+    public String when() {
         return dateOfSeed.when();
     }
 
-    boolean hasCovered() {
+    public boolean hasCover() {
         return covered.isCovered();
     }
 
-    String features() {
-        return features.show();
+    public Features features() {
+        return features;
     }
 
-    boolean hasFeatures() {
+    public boolean hasFeatures() {
         return features.hasFeatures();
     }
 
@@ -50,7 +64,7 @@ public class Specification {
         return rows.asList();
     }
 
-    Specification addRow() {
+    public Specification addRow() {
         Rows result = rows.addRow();
         return withRows(result);
     }
