@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>アプリケーション</title>
+  <link th:replace="_fragments/head :: css-light">
+</head>
+<body>
+<header>
+  <nav>
+    <a target="top" th:href="@{/}">トップに戻る</a>
+    | <a target="_self" th:href="@{/references/application}">アプリケーションの紹介</a>
+    | <a target="object-mapping" th:href="@{/references/object-mapping}">オブジェクトマッピングの概要</a>
+    | <a target="jig-report" th:href="@{/references/jig-report}">Jigレポート</a>
+  </nav>
+</header>
+
+<h1>アプリケーションの紹介</h1>
+<p>
+  ハーブ栽培キットの販売会社が、商品を管理する社内アプリケーションです。<br />
+  <a target="Thymeleaf-Spring Document" href="https://www.thymeleaf.org/doc/tutorials/3.0/thymeleafspring.html#spring-thyme-seed-starter-manager">
+    Thymeleaf-Springのドキュメント(英語)
+  </a>
+  に登場するアプリケーションを元にしています。
+</p>
+<p>
+  このアプリケーションとドキュメントはオブジェクトと画面、オブジェクトとデータベース、オブジェクトとJSONデータをマッピングするやり方の学習用に作成しました。
+</p>
+<p>
+  使用している要素技術は以下の通りです。
+</p>
+<ul>
+  <li>画面：Spring MVC (WebDataBinder), Thymeleaf</li>
+  <li>データベース：myBatis SQL Mapper, H2 Database, Flyway</li>
+  <li>JSON(API)：Spring MVC (Jackson ObjectMapper), Swagger-UI</li>
+</ul>
+<h2>ドメインモデル</h2>
+<p>
+  ハーブの栽培キットを表現するドメインモデルです。
+</p>
+<object data="/diagram/business-rule-relation.svg"></object>
+<h2>画面</h2>
+<p>
+  ハーブの栽培キットを一覧したり追加するための管理画面です。<br />
+<a target="kits" th:href="@{/kits}">栽培キットの管理画面</a>
+</p>
+<h4>画面イメージ</h4>
+<img src="/diagram/starterkit-screen.png">
+<h2>データモデル</h2>
+<p>
+  ハーブの栽培キットをデータベースで記録・参照するためのテーブル構成です。<br />
+  <a target="h2-console" th:href="@{${@environment.getProperty('spring.h2.console.path')}}">データベースの管理画面</a><br />
+  (JDBC URL <span th:text="${@environment.getProperty('spring.datasource.url')}"></span>)
+</p>
+<img src="/diagram/tables.png" height="400"></img>
+</body>
+</html>

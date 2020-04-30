@@ -22,20 +22,6 @@ FQCN(完全修飾クラス名)に別名をつけて参照できる
 
 <mapper namespace="&名前空間;">
 
-    <!--
-resultMap要素 : オブジェクト（のフィールド）とSELECT結果（のカラム）のマッピングの定義
-
-id属性 : マッピングを参照するための識別名
-type属性 : マッピング対象の型(クラス）
-
-collection要素 : コレクションオブジェクトのマッピングの定義
-
-property属性 : コレクションをマッピングする先
-ofType属性 : コレクションの要素の型
-column属性 : コレクションを取得するSELECT文の渡すパラメータ
-select属性 : コレクションを取得するためのselect要素の識別名
-
--->
     <resultMap id="栽培キットマッピング" type="&栽培キット;">
         <collection property="specification.features.list" ofType="&特徴;"
                     column="kitNumber.value"

@@ -2,13 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>オブジェクトとHTMLのマッピング</title>
+  <title>HTMLマッピング</title>
   <link th:replace="_fragments/head :: css-light">
 </head>
 <body>
 <header>
   <nav>
-    <a target="top" th:href="@{/}">トップに戻る</a>
+    <a target="object-mapping" th:href="@{/references/object-mapping}">オブジェクトマッピングの概要に戻る</a>
     | <a target="_self" th:href="@{/references/object-html}">オブジェクト ⇔ HTML</a>
     | <a target="object-sql" th:href="@{/references/object-sql}">オブジェクト ⇔ SQL</a>
     | <a target="object-json" th:href="@{/references/object-json}">オブジェクト ⇔ JSON</a>
@@ -17,7 +17,7 @@
 <h1>オブジェクト ⇔ HTMLのマッピング</h1>
 <p>
   <a target="varieties" th:href="@{/varieties}">ハーブの品種を一覧・登録する画面</a>を例に、オブジェクトとHTMLとのマッピングを説明します。<br />
-  マッピングの対象は、下記のVarietyクラスです。
+  マッピングの対象は、下記のVarietyクラスのオブジェクトです。
 </p>
 <pre>
   <code>

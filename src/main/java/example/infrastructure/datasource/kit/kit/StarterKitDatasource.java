@@ -33,11 +33,6 @@ public class StarterKitDatasource implements StarterKitRepository {
     }
 
     @Override
-    public StarterKit findBy(KitNumber kitNumber) {
-        return starterKitMapper.findBy(kitNumber);
-    }
-
-    @Override
     public void register(StarterKit starterKit) {
         starterKitMapper.register(starterKit);
         Specification specification = starterKit.specification();

@@ -14,7 +14,5 @@ import java.util.List;
 public interface StarterKitMapper {
     List<StarterKit> listAll();
 
-    StarterKit findBy(KitNumber kitNumber);
-
     void register(StarterKit starterKit);
 }

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>トップ</title>
+  <link th:replace="_fragments/head :: css-light">
+</head>
+<body>
+<h1>ハーブ栽培キット管理アプリケーション</h1>
+<h2>アプリケーションの紹介</h2>
+<p>
+  このアプリケーションの概要説明です。<br />
+  アプリケーションの目的、ドメインモデルのクラス構成、画面のイメージ、データモデルの概要を紹介します。<br />
+  <strong>
+    ⇒ <a target="application" th:href="@{/references/application}">アプリケーションの紹介</a>
+  </strong>
+  </p>
+<h2>オブジェクトマッピングの概要</h2>
+<p>
+  このアプリケーションはドメイン層のオブジェクトと画面・データベース・JSONとのマッピングのやり方の学習用に作成しました。<br />
+<strong>
+  ⇒ <a target="object-mapping" th:href="@{/references/object-mapping}">オブジェクトマッピングの概要</a>
+</strong>
+</p>
+<p>
+  それぞれのマッピングの説明は以下を参考にしてください。<br />
+<a target="object-html" th:href="@{/references/object-html}">オブジェクト ⇔ HTML</a><br />
+<a target="object-sql" th:href="@{/references/object-sql}">オブジェクト ⇔ SQL</a><br />
+<a target="object-json" th:href="@{/references/object-json}">オブジェクト ⇔ JSON</a><br />
+</p>
+
+<h2>Jigレポート</h2>
+<p>
+  ソースコードから各種のドキュメントを自動生成するツール Jig の説明です。<br />
+  このアプリケーションの設計内容を理解するために役に立ちます。<br />
+  <strong>
+   ⇒ <a target="jig-report" th:href="@{/references/jig-report}">Jigレポート</a>
+  </strong>
+</p>
+</body>
+</html>

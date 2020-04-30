@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>マッピング</title>
+  <link th:replace="_fragments/head :: css-light">
+</head>
+<body>
+<header>
+  <nav>
+    <a target="top" th:href="@{/}">トップに戻る</a>
+    | <a target="application" th:href="@{/references/application}">アプリケーションの紹介</a>
+    | <a target="_self" th:href="@{/references/object-mapping}">オブジェクトマッピングの概要</a>
+    | <a target="jig-report" th:href="@{/references/jig-report}">Jigレポート</a>
+  </nav>
+</header>
+
+<h1>オブジェクトマッピングの概要</h1>
+<p>
+  ハーブ品種の品種番号と品種名を持つVarietyクラスを使って、
+  <a href="#html">オブジェクトと画面</a>、
+  <a href="#sql">オブジェクトとデータベース</a>、
+  <a href="#json">オブジェクトとJSONデータ</a>
+  のマッピングのやり方を説明します。
+</p>
+<pre>
+  <code>
+package example.domain.model.kit.row;
+
+/**
+* ハーブの品種を表現するクラス
+*/
+public class Variety {
+    VarietyNumber varietyNumber;
+    String name = "";
+
+    public String show() {
+        return String.format("%s [%s]", name, varietyNumber);
+    }
+}
+  </code>
+</pre>
+
+<h2 id="html">オブジェクトと画面のマッピング</h2>
+<p>
+  ハーブ品種の一覧と登録を行う画面の例です。
+  <a target="varieties" th:href="@{/varieties}">ハーブ品種の管理画面</a>
+</p>
+<p>
+  この画面を実現する方法は<a target="object-html" th:href="@{/references/object-html}">オブジェクト ⇔ HTML</a>を参照してください。
+</p>
+<h2 id="sql">オブジェクトとデータベースのマッピング</h2>
+
+<p>
+  データベースとオブジェクトのマッピングについて説明します。<br />
+  <a target="object-sql" th:href="@{/references/object-sql}">オブジェクト ⇔ SQL</a>
+</p>
+<h2 id="json">オブジェクトとJSONのマッピング</h2>
+<p>
+  API(JSONデータ)とオブジェクトとのマッピングについて説明します。<br />
+  <a target="object-json" th:href="@{/references/object-json}">オブジェクト ⇔ JSON</a>
+</p>
+</body>
+</html>

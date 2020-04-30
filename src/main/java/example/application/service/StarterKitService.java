@@ -23,13 +23,4 @@ public class StarterKitService {
     public StarterKitList listAll() {
         return starterKitRepository.listAll();
     }
-
-    /**
-     * 栽培キットを取得する
-     * @param kitNumber
-     * @return
-     */
-    public StarterKit findBy(KitNumber kitNumber) {
-        return starterKitRepository.findBy(kitNumber);
-    }
 }

@@ -2,16 +2,16 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>トップ</title>
+  <title>Jig</title>
   <link th:replace="_fragments/head :: css-light">
 </head>
 <body>
 <header>
   <nav>
-    <a target="_self" th:href="@{/}">トップに戻る</a>
-    | <a target="object-html" th:href="@{/references/object-html}">オブジェクト ⇔ HTML</a>
-    | <a target="object-sql" th:href="@{/references/object-sql}">オブジェクト ⇔ SQL</a>
-    | <a target="object-json" th:href="@{/references/object-json}">オブジェクト ⇔ JSON</a>
+    <a target="top" th:href="@{/}">トップに戻る</a>
+    | <a target="application" th:href="@{/references/application}">アプリケーションの紹介</a>
+    | <a target="object-mapping" th:href="@{/references/object-mapping}">オブジェクトマッピングの概要</a>
+    | <a target="_self" th:href="@{/references/jig-report}">Jigレポート</a>
   </nav>
 </header>
 

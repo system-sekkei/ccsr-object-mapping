@@ -10,7 +10,5 @@ import example.domain.model.kit.StarterKitList;
 public interface StarterKitRepository {
     StarterKitList listAll();
 
-    StarterKit findBy(KitNumber kitNumber);
-
     void register(StarterKit starterKit);
 }
