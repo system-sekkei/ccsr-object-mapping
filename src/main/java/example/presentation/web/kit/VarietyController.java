@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * ハーブ品種の管理画面
  */
-@Controller
+@Controller("ハーブ品種の管理画面")
 @RequestMapping("/varieties")
 public class VarietyController {
 

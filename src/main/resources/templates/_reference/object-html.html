@@ -36,6 +36,29 @@ public class Variety {
 }
   </code>
 </pre>
+<h2>基本的な仕組み</h2>
+<h3>オブジェクトを参照して画面を表示する</h3>
+<p>
+  画面への表示は、HTMLテンプレートにオブジェクトへの参照式を埋め込むことで実現します。<br />
+  下の例は、productオブジェクトのtoString()の結果を「商品の説明」の場所に表示します。<br />
+</p>
+<pre>
+  <code>
+    &lt;p th:text="${product}"&gt;商品の説明&lt;p&gt;
+  </code>
+</pre>
+<p>
+  テンプレートエンジンには、Thymeleafを使っています。<br />
+  HTML要素の属性に<code>th:</code>を付けることで、さまざまな内容を動的に生成できます。<br />
+  参照式<code>${...}</code>には、オブジェクトへの参照・計算式・判断式を記述できます。
+</p>
+<h3>フォームの入力をオブジェクトにマッピングする</h3>
+<p>
+  フォームにinput要素で指定したname属性とvalue属性が、HTTPリクエストとして<code>name=value</code>の組としてサーバーに送られます。<br />
+  Spring MVCのWebDataBinderが、この<code>name</code>をフィールド名として、対象のフィールドに<code>value</code>をセットします。<br />
+  <code>name</code>は、オブジェクトへの参照パスを指摘できます。<br />
+  例えば<code>person.name.kana</code>はPersonクラス→Nameクラス→kanaフィールドへの参照になります。
+</p>
 <hr>
 <h2>依存ライブラリ</h2>
 <p>必要な依存ライブラリをビルドツールの設定ファイル（build.gradle）で指定します。</p>
@@ -49,7 +72,7 @@ public class Variety {
   このガイドではサンプルに固有の内容を説明します。
 </p>
 <details>
-  <summary><em>ソースコード</em></summary>
+  <summary><em>build.gradleの記述</em></summary>
   <pre>
   <code>
 dependencies {
@@ -91,7 +114,7 @@ public class BaseControllerAdvice {
 <p>HTTPリクエストを受け取り処理するクラスです。</p>
 <p>
   Spring MVCに用意されたアノテーションを使うことで、HTTPリクエストの処理方法を簡潔に記述できます。<br />
-  このハーブの一覧・登録のコントローラで使うアノテーションは次の通りです。
+  ハーブ品種の一覧・登録のコントローラで使うアノテーションは次の通りです。
 </p>
 <ul>
   <li>@Controllerと@RequestMapping（クラスレベル）</li>
@@ -153,8 +176,12 @@ public class VarietyController {
 }
   </code>
 </pre>
+<p>
+  ソースコードの記述を説明します。
+</p>
 <hr>
-<h2>コントローラクラスの宣言</h2>
+<h2>コントローラの宣言</h2>
+<p>このクラスがコントローラであることを宣言します。</p>
 <pre>
   <code>
 <mark>@Controller</mark>
@@ -165,7 +192,7 @@ public class VarietyController {
   </code>
 </pre>
 <p>
-  @Controllerは、このクラスがコントローラクラスであることを宣言しています。<br />
+  @Controllerは、このクラスがコントローラクラスであることの宣言です。<br />
   @RequestMappingは、パラメータ<code>"/varieties"</code>で指定したURLへのリクエストを処理することを宣言します。
 </p>
 <hr>
@@ -175,8 +202,8 @@ public class VarietyController {
   HTMLテンプレートから参照したい値を、Spring MVCが用意する<code>Model</code>クラスのオブジェクトに追加します。
 </p>
 <P>
-  Spring MVCの<code>Model</code>クラスは、ビューのためのモデルを表現します。<br />
-  プレゼンテーション層に固有のクラスです。ドメイン層のモデルとは意味の異なるクラスです。
+  Spring MVCの<code>Model</code>クラスは、ビューで参照するオブジェクトを保持するためプレゼンテーション層専用のクラスです。<br />
+  ドメイン層のモデルとは意味が異なります。
 </P>
 <pre>
   <code>

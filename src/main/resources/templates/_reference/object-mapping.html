@@ -17,11 +17,8 @@
 
 <h1>オブジェクトマッピングの概要</h1>
 <p>
-  ハーブ品種の品種番号と品種名を持つVarietyクラスを使って、
-  <a href="#html">オブジェクトと画面</a>、
-  <a href="#sql">オブジェクトとデータベース</a>、
-  <a href="#json">オブジェクトとJSONデータ</a>
-  のマッピングのやり方を説明します。
+  ハーブ品種の品種番号と品種名を持つVarietyクラスのオブジェクトと、
+  <strong>画面・テーブル・JSONデータ</strong>とのマッピングのやり方を説明します。
 </p>
 <pre>
   <code>
@@ -41,24 +38,11 @@ public class Variety {
   </code>
 </pre>
 
-<h2 id="html">オブジェクトと画面のマッピング</h2>
-<p>
-  ハーブ品種の一覧と登録を行う画面の例です。
-  <a target="varieties" th:href="@{/varieties}">ハーブ品種の管理画面</a>
-</p>
-<p>
-  この画面を実現する方法は<a target="object-html" th:href="@{/references/object-html}">オブジェクト ⇔ HTML</a>を参照してください。
-</p>
-<h2 id="sql">オブジェクトとデータベースのマッピング</h2>
-
-<p>
-  データベースとオブジェクトのマッピングについて説明します。<br />
-  <a target="object-sql" th:href="@{/references/object-sql}">オブジェクト ⇔ SQL</a>
-</p>
-<h2 id="json">オブジェクトとJSONのマッピング</h2>
-<p>
-  API(JSONデータ)とオブジェクトとのマッピングについて説明します。<br />
-  <a target="object-json" th:href="@{/references/object-json}">オブジェクト ⇔ JSON</a>
-</p>
+<h2>マッピングする対象ごとの説明</h2>
+<ul>
+  <li>画面とのマッピング ⇒ <a target="object-html" th:href="@{/references/object-html}">オブジェクト ⇔ HTML</a></li>
+  <li>テーブルとのマッピング ⇒ <a target="object-sql" th:href="@{/references/object-sql}">オブジェクト ⇔ SQL</a></li>
+  <li>JSONとのマッピング ⇒ <a target="object-json" th:href="@{/references/object-json}">オブジェクト ⇔ JSON</a></li>
+</ul>
 </body>
 </html>

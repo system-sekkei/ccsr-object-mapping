@@ -15,7 +15,7 @@ public class Application {
 
     @Bean
     public ObjectMapper directFieldAccess() {
-        ObjectMapper mapper = new CustomObjectMapper().ofDirectFieldAccess();
+        ObjectMapper mapper = new CustomObjectMapper().customize();
         return mapper;
     }
 

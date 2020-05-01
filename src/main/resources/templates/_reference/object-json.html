@@ -8,7 +8,7 @@
 <body>
 <header>
   <nav>
-    <a target="top" th:href="@{/}">トップに戻る</a>
+    <a target="object-mapping" th:href="@{/references/object-mapping}">オブジェクトマッピングに概要に戻る</a>
     | <a target="object-html" th:href="@{/references/object-html}">オブジェクト ⇔ HTML</a>
     | <a target="object-sql" th:href="@{/references/object-sql}">オブジェクト ⇔ SQL</a>
     | <a target="_self" th:href="@{/references/object-json}">オブジェクト ⇔ JSON</a>
@@ -16,7 +16,7 @@
 </header>
 <h1>オブジェクト ⇔ JSONのマッピング</h1>
 <p>
-  ハーブの品種の一覧APIと登録APIを例に、オブジェクトとJSONとのマッピングを説明します。<br />
+  オブジェクトとJSONとのマッピングを説明します。<br />
   マッピングの対象は、下記のVarietyクラスです。
 </p>
 <pre>
@@ -37,7 +37,7 @@ public class Variety {
   </code>
 </pre>
 <details open>
-  <summary>一覧結果のJSON</summary>
+  <summary>ハーブ品種の一覧を取得するAPI<code>GET /varieties</code>リクエストのレスポンスJSONデータ</summary>
 <pre>
   <code>
 {
@@ -45,7 +45,7 @@ public class Variety {
     {
       "covered": "有",
       "dateOfSeed": {
-        "value": "string"
+        "value": "2020-04-30"
       },
       "features": {
         "list": [
@@ -53,14 +53,14 @@ public class Variety {
         ]
       },
       "kitNumber": {
-        "value": "string"
+        "value": "KN-X123-Z987"
       },
       "rows": {
         "list": [
           {
             "seedsPerCell": 0,
             "variety": {
-              "name": "string"
+              "name": "ハーブの品種名"
             }
           }
         ]
@@ -72,28 +72,188 @@ public class Variety {
   </code>
 </pre>
 </details>
+
 <details open>
-<summary>品種を登録するJSON</summary>
+<summary>ハーブ品種を登録するAPI<code>POST /varieties</code>リクエストのJSONデータ</summary>
 <pre>
   <code>
 {
-  "name": "string"
+  "name": "ハーブの品種名"
 }
   </code>
 </pre>
 </details>
-<hr>
-<h2>APIドキュメント</h2>
 <p>
   APIの仕様は
 <a target="swagger-ui" th:href="@{/swagger-ui.html}">APIドキュメント</a>
-  で参照できます。<br />
-  このドキュメントは、ソースコードから自動生成しています。（詳細は後述）
+  で参照できます。
 </p>
+<h2>基本的な仕組み</h2>
+<p>
+  Spring MVCでは、Jackson ObjectMapperを使って、オブジェクトとJSONを双方向で変換します。<br />
+  コントローラクラスに<code>@RestController</code>アノテーションを宣言するだけで、
+  HTTPレスポンスとしてJSONを返したり、HTTPリクエストで受け取ったJSONをオブジェクトにマッピングすることができます。
+</p>
+<hr>
 <h2>依存ライブラリ</h2>
+<p>
+  必要な依存ライブラリは、Spring MVCの基本部分だけです。
+</p>
+<details>
+  <summary><em>build.gradleの記述</em></summary>
+  <pre>
+  <code>
+dependencies {
+    implementation("org.springframework.boot:spring-boot-starter-web")
+}
+  </code>
+</pre>
+</details>
+<h2>ダイレクトフィールドアクセスの設定</h2>
+  <p>
+    オブジェクトとJSONのマッピングでも<strong>ダイレクトフィールドアクセス</strong>を指定します。<br />
+    JSONとのマッピングのためのgetter/setterメソッドを書く必要がなく、ドメイン層のクラスの記述をシンプルにできます。
+  </p>
+  <p>
+    ObjectMapperのカスタム設定をします。<br />
+    ソースコードで強調表示した個所が、ダイレクトフィールドアクセスの設定です。<br />
+    その後の設定は、JSONとLocalDate型のマッピングを行うための設定と、JSONの出力を成形する設定です。
+  </p>
+  <pre>
+    <code>
+package example.infrastructure._configuration;
 
-<h2>ダイレクトフィールドアクセス</h2>
+public class CustomObjectMapper {
+
+    public ObjectMapper customize() {
+        return new ObjectMapper()
+            <mark>.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY)</mark>
+            <mark>.setVisibility(PropertyAccessor.GETTER, JsonAutoDetect.Visibility.NONE)</mark>
+            <mark>.setVisibility(PropertyAccessor.SETTER, JsonAutoDetect.Visibility.NONE)</mark>
+            .registerModule(new JavaTimeModule())
+            .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
+            .enable(SerializationFeature.INDENT_OUTPUT)
+            ;
+    }
+}
+    </code>
+  </pre>
+  <p>
+  カストマイズしたObjectMapperをアプリケーションに組み込みます。
+  </p>
+  <pre>
+    <code>
+package example;
+
+<mark>@SpringBootApplication</mark>
+public class Application {
+
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
+
+    <mark>@Bean</mark>
+    public ObjectMapper directFieldAccess() {
+        ObjectMapper mapper = new CustomObjectMapper().customize();
+        return mapper;
+    }
+}
+    </code>
+  </pre>
+  <hr>
 <h2>コントローラ</h2>
+<p>HTTPリクエストを受け取り処理するクラスです。</p>
+<p>
+  Spring MVCに用意されたアノテーションを使うことで、HTTPリクエストの処理方法を簡潔に記述できます。<br />
+  ハーブ品種の一覧・登録APIのコントローラで使うアノテーションは次の通りです。
+</p>
+<ul>
+  <li>@RestControllerと@RequestMapping（クラスレベル）</li>
+  <li>@GetMappingと@PostMapping（メソッドレベル）</li>
+  <li>@RequestBody</li>
+  <li>@Validated</li>
+</ul>
+<h3>コントローラクラスのソースコード</h3>
+<p>
+  ハーブの品種の一覧・登録APIのコントローラクラスです。<br />
+  アノテーションを強調表示しています。
+</p>
+<pre>
+  <code>
+package example.presentation.api.kit;
+
+/**
+ * API ハーブ品種
+ */
+<mark>@RestController("APIハーブの品種")</mark>
+<mark>@RequestMapping("/api/varieties")</mark>
+public class VarietyController {
+    VarietyService varietyService;
+    VarietyRegisterService varietyRegisterService;
+
+    public VarietyController(VarietyService varietyService, VarietyRegisterService varietyRegisterService) {
+        this.varietyService = varietyService;
+        this.varietyRegisterService = varietyRegisterService;
+    }
+
+    <mark>@GetMapping("")</mark>
+    Variety[] listAll() {
+        return varietyService.listAll();
+    }
+
+    <mark>@PostMapping</mark>
+    VarietyNumber register(<mark>@RequestBody</mark> <mark>@Validated</mark> VarietyName varietyName,
+                           BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            throw new IllegalArgumentException(bindingResult.toString());
+        }
+        Variety variety = Variety.from(varietyName);
+        varietyRegisterService.register(variety);
+        return variety.number();
+    }
+}
+  </code>
+</pre>
+<p>
+  ソースコードの記述を説明します。
+</p>
+<hr>
+<h2>APIコントローラの宣言</h2>
+<p>このクラスがAPIコントローラであることを宣言します。</p>
+<pre>
+  <code>
+<mark>@RestController("APIハーブの品種")</mark>
+<mark>@RequestMapping("/api/varieties")</mark>
+public class VarietyController {
+    ...
+}
+  </code>
+</pre>
+<p>
+  @Controllerは、このクラスがコントローラクラスであることの宣言です。<br />
+  引数でコントローラ名を指定しています。指定しない場合は、クラス名が使われます。
+  画面用のコントローラとクラス名が同じため、引数で固有名を指定しています。<br />
+</p>
+<p>
+  @RequestMappingは、パラメータ<code>"/api/varieties"</code>で指定したURLへのリクエストを処理することを宣言します。
+</p>
+<hr>
+<h2>GETリクエストの処理：@GetMapping</h2>
+<p>
+  HTTPリクエストがGETの場合に実行する処理を記述します。
+</p>
+<pre>
+  <code>
+    <mark>@GetMapping("")</mark>
+    Variety[] listAll() {
+        return varietyService.listAll();
+    }
+  </code>
+</pre>
+<p>
+  メソッドの返すVarietyの配列を、Spring MVCがJSONに変換してレスポンスとして返します。
+</p>
+<hr>
 <h2>APIドキュメントの自動生成</h2>
 </body>
 </html>
