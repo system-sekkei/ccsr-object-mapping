@@ -6,16 +6,17 @@
   <link th:replace="_fragments/head :: css-dark">
 </head>
 <body>
+<nav>
+  <a target="object-html" th:href="@{/references/object-html#http-response}">オブジェクト ⇔ HTMLに戻る</a>
+</nav>
+<br />
 <h1>シンプルなHTMLを書く</h1>
 <p>
   この画面は、最小限のスタイルを指定した
   <a href="https://kognise.github.io/water.css/" target="_blank">Water.css</a>
   を使用しています。<br />
   HTML要素を記述するだけで、このような画面を作成できます。<br />
-  class属性は不要です。
-</p>
-<p>
-  <a target="object-html" th:href="@{/references/object-html#http-response}">オブジェクト ⇔ HTMLに戻る</a>
+  レイアウトや体裁を整えるためのclass属性の記述は不要です。
 </p>
 <hr>
 <header>

@@ -8,23 +8,368 @@
 <body>
 <header>
   <nav>
-    <a target="top" th:href="@{/}">トップに戻る</a>
+    <a target="object-mapping" th:href="@{/references/object-mapping}">オブジェクトマッピングの概要に戻る</a>
     | <a target="object-html" th:href="@{/references/object-html}">オブジェクト ⇔ HTML</a>
     | <a target="_self" th:href="@{/references/object-sql}">オブジェクト ⇔ SQL</a>
     | <a target="object-json" th:href="@{/references/object-json}">オブジェクト ⇔ JSON</a>
   </nav>
 </header>
 <h1>オブジェクト ⇔ SQLのマッピング</h1>
-<h2>データベースとSQLマッピング</h2>
-<p><a target="h2-console" th:href="@{${@environment.getProperty('spring.h2.console.path')}}">データベースへの接続</a></p>
-<p >
-  JDBC URL <span th:text="${@environment.getProperty('spring.datasource.url')}"></span>
+<p>
+  ドメインオブジェクトをデータベースを使って記録・参照する方法を説明します。<br />
+  マッピングの対象は、下記のVarietyクラスのオブジェクトです。
+</p>
+<pre>
+  <code>
+package example.domain.model.kit.row;
+
+/**
+* ハーブの品種を表現するクラス
+*/
+public class Variety {
+    VarietyNumber varietyNumber;
+    String name = "";
+
+    public String show() {
+        return String.format("%s [%s]", name, varietyNumber);
+    }
+}
+  </code>
+</pre>
+<h4>記録・参照するテーブルのDDL文</h4>
+<pre>
+  <code>
+CREATE TABLE 商品.品種
+(
+    品種番号 CHARACTER (7) PRIMARY KEY ,
+    名前 VARCHAR (20) NOT NULL
+);
+  </code>
+</pre>
+<hr>
+<h2>基本的な仕組み</h2>
+<p>
+  このサンプルではマッピングの仕組みとしてmyBatis SQL Mapperを使っています。<br />
+  myBatis SQL Mapperは、オブジェクトとSQLとのマッピングを明示的に行う、比較的軽量の永続化フレームワークです。
 </p>
 <h2>依存ライブラリ</h2>
+<h3>依存ライブラリ</h3>
+<p>
+  必要なライブりをbuild.gradleに指定します。
+</p>
+<ul>
+  <li>永続化フレームワークとしてmyBatis SQL Mapperを使います</li>
+  <li>データベースはインメモリのH2 Databaseを使います</li>
+  <li>データベースマイグレーションツールとしてFlyawayを使います</li>
+</ul>
+<details>
+  <summary>build.gradleの記述</summary>
+  <pre>
+    <code>
+dependencies {
+    implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.2")
+    runtimeOnly("com.h2database:h2")
+    runtimeOnly("org.flywaydb:flyway-core")
+}
+    </code>
+  </pre>
+</details>
 <h2>設定</h2>
-<h2>リポジトリ</h2>
-<h2>データソースクラス</h2>
-<h2>SQL Mapperインタフェース</h2>
-<h2>SQLマップ</h2>
+<h3>myBatis</h3>
+<details>
+  <summary>SQL Mapファイルの検索パスの設定</summary>
+  <p>
+    myBatisのSQL Mapper定義ファイルを、<code>/src/main/java</code>以下に配置可能にします。
+  </p>
+  <h4>build.gradleの記述</h4>
+  <pre>
+    <code>
+  //　myBatisのXxxMapper.xmlを、XxxMapper.javaと同じディレクトリに配置
+  sourceSets {
+    main {
+        resources.srcDirs = ["src/main/java", "src/main/resources"]
+    }
+  }
+    </code>
+  </pre>
+</details>
+<h3>H2 Database</h3>
+<details>
+  <summary>接続情報の設定</summary>
+  <p>接続情報をapplication.propertiesファイルに記述します。</p>
+  <pre>
+    <code>
+spring.datasource.url=jdbc:h2:mem:testdb;MODE=PostgreSQL
+spring.h2.console.enabled=true
+spring.h2.console.path=/h2-console
+    </code>
+  </pre>
+  <p>
+    H2 DatabaseをインメモリでPostgreSQL互換モードで実行します。<br />
+    データベースの管理画面をURL<code>/h2-console</code>で利用可能にします。
+  </p>
+</details>
+<h3>Flyway</h3>
+<details>
+  <summary>データベースの初期化の設定</summary>
+  <p>
+    起動のたびにデータベースを初期化する設定をapplication.propertiesファイルに記述します。<br />
+    また、テーブルを作成するスキーマはデータベースのデフォルトではなく、Flywayが実行するSQLで管理します。
+  </p>
+  <pre>
+    <code>
+spring.flyway.clean-disabled=false
+spring.flyway.schemas=managed
+    </code>
+  </pre>
+</details>
+<p>
+  Flywayが実行するSQLスクリプトは、<code>resources/db/migration</code>に配置します。
+</p>
+<hr>
+<h2>永続化のアーキテクチャ</h2>
+<p>
+  データの記録と参照というビジネスの関心事は、アプリケーション層でインタフェースとして宣言します。
+</p>
+<pre>
+  <code>
+package example.application.repository;
+
+/**
+ * ハーブ品種リポジトリ
+ */
+public <mark>interface VarietyRepository</mark> {
+    Variety[] listAll() ;
+
+    void register(Variety variety);
+}
+  </code>
+</pre>
+<p>
+  データベースアクセスの実装は、データソース層で記述します。
+</p>
+<pre>
+  <code>
+package example.infrastructure.datasource.kit.variety;
+
+<mark>@Repository</mark>
+public class VarietyDatasource <mark>implements VarietyRepository</mark> {
+
+    ...
+
+    @Override
+    public Variety[] listAll() { ... }
+
+    @Override
+    public void register(Variety variety) { ... }
+}
+  </code>
+</pre>
+<p>
+  リポジトリの実装であることを<code>@Repository</code>アノテーションで宣言します。
+</p>
+<hr>
+<h2>SQLの記述</h2>
+<p>
+  SQL文は、XMLファイルで記述します。
+</p>
+<pre>
+  <code>
+&lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+&lt;!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd"
+[
+&lt;!ENTITY 名前空間 "example.infrastructure.datasource.kit.variety.VarietyMapper"&gt;
+&lt;!ENTITY 品種 "example.domain.model.kit.row.Variety"&gt;
+]
+&gt;
+
+&lt;mapper namespace="&amp;名前空間;"&gt;
+
+    &lt;select id="listAll" resultType="&amp;品種;"&gt;
+        SELECT
+            品種番号 as "varietyNumber.value",
+            名前 as "varietyName.value"
+        FROM 商品.品種
+        ORDER BY
+            名前 ASC
+    &lt;/select&gt;
+
+    &lt;insert id="register"&gt;
+        INSERT INTO 商品.品種
+        (品種番号, 名前)
+        VALUES
+        (#{varietyNumber.value}, #{varietyName.value})
+    &lt;/insert&gt;
+
+&lt;/mapper&gt;
+  </code>
+</pre>
+<p>
+  Mapper XMLファイルの詳細は、<a target="mybatis-document" href="https://mybatis.org/mybatis-3/ja/sqlmap-xml.html">公式ドキュメント</a>を参考にしてください。
+</p>
+<p>記述方法の要点は以下の通りです。</p>
+<h3>XML宣言</h3>
+<p>定型のXML宣言です。（必須）</p>
+<p>
+  <code>
+    &lt;?xml version="1.0" encoding="UTF-8" ?&gt;
+  </code>
+</p>
+<h3>ドキュメントタイプ宣言</h3>
+<p>
+  myBatis Mapperの書式を使うことを宣言します。<br />
+  3行目と4行目は<code>&lt;!ENTITY 別名 "クラスへの完全パス"&gt;</code>の形式で、長いパス名の別名を定義しています。<br />
+  この別名の宣言は任意です。別名の参照<code>&amp;別名;</code>ではなく、該当個所にパス名をそのまま記述してもかまいません。
+</p>
+<h3>mapper要素</h3>
+<p>
+  <code>mapper</code>要素に、SQL文を記述します。<br />
+  名前空間に、このMapper XMLに対応する、JavaのMapper インタフェース宣言を記述します。<br />
+  JavaのMapperインタフェース宣言は後ほど説明します。
+</p>
+<p>
+  Mapper XMLファイルとJavaのMapperインタフェース宣言ファイルは、必ず同じファイル名にします。<br />
+  異なるのは拡張子<code>.xml</code>と<code>.java</code>の違いだけです。
+</p>
+<pre>
+  <code>
+&lt;mapper namespace="<mark>&amp;名前空間;</mark>"&gt;
+
+    ... (SQL文の記述)
+
+&lt;/mapper&gt;
+  </code>
+</pre>
+<h3>select要素</h3>
+<p>
+  select要素の中に、SELECT文を記述します。<br />
+  select要素のid属性は、JavaのMapperインタフェースで宣言したメソッド名を指定します。<br />
+</p>
+<pre>
+<code>
+&lt;select id="<mark>listAll</mark>" resultType="<mark>&amp;品種;</mark>"&gt;
+    SELECT
+        品種番号 <mark>AS "varietyNumber.value"</mark>,
+        名前 <mark>AS "varietyName.value"</mark>
+    FROM 商品.品種
+    ORDER BY
+        名前 ASC
+&lt;/select&gt;
+</code>
+</pre>
+<p>
+  select要素のresultType属性は、SELECTの結果をマッピングするオブジェクトの型(クラス名)を指定します。<br />
+  SELECT文は多くの場合、複数行を返しますが、resultTypeには、コレクション型ではなくコレクションが持つ「要素」の型を指定します。<br />
+  コレクションは、myBatisが、Java Mapperインタフェース宣言のメソッドの返す型をもとに自動的に生成します。
+</p>
+<p>
+  AS句で、マッピング先のフィールドを記述します。<br/>
+  <code>AS "varietyNumber.value"</code>は、resultTypeのVarietyクラスが持つvarietyNumberオブジェクトの
+  valueフィールドへのマッピングです。
+</p>
+<h3>insert要素の記述</h3>
+<p>
+  INSERT文はinsert要素で記述します。<br />
+  insert要素のid属性は、JavaのMapperインタフェース宣言のメソッド名です。
+</p>
+<pre>
+  <code>
+&lt;insert id="<mark>register</mark>"&gt;
+    INSERT INTO 商品.品種
+    (品種番号, 名前)
+    VALUES
+    (<mark>#{varietyNumber.value}</mark>, <mark>#{varietyName.value}</mark>)
+&lt;/insert&gt;
+  </code>
+</pre>
+<p>
+  VALUES句の<code>#{varietyNumber.value}</code>と<code>#{varietyName.value}</code>は、バインド変数です。<br />
+  JavaのMapperインタフェース宣言で指定した引数オブジェクトへの参照です。myBatisのバインド変数の記法はOGNLという標準的な記法に準拠しています。
+</p>
+<p>
+  バインド変数の記号<code>#</code>に注意してください。<code>$</code>ではなく<code>#</code>です。<br />
+  <code>#</code>で参照した内容は、SQLインジェクションを回避するためにエスケープ処理され実行されます。<br />
+  <code>$</code>は、文字列がそのまま実行されるため危険です。できるだけ使うべきではありません。
+</p>
+<hr>
+<h2>SQL Mapperインタフェースの宣言</h2>
+<p>
+  SQL Mapperファイル(xmlファイル)で記述したSQLを実行するインタフェース定義をJavaのinterfaceとして宣言します。<br />
+  ここで宣言したメソッド名が、Mapper xmlファイルのselect要素やinsert要素のid属性になります。
+</p>
+<pre>
+<code>
+package example.infrastructure.datasource.kit.variety;
+
+<mark>@Mapper</mark>
+public interface VarietyMapper {
+  <mark>Variety[]</mark> <mark>listAll</mark>();
+
+  void <mark>register</mark>(<mark>Variety variety</mark>);
+}
+</code>
+</pre>
+<p>
+  <code>@Mapper</code>アノテーションを使って、myBatisのSQL Mapperインタフェースであることを宣言します。<br />
+  このインタフェースの実体となるオブジェクトは、myBatisが実行時に自動生成します。<br />
+  アプリケーション開発が実装クラスを記述する必要はありません。
+</p>
+<p>
+  listAll()メソッドは、Mapper XMLファイルのselect要素(id="listAll")で記述したSELECTを実行し、
+  ハーブ品種(Variety)オブジェクトの配列を返します。
+</p>
+<p>
+  register()メソッドは、ハーブ品種(Variety)オブジェクトをパラメータとして渡して、
+  Mapper XMLファイルのinsert要素(id="register")を実行します。
+</p>
+<p>
+  引数を複数渡したい場合は、<code>@Param</code>アノテーションでパラメター名を指定します。
+</p>
+<pre>
+  <code>
+    void register(<mark>@Param("variety")</mark> Variety variety, <mark>@Param("date")</mark> LocalDate date);
+  </code>
+</pre>
+<p>
+  <code>@Param</code>で、パラメータ名を指定した場合は、Mapper XMLファイルのバインド変数で、パラメター名が必要です。<br/>
+  パラメータが一つの場合、<code>@Param</code>アノテーションは不要です。
+</p>
+<hr>
+<h2>SQL Mapperを使ったデータベースアクセス</h2>
+<p>
+  Mapperインタフェースを使った、Varietyデータソースの実装は以下になります。
+</p>
+<pre>
+  <code>
+package example.infrastructure.datasource.kit.variety;
+
+<mark>@Repository</mark>
+public class VarietyDatasource <mark>implements VarietyRepository</mark> {
+
+    VarietyMapper varietyMapper;
+
+    <mark>@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")</mark>
+    <mark>public VarietyDatasource(VarietyMapper varietyMapper)</mark> {
+        this.varietyMapper = varietyMapper;
+    }
+
+    @Override
+    public Variety[] listAll() {
+        return <mark>varietyMapper.listAll()</mark>;
+    }
+
+    @Override
+    public void register(Variety variety) {
+      <mark>varietyMapper.register(variety)</mark>;
+    }
+}
+  </code>
+</pre>
+<h3>リポジトリの実装クラスの宣言</h3>
+<h3>コンストラクタによるautowiring</h3>
+<h3>ハーブ品種一覧の取得</h3>
+<h3>ハーブ品種の記録</h3>
 </body>
 </html>

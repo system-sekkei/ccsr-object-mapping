@@ -9,7 +9,8 @@ public class VarietyDatasource implements VarietyRepository {
 
     VarietyMapper varietyMapper;
 
-    public VarietyDatasource(@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection") VarietyMapper varietyMapper) {
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+    public VarietyDatasource(VarietyMapper varietyMapper) {
         this.varietyMapper = varietyMapper;
     }
 

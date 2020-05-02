@@ -77,7 +77,7 @@ public class Variety {
   <code>
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+    runtimeOnly("org.springframework.boot:spring-boot-starter-thymeleaf")
 }
   </code>
 </pre>
@@ -328,6 +328,9 @@ void allVarieties(Model model) {
 <p>
   このサンプルアプリケーションの画面は最小限のスタイルだけを指定した<code>Water.css</code>で作成しています。<br />
   <code>Water.css</code>を使った画面の例：<a target="plain-html" th:href="@{/references/plain-html}">シンプルなHTMLを書く</a>
+</p>
+<p>
+  Thymeleafの詳細は、<a target="thymeleaf-document" href="https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf_ja.html">日本語ドキュメント</a>を参考にしてください。
 </p>
 <hr>
 <h2>POSTリクエストの処理：@PostMapping</h2>

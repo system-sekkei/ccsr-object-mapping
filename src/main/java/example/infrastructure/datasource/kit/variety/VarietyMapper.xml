@@ -2,10 +2,12 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd"
-        [
-                <!ENTITY 名前空間 "example.infrastructure.datasource.kit.variety.VarietyMapper">
-                <!ENTITY 品種 "example.domain.model.kit.row.Variety">
-                ]>
+[
+<!ENTITY 名前空間 "example.infrastructure.datasource.kit.variety.VarietyMapper">
+<!ENTITY 品種 "example.domain.model.kit.row.Variety">
+]
+>
+
 <mapper namespace="&名前空間;">
     <select id="listAll" resultType="&品種;">
         SELECT
@@ -23,4 +25,5 @@
         (#{varietyNumber.value}, #{varietyName.value})
 
     </insert>
+
 </mapper>

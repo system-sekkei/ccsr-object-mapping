@@ -15,52 +15,41 @@
   </nav>
 </header>
 
-<h1>オブジェクトのマッピング</h1>
-<h2>オブジェクトとHTML・SQL・JSONのマッピング</h2>
-<h2>サンプルアプリケーション</h2>
+<h1>Jig レポート</h1>
 <p>
-  ハーブの栽培キットを一覧・登録するアプリケーションです。<br/>
-  オブジェクト ⇔ HTML、オブジェクト ⇔ SQL、オブジェクト ⇔ JSONのそれぞれのマッピングのやり方のサンプルコードです。
-  <a target="Thymeleaf-Spring Document" href="https://www.thymeleaf.org/doc/tutorials/3.0/thymeleafspring.html#spring-thyme-seed-starter-manager">
-    Thymeleaf-Springのドキュメント(英語)
-  </a>
-  で使われているサンプルアプリケーションを参考にして作成しました。
+  このサンプルアプリケーションには、ソースコードからさまざまな設計ドキュメントを自動生成できる、
+  Jigレポート機能をGradleプラグインとして組み込んであります。
 </p>
-<dl>
-  <dt>説明に使う、簡単な例</dt>
-  <dd>
-    <a target="varieties" th:href="@{/varieties}">品種の一覧・登録</a>
-  </dd>
-  <dt>より複雑なマッピングの例</dt>
-  <dd>
-    <a target="kits" th:href="@{/kits}">栽培キットの一覧・登録</a>
-  </dd>
-</dl>
-<hr>
-<h2>オブジェクトとHTMLのマッピング</h2>
 <p>
-  Web画面とオブジェクトのマッピングについて説明します。<br />
-  <a target="object-html" th:href="@{/references/object-html}">オブジェクト ⇔ HTML</a>
+  特に、クラスやパッケージの参照関係を俯瞰して確認するためのダイアグラムが充実しています。<br />
+  以下に主なダイアグラムを紹介します。
 </p>
-<h2>オブジェクトとSQLのマッピング</h2>
+<h2>ドメインオブジェクト</h2>
 <p>
-  データベースとオブジェクトのマッピングについて説明します。<br />
-  <a target="object-sql" th:href="@{/references/object-sql}">オブジェクト ⇔ SQL</a>
+  ビジネスの関心事を表現するためのドメインオブジェクトの全体像です。
 </p>
-<h2>オブジェクトとJSONのマッピング</h2>
+<object data="/diagram/business-rule-relation.svg"></object>
+<h2>パッケージの参照関係</h2>
 <p>
-  API(JSONデータ)とオブジェクトとのマッピングについて説明します。<br />
-  <a target="object-json" th:href="@{/references/object-json}">オブジェクト ⇔ JSON</a>
+  ドメイン層のパッケージ関係図です。
 </p>
-<h2>設計可視化ツール：Jigレポート</h2>
+<object data="/diagram/package-relation-depth6.svg"></object>
+<h2>区分定義とその参照関係</h2>
 <p>
-  ソースコードから、設計内容を可視化するツールを説明します。
+  ビジネスルールの中核となる区分定義とその参照関係です。
 </p>
-
-<img src="/diagram/class.svg"></img>
-<img src="/diagram/tables.png" height="400"></img>
 <object data="/diagram/category.svg"></object>
-<object data="/diagram/tables.svg"></object>
+<object data="/diagram/category-usage.svg"></object>
+<h2>コントローラ・サービス・リポジトリの参照関係</h2>
+<p>
+  サービスクラスのメソッド（ユースケースの実装）に焦点を合わせた俯瞰図です。
+</p>
+<object data="/diagram/service-method-call-hierarchy.svg"></object>
+<h2>ユースケース複合図</h2>
+<p>
+  軽量の要件定義手法 RDRAのユースケース複合図と対比するための図です。
+</p>
+<object data="/diagram/use-case-and-fellows.svg"></object>
 ### Jigを活用するための規約
 
 * クラス名、メソッド名、パッケージ名

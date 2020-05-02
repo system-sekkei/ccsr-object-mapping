@@ -2,7 +2,7 @@ plugins {
     id 'java'
     id 'idea'
     id 'org.springframework.boot' version '2.2.6.RELEASE'
-    id 'org.dddjava.jig-gradle-plugin' version '2020.4.4'
+    id 'org.dddjava.jig-gradle-plugin' version '2020.5.1'
 }
 
 group 'org.example'
@@ -26,17 +26,14 @@ repositories {
 dependencies {
     implementation platform("org.springframework.boot:spring-boot-dependencies:2.2.6.RELEASE")
     implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+    runtimeOnly("org.springframework.boot:spring-boot-starter-thymeleaf")
 
     implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.2")
-
     runtimeOnly("com.h2database:h2")
-    implementation 'org.postgresql:postgresql'
+    runtimeOnly("org.flywaydb:flyway-core")
 
-    implementation("org.flywaydb:flyway-core")
-
-    implementation 'io.springfox:springfox-swagger2:2.9.2'
-    implementation 'io.springfox:springfox-swagger-ui:2.9.2'
+    implementation ("io.springfox:springfox-swagger2:2.9.2")
+    runtimeOnly ("io.springfox:springfox-swagger-ui:2.9.2")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude(group: 'org.junit.vintage')
