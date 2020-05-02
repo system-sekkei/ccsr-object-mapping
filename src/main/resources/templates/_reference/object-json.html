@@ -125,7 +125,7 @@ package example.infrastructure._configuration;
 
 public class CustomObjectMapper {
 
-    public ObjectMapper customize() {
+    public static ObjectMapper create() {
         return new ObjectMapper()
             <mark>.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY)</mark>
             <mark>.setVisibility(PropertyAccessor.GETTER, JsonAutoDetect.Visibility.NONE)</mark>
@@ -153,9 +153,8 @@ public class Application {
     }
 
     <mark>@Bean</mark>
-    public ObjectMapper directFieldAccess() {
-        ObjectMapper mapper = new CustomObjectMapper().customize();
-        return mapper;
+    public ObjectMapper customObjectMapper() {
+        return CustomObjectMapper.create();
     }
 }
     </code>
@@ -240,7 +239,8 @@ public class VarietyController {
 <hr>
 <h2>GETリクエストの処理：@GetMapping</h2>
 <p>
-  HTTPリクエストがGETの場合に実行する処理を記述します。
+  GETリクエストで、ハーブ品種の一覧を返します。<br />
+  HTTPレスポンスとして、品種(Variety)オブジェクトの配列をJSONデータに変換して返します。
 </p>
 <pre>
   <code>
@@ -253,7 +253,162 @@ public class VarietyController {
 <p>
   メソッドの返すVarietyの配列を、Spring MVCがJSONに変換してレスポンスとして返します。
 </p>
+<h2>POSTリクエストの処理：@PostMapping</h2>
+<p>
+  POSTリクエストでハーブ品種を登録します。<br />
+  品種名(VarietyName)を受け取り、それを使ってハーブ品種(Variety)オブジェクトを生成します。<br />
+  HTTPレスポンスとして、ハーブ品種番号(VarietyNumber)オブジェクトをJSONデータに変換して返します。
+</p>
+<pre>
+  <code>
+<mark>@PostMapping("")</mark>
+    VarietyNumber register(<mark>@RequestBody</mark> <mark>@Validated</mark> VarietyName varietyName,
+                       BindingResult bindingResult) {
+    if (bindingResult.hasErrors()) {
+        throw new IllegalArgumentException(bindingResult.toString());
+    }
+    Variety variety = Variety.from(varietyName);
+    varietyRegisterService.register(variety);
+    return variety.number();
+}
+  </code>
+</pre>
+<h3>@RequestBody</h3>
+<p>
+  HTTPリクエストのボディ（JSONデータ）をVarietyNameクラスのオブジェクトにマッピングします。
+</p>
+<h3>@Validated</h3>
+<p>
+  VarietyNameクラスで宣言している制約に基づきオブジェクトの妥当性を検査します。
+</p>
+<h4>VarietyNameクラスのバリデーション制約</h4>
+<pre>
+  <code>
+package example.domain.model.kit.row;
+
+public class VarietyName {
+    <mark>@NotNull(message = "必須")</mark>
+    <mark>@Size(min=3, message = "{min}字以上")</mark>
+    <mark>@Size(max=20, message = "{max}字以内")</mark>
+    String value;
+
+    ...
+}
+  </code>
+</pre>
+<h3>バリデーションエラー</h3>
+<p>
+  エラーの有無を<code>BindingResult#hasErrors()</code>メソッドで判断します。<br />
+  エラーが発生した場合は、例外を投げます。（例外を処理する仕組みは後述）
+</p>
+<pre>
+  <code>
+if (bindingResult.hasErrors()) {
+    throw new IllegalArgumentException(bindingResult.toString());
+}
+  </code>
+</pre>
+<h3>Varietyオブジェクトの生成と保存</h3>
+<p>
+  ハーブの品種名(VarietyName)オブジェクトを使って、ハーブ品種(Variety)オブジェクトを生成して保存します。
+</p>
+<pre>
+  <code>
+  Variety variety = Variety.from(varietyName);
+  varietyRegisterService.register(variety);
+  </code>
+</pre>
+<h3>品種番号を返す</h3>
+<p>
+  ハーブ品種(Variety)オブジェクトを生成した時に自動的に発番された品種番号(VarietyNumber)オブジェクトをJSONデータとして返します。
+</p>
+<hr>
+<h2>エラーの処理</h2>
+<p>
+  エラー時に発生した例外は、専用のコントローラで処理します。<br />
+  指定したHTTPステータスコードとメッセージをHTTPレスポンスとして返します。
+</p>
+<pre>
+  <code>
+package example.presentation.api._support;
+
+<mark>@RestControllerAdvice(basePackages = {"example.presentation.api"})</mark>
+public class ApplicationErrorHandler {
+
+    static final Logger logger = LoggerFactory.getLogger(ApplicationErrorHandler.class);
+
+    // Validation Errors
+    <mark>@ResponseStatus(value = HttpStatus.BAD_REQUEST)</mark>
+    <mark>@ExceptionHandler({IllegalArgumentException.class})</mark>
+    public String validationErrors(Exception exception) {
+        logger.error(exception.getMessage());
+        return exception.getMessage();
+    }
+}
+  </code>
+</pre>
 <hr>
 <h2>APIドキュメントの自動生成</h2>
+<p>
+  APIの仕様は
+  <a target="swagger-ui" th:href="@{/swagger-ui.html}">APIドキュメント</a>
+  で参照できます。
+</p>
+<p>
+  このオンラインのドキュメントはSpringFoxを使ってソースコードから自動生成しています。
+</p>
+<h3>依存ライブラリ</h3>
+<details>
+  <summary>build.gradleの記述</summary>
+<pre>
+  <code>
+dependencies {
+    implementation 'io.springfox:springfox-swagger2:2.9.2'
+    implementation 'io.springfox:springfox-swagger-ui:2.9.2'
+}
+  </code>
+</pre>
+</details>
+<h3>ドキュメント生成方法の設定</h3>
+<p>
+  ドキュメントの生成方法について指定します。
+</p>
+<pre>
+  <code>
+package example.infrastructure._configuration;
+
+@Configuration
+@EnableSwagger2
+public class SwaggerConfig {
+
+    @Bean
+    public Docket newsApi() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .select().paths(patterns()).build()
+                .apiInfo(apiInfo())
+                .groupName("ccsr")
+                .directModelSubstitute(LocalDateTime.class, java.util.Date.class)
+                .directModelSubstitute(LocalDate.class, java.sql.Date.class)
+                .directModelSubstitute(LocalTime.class, String.class)
+                ;
+    }
+
+    private Predicate&lt;String&gt; patterns() {
+        return or(
+                regex("/api.*")
+        );
+    }
+    private ApiInfo apiInfo() {
+        return new ApiInfoBuilder()
+                .title("ハーブ栽培キット API仕様")
+                .description("version 1.0")
+                .build();
+    }
+}
+  </code>
+</pre>
+<p>
+  <a href="#">ページの先頭に戻る</a>
+</p>
 </body>
 </html>

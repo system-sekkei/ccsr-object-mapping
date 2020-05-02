@@ -28,7 +28,7 @@ public class VarietyController {
         return varietyService.listAll();
     }
 
-    @PostMapping
+    @PostMapping("")
     VarietyNumber register(@RequestBody @Validated VarietyName varietyName,
                            BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {

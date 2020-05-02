@@ -23,9 +23,7 @@ public class SwaggerConfig {
     @Bean
     public Docket newsApi() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .directModelSubstitute(LocalDate.class, java.sql.Date.class)                .select()
-                .paths(patterns())
-                .build()
+                .select().paths(patterns()).build()
                 .apiInfo(apiInfo())
                 .groupName("ccsr")
                 .directModelSubstitute(LocalDateTime.class, java.util.Date.class)

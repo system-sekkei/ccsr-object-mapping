@@ -358,26 +358,38 @@ public String register(
 </p>
 <h3>バリデーション</h3>
 <p>
-  引数に<code>@Validated</code>を宣言すると、オブジェクトの妥当性検査が行われます。
-<h4>Varietyクラスのnameフィールドのバリデーション制約の記述</h4>
+  引数に<code>@Validated</code>を宣言し、オブジェクトの妥当性を検査します。
+<h4>VarietyクラスのvarietyNameフィールドのバリデーション制約の記述</h4>
 <pre>
   <code>
 package example.domain.model.kit.row;
 
 public class Variety {
+
     ....
 
-    @NotNull(message = "必須")
-    @Size(min=3, message = "{min}字以上")
-    @Size(max=20, message = "{max}字以内")
-    String name = "";
+    <mark>@Valid</mark>
+    VarietyName varietyName;
+
+    ...
+}
+  </code>
+</pre>
+<pre>
+  <code>
+public class VarietyName {
+
+    <mark>@NotNull(message = "必須")</mark>
+    <mark>@Size(min=3, message = "{min}字以上")</mark>
+    <mark>@Size(max=20, message = "{max}字以内")</mark>
+    String value = "";
 
     ....
 }
   </code>
 </pre>
 <p>
-  nameがバインドできなかった時、3文字未満の時、20文字を超える時に、バリデーションエラーになります。
+  varietyName.valueがバインドできなかった時、3文字未満の時、20文字を超える時に、バリデーションエラーになります。
 </p>
 <h3>エラー内容の表示</h3>
 <p>
@@ -419,13 +431,13 @@ public class Variety {
   <code>
 @InitBinder
 public void initBinder(WebDataBinder binder) {
-    binder.setAllowedFields("name");
+    binder.setAllowedFields("varietyName.value");
 }
   </code>
 </pre>
 <p>
-  <code>WebDataBinder#setAllowFields()</code>メソッドを使って、バインドを許可するフィールドを明示します。<br />
-  このメソッドの引数は可変長です。複数のフィールドを必要なだけ記述できます。
+  <code>WebDataBinder#setAllowFields()</code>メソッドを使って、バインドを許可するフィールドを指定します。<br />
+  このメソッドの引数は可変長です。複数のフィールドを記述できます。
 </p>
 <p>
   <a href="#">ページの先頭に戻る</a>
