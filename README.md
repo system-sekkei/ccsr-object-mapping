@@ -23,7 +23,7 @@ CCSR手法は、ソフトウェアのもっとも重要な品質は発展性で�
 - スライド：[ドメイン駆動設計 15年の取り組みでわかったこと](https://www.slideshare.net/masuda220/ss-231096753) (2020/3/30)
 - YouTube：[RDRA2.0のサンプルをJIGで実装してみたよ](https://www.youtube.com/watch?v=Jf8y5fd9OhM&feature=youtu.be) (2020/4/30)
 
-### このサンプルの利用方法
+## このサンプルの利用方法
 ```>./gradlew bootRun```でアプリケーションを起動し、ブラウザで```localhost:8080```を開いてください。  
 - アプリケーションの紹介
 - オブジェクトマッピングの概要

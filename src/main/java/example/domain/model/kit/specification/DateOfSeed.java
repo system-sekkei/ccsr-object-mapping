@@ -21,8 +21,7 @@ public class DateOfSeed {
 
     public DateOfSeed() {}
 
-    @JsonIgnore
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M月d日");
+    static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M月d日");
     public String when() {
         return value.format(formatter);
     }
