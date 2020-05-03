@@ -11,22 +11,30 @@
     <a target="top" th:href="@{/}">トップに戻る</a>
     | <a target="application" th:href="@{/references/application}">アプリケーションの紹介</a>
     | <a target="object-mapping" th:href="@{/references/object-mapping}">オブジェクトマッピングの概要</a>
-    | <a target="_self" th:href="@{/references/jig-report}">Jigレポート</a>
+    | <a target="_self" th:href="@{/references/jig-report}">Jigドキュメント</a>
   </nav>
 </header>
 
-<h1>Jig レポート</h1>
+<h1>Jigドキュメント</h1>
 <p>
   このサンプルアプリケーションには、ソースコードからさまざまな設計ドキュメントを自動生成できる、
-  Jigレポート機能をGradleプラグインとして組み込んであります。
+  Jigレポート機能をGradleプラグインとして組み込んであります。<br />
+  Gradleタスク<code>jigReports</code>を実行すると、
+  <code>build/jig</code>ディレクトリに各種のドキュメントが生成されます。
 </p>
 <p>
-  特に、クラスやパッケージの参照関係を俯瞰して確認するためのダイアグラムが充実しています。<br />
+  特に、クラスやパッケージの参照関係や全体像を<strong>俯瞰して確認できるダイアグラム</strong>が充実しています。<br />
   以下に主なダイアグラムを紹介します。
 </p>
+<p>
+  Jigの詳細は
+  <a target="jig-repository" href="https://github.com/dddjava/jig">GitHubのJigリポジトリ</a>
+  をご覧ください。
+</p>
+<hr>
 <h2>ドメインオブジェクト</h2>
 <p>
-  ビジネスの関心事を表現するためのドメインオブジェクトの全体像です。
+  ビジネスの関心事を表現するためのドメインオブジェクト全体の関係図です。
 </p>
 <object data="/diagram/business-rule-relation.svg"></object>
 <h2>パッケージの参照関係</h2>
@@ -34,42 +42,155 @@
   ドメイン層のパッケージ関係図です。
 </p>
 <object data="/diagram/package-relation-depth6.svg"></object>
+<h2>パッケージやクラスの一覧</h2>
+<p>
+  さまざまな一覧系の情報を<code>build/jig/business-rule.xlsx</code>で確認できます。<br />
+  主な内容は以下の通りです。
+</p>
+<details>
+  <summary>パッケージ一覧</summary>
+  <table class="tableizer-table">
+    <thead><tr class="tableizer-firstrow"><th>パッケージ名</th><th>パッケージ別名</th><th>クラス数</th></tr></thead><tbody>
+  <tr><td>example.domain.model.kit</td><td>ハーブ栽培キット</td><td>2</td></tr>
+  <tr><td>example.domain.model.kit.feature</td><td>特徴</td><td>2</td></tr>
+  <tr><td>example.domain.model.kit.row</td><td>列</td><td>4</td></tr>
+  <tr><td>example.domain.model.kit.row.validation</td><td>追加・削除の制約</td><td>2</td></tr>
+  <tr><td>example.domain.model.kit.specification</td><td>栽培キットの仕様</td><td>2</td></tr>
+  <tr><td>example.domain.type</td><td>基本型(primitives)</td><td>2</td></tr>
+  </tbody></table>
+</details>
+<br />
+<details>
+  <summary>クラス一覧</summary>
+  <table class="tableizer-table">
+    <thead><tr class="tableizer-firstrow"><th>クラス名</th><th>クラス別名</th></tr></thead><tbody>
+  <tr><td>kit.feature.Feature</td><td>特徴</td></tr>
+  <tr><td>kit.feature.Features</td><td>特徴</td></tr>
+  <tr><td>kit.row.Row</td><td>列</td></tr>
+  <tr><td>kit.row.Rows</td><td>すべての列</td></tr>
+  <tr><td>kit.row.validation.AddRow</td><td>列の追加の制約</td></tr>
+  <tr><td>kit.row.validation.RemoveRow</td><td>列の削除の制約</td></tr>
+  <tr><td>kit.row.Variety</td><td>ハーブの品種</td></tr>
+  <tr><td>kit.row.VarietyName</td><td>品種名</td></tr>
+  <tr><td>kit.specification.DateOfSeed</td><td>種をまいた日</td></tr>
+  <tr><td>kit.specification.Specification</td><td>キットの仕様</td></tr>
+  <tr><td>kit.StarterKit</td><td>ハーブ栽培キット</td></tr>
+  <tr><td>kit.StarterKitList</td><td>栽培キット一覧</td></tr>
+  <tr><td>Covered</td><td>カバー有無</td></tr>
+  <tr><td>Type</td><td>素材</td></tr>
+  </tbody></table>
+</details>
+<br />
+<details>
+  <summary>バリデーション制約一覧</summary>
+  <table class="tableizer-table">
+    <thead><tr class="tableizer-firstrow"><th>クラス名</th><th>クラス別名</th><th>メンバ名</th><th>メンバクラス名</th><th>アノテーションクラス名</th><th>アノテーション記述</th></tr></thead><tbody>
+  <tr><td>kit.row.Row</td><td>列</td><td>variety</td><td>Variety</td><td>NotNull</td><td>{message=必須}</td></tr>
+  <tr><td>kit.row.Row</td><td>列</td><td>seedsPerCell</td><td>int</td><td>Min</td><td>{message=最低1粒, value=1}</td></tr>
+  <tr><td>kit.row.Row</td><td>列</td><td>seedsPerCell</td><td>int</td><td>Max</td><td>{message=最大２０粒, value=20}</td></tr>
+  <tr><td>kit.row.Rows</td><td>すべての列</td><td>list</td><td>List</td><td>NotNull</td><td>{message=必須}</td></tr>
+  <tr><td>kit.row.Rows</td><td>すべての列</td><td>list</td><td>List</td><td>Size$List</td><td>{value=[]}</td></tr>
+  <tr><td>kit.row.Variety</td><td>ハーブの品種</td><td>varietyName</td><td>VarietyName</td><td>Valid</td><td>{}</td></tr>
+  <tr><td>kit.row.VarietyName</td><td>品種名</td><td>value</td><td>String</td><td>NotNull</td><td>{message=必須}</td></tr>
+  <tr><td>kit.row.VarietyName</td><td>品種名</td><td>value</td><td>String</td><td>Size$List</td><td>{value=[]}</td></tr>
+  <tr><td>kit.specification.DateOfSeed</td><td>種をまいた日</td><td>value</td><td>LocalDate</td><td>NotNull</td><td>{message=必須}</td></tr>
+  <tr><td>kit.specification.Specification</td><td>キットの仕様</td><td>dateOfSeed</td><td>DateOfSeed</td><td>Valid</td><td>{}</td></tr>
+  <tr><td>kit.specification.Specification</td><td>キットの仕様</td><td>type</td><td>Type</td><td>NotNull</td><td>{message=必須}</td></tr>
+  <tr><td>kit.specification.Specification</td><td>キットの仕様</td><td>features</td><td>Features</td><td>NotNull</td><td>{}</td></tr>
+  <tr><td>kit.specification.Specification</td><td>キットの仕様</td><td>rows</td><td>Rows</td><td>Valid</td><td>{}</td></tr>
+  </tbody></table>
+</details>
+<hr>
 <h2>区分定義とその参照関係</h2>
 <p>
   ビジネスルールの中核となる区分定義とその参照関係です。
 </p>
 <object data="/diagram/category.svg"></object>
 <object data="/diagram/category-usage.svg"></object>
+<hr>
 <h2>コントローラ・サービス・リポジトリの参照関係</h2>
 <p>
   サービスクラスのメソッド（ユースケースの実装）に焦点を合わせた俯瞰図です。
 </p>
 <object data="/diagram/service-method-call-hierarchy.svg"></object>
+<p>
+  関連する一覧系の情報を<code>build/jig/application.xlsx</code>で確認できます。<br />
+</p>
+<details>
+  <summary>サービスのメソッド（ユースケース）の一覧</summary>
+  <div style="overflow-x: auto; white-space: nowrap">
+  <table >
+    <thead><tr><th>クラス名</th><th>メソッドシグネチャ</th><th>メソッド戻り値の型</th><th>クラス別名</th><th>メソッド別名</th><th>メソッド戻り値の型の別名</th><th>メソッド引数の型の別名</th><th>使用しているフィールドの型</th><th>使用しているリポジトリのメソッド</th></tr></thead><tbody>
+  <tr><td>StarterKitRegisterService</td><td>register(StarterKit)</td><td>void</td><td>ハーブ栽培キット登録サービス</td><td>ハーブ栽培キットを登録する</td><td>&nbsp;</td><td>[ハーブ栽培キット]</td><td>[StarterKitRepository]</td><td>[StarterKitRepository.register(StarterKit)]</td></tr>
+  <tr><td>StarterKitService</td><td>listAll()</td><td>StarterKitList</td><td>ハーブ栽培キット参照サービス</td><td>ハーブ栽培キットを一覧する</td><td>栽培キット一覧</td><td>[]</td><td>[StarterKitRepository]</td><td>[StarterKitRepository.listAll()]</td></tr>
+  <tr><td>VarietyRegisterService</td><td>register(Variety)</td><td>void</td><td>ハーブ品種の登録サービス</td><td>ハーブ品種を登録する</td><td>&nbsp;</td><td>[ハーブの品種]</td><td>[VarietyRepository]</td><td>[VarietyRepository.register(Variety)]</td></tr>
+  <tr><td>VarietyService</td><td>listAll()</td><td>Variety[]</td><td>ハーブ品種の参照サービス</td><td>ハーブ品種を一覧する</td><td>&nbsp;</td><td>[]</td><td>[VarietyRepository]</td><td>[VarietyRepository.listAll()]</td></tr>
+  </tbody></table>
+  </div>
+</details>
+<br />
+<details>
+  <summary>リポジトリ一覧とテーブルCRUD図</summary>
+  <div style="overflow-x: auto; white-space: nowrap">
+  <table class="tableizer-table">
+    <thead><tr class="tableizer-firstrow"><th>クラス名</th><th>メソッドシグネチャ</th><th>メソッド戻り値の型</th><th>クラス別名</th><th>INSERT</th><th>SELECT</th><th>UPDATE</th><th>DELETE</th></tr></thead><tbody>
+  <tr><td>StarterKitRepository</td><td>listAll()</td><td>StarterKitList</td><td>ハーブ栽培キットリポジトリ</td><td>[]</td><td>[商品.栽培キット]</td><td>[]</td><td>[]</td></tr>
+  <tr><td>StarterKitRepository</td><td>register(StarterKit)</td><td>void</td><td>ハーブ栽培キットリポジトリ</td><td>[商品.キットの特徴, 商品.列, 商品.栽培キット]</td><td>[]</td><td>[]</td><td>[]</td></tr>
+  <tr><td>VarietyRepository</td><td>listAll()</td><td>Variety[]</td><td>ハーブ品種リポジトリ</td><td>[]</td><td>[商品.品種]</td><td>[]</td><td>[]</td></tr>
+  <tr><td>VarietyRepository</td><td>register(Variety)</td><td>void</td><td>ハーブ品種リポジトリ</td><td>[商品.品種]</td><td>[]</td><td>[]</td><td>[]</td></tr>
+  </tbody></table>
+
+  </div>
+</details>
 <h2>ユースケース複合図</h2>
 <p>
   軽量の要件定義手法 RDRAのユースケース複合図と対比するための図です。
 </p>
 <object data="/diagram/use-case-and-fellows.svg"></object>
-### Jigを活用するための規約
+<hr>
+<h2>Jigを活用するためのコードの書き方</h2>
+<h3>クラス・メソッド・パッケージの日本語の別名</h3>
+<p>
+  日本語の別名は、JavaDoc形式のコメントに記述します。<br />
+  クラスの別名とメソッドの別名はそれぞれの定義の直前のJavaDocコメントの一行目を表示します。<br />
+  パッケージの別名は、それぞれのディレクトリの<code>package-info.java</code>ファイルのJavaDocコメントの一行目を表示します。
+</p>
+<h3>enumの要素名</h3>
+<p>
+  日本語で要素名を書きます。
+</p>
+<pre>
+  <code>
+package example.domain.type;
 
-* クラス名、メソッド名、パッケージ名
-* Spring アノテーション
+/**
+ * 素材
+ */
+public enum Type {
+    プラスチック,
+    木製
+}
+  </code>
+</pre>
+<h3>スキーマ名・テーブル名・カラム名</h3>
+<p>
+  データベースのスキーマ名・テーブル名・カラム名は日本語を使います。
+</p>
+<pre>
+  <code>
+CREATE SCHEMA 商品;
 
-## オブジェクトと画面のマッピング
-
-## オブジェクトとJSONのマッピング
-
-## オブジェクトとSQL(テーブル)のマッピング
-
-## Jigを活用するための規約
-
-### ドキュメントとしての価値をあげる
-
-* enumの要素名を日本語に
-* スキーマ名・テーブル名・カラム名を日本語
-* クラス、メソッド、パッケージに日本語名を付加する
-
-### Java Docコメント　日本語名
-### package-info.java の Java Docコメント日本語名
+CREATE TABLE 商品.栽培キット
+(
+    キット番号 CHARACTER (12) PRIMARY KEY,
+    種まき日 DATE NOT NULL,
+    カバー CHAR (1) NOT NULL REFERENCES 商品.カバー,
+    素材 VARCHAR (6) NOT NULL REFERENCES 商品.素材
+);
+  </code>
+</pre>
+<p>
+  <a href="#">ページの先頭に戻る</a>
+</p>
 </body>
 </html>

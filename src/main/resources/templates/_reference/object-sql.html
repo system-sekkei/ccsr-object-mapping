@@ -21,7 +21,7 @@
 </p>
 <pre>
   <code>
-package example.domain.model.kit.row;
+package example.<mark>domain.model</mark>.kit.row;
 
 /**
 * ハーブの品種を表現するクラス
@@ -53,7 +53,6 @@ CREATE TABLE 商品.品種
   myBatis SQL Mapperは、オブジェクトとSQLとのマッピングを明示的に行う、比較的軽量の永続化フレームワークです。
 </p>
 <h2>依存ライブラリ</h2>
-<h3>依存ライブラリ</h3>
 <p>
   必要なライブりをbuild.gradleに指定します。
 </p>
@@ -63,7 +62,7 @@ CREATE TABLE 商品.品種
   <li>データベースマイグレーションツールとしてFlyawayを使います</li>
 </ul>
 <details>
-  <summary>build.gradleの記述</summary>
+  <summary><em>build.gradleの記述</em></summary>
   <pre>
     <code>
 dependencies {
@@ -133,7 +132,7 @@ spring.flyway.schemas=managed
 </p>
 <pre>
   <code>
-package example.application.repository;
+package example.<mark>application</mark>.repository;
 
 /**
  * ハーブ品種リポジトリ
@@ -150,7 +149,7 @@ public <mark>interface VarietyRepository</mark> {
 </p>
 <pre>
   <code>
-package example.infrastructure.datasource.kit.variety;
+package example.<mark>infrastructure.datasource</mark>.kit.variety;
 
 <mark>@Repository</mark>
 public class VarietyDatasource <mark>implements VarietyRepository</mark> {
@@ -188,16 +187,16 @@ public class VarietyDatasource <mark>implements VarietyRepository</mark> {
 &lt;mapper namespace="&amp;名前空間;"&gt;
 
     &lt;select id="listAll" resultType="&amp;品種;"&gt;
-        SELECT
-            品種番号 as "varietyNumber.value",
-            名前 as "varietyName.value"
-        FROM 商品.品種
+        <mark>SELECT</mark>
+            品種番号 AS "varietyNumber.value",
+            名前 AS "varietyName.value"
+        <mark>FROM 商品.品種</mark>
         ORDER BY
             名前 ASC
     &lt;/select&gt;
 
     &lt;insert id="register"&gt;
-        INSERT INTO 商品.品種
+        <mark>INSERT INTO 商品.品種</mark>
         (品種番号, 名前)
         VALUES
         (#{varietyNumber.value}, #{varietyName.value})
@@ -294,7 +293,7 @@ public class VarietyDatasource <mark>implements VarietyRepository</mark> {
   <code>$</code>は、文字列がそのまま実行されるため危険です。できるだけ使うべきではありません。
 </p>
 <hr>
-<h2>SQL Mapperインタフェースの宣言</h2>
+<h2>SQL Mapperのインタフェース宣言</h2>
 <p>
   SQL Mapperファイル(xmlファイル)で記述したSQLを実行するインタフェース定義をJavaのinterfaceとして宣言します。<br />
   ここで宣言したメソッド名が、Mapper xmlファイルのselect要素やinsert要素のid属性になります。
@@ -313,7 +312,7 @@ public interface VarietyMapper {
 </pre>
 <p>
   <code>@Mapper</code>アノテーションを使って、myBatisのSQL Mapperインタフェースであることを宣言します。<br />
-  このインタフェースの実体となるオブジェクトは、myBatisが実行時に自動生成します。<br />
+  このインタフェースの実体となるオブジェクトは、<mark>myBatisが実行時に自動生成</mark>します。<br />
   アプリケーション開発が実装クラスを記述する必要はありません。
 </p>
 <p>
@@ -368,8 +367,61 @@ public class VarietyDatasource <mark>implements VarietyRepository</mark> {
   </code>
 </pre>
 <h3>リポジトリの実装クラスの宣言</h3>
+<p>
+  このクラスがVarietyRepositoryインタフェースを実装したクラスであることを宣言します。
+</p>
+<pre>
+  <code>
+<mark>@Repository</mark>
+public class VarietyDatasource <mark>implements VarietyRepository</mark> {
+    ...
+}
+  </code>
+</pre>
 <h3>コンストラクタによるautowiring</h3>
+<p>
+  VarietyMapperインタフェースのオブジェクトのコンストラクタによるインジェクション(autowiring)を宣言します。<br />
+  <code>@SuppressWarnings</code>は、autowiringすべき実装クラスの定義が見つからないというエラーを抑止します。<br />
+  「SQL Mapperのインタフェース宣言」で説明したように、<code>interface VarietyMapper</code>の実装クラスは、
+  myBatisが実行時に自動生成します。
+</p>
+<pre>
+  <code>
+  VarietyMapper varietyMapper;
+
+  <mark>@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")</mark>
+  <mark>public VarietyDatasource(VarietyMapper varietyMapper)</mark> {
+      this.varietyMapper = varietyMapper;
+  }
+  </code>
+</pre>
 <h3>ハーブ品種一覧の取得</h3>
+<p>
+  <code>VarietyMapper#listAll()</code>メソッドを使って、
+  データベースからハーブ品種一覧を取り出しVarietyオブジェクトの配列を返します。
+</p>
+<pre>
+  <code>
+    @Override
+    public Variety[] listAll() {
+        return <mark>varietyMapper.listAll()</mark>;
+    }
+  </code>
+</pre>
 <h3>ハーブ品種の記録</h3>
+<p>
+  <code>VarietyMapper#register()</code>メソッドを使って、Varietyオブジェクトをデータベースに保存します。
+</p>
+<pre>
+  <code>
+    @Override
+    public void register(Variety variety) {
+      <mark>varietyMapper.register(variety)</mark>;
+    }
+  </code>
+</pre>
+<p>
+  <a href="#">ページの先頭に戻る</a>
+</p>
 </body>
 </html>

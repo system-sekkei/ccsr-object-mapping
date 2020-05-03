@@ -11,7 +11,7 @@
     <a target="top" th:href="@{/}">トップに戻る</a>
     | <a target="application" th:href="@{/references/application}">アプリケーションの紹介</a>
     | <a target="_self" th:href="@{/references/object-mapping}">オブジェクトマッピングの概要</a>
-    | <a target="jig-report" th:href="@{/references/jig-report}">Jigレポート</a>
+    | <a target="jig-report" th:href="@{/references/jig-report}">Jigドキュメント</a>
   </nav>
 </header>
 
@@ -40,9 +40,22 @@ public class Variety {
 
 <h2>マッピングする対象ごとの説明</h2>
 <ul>
-  <li>画面とのマッピング ⇒ <a target="object-html" th:href="@{/references/object-html}">オブジェクト ⇔ HTML</a></li>
-  <li>テーブルとのマッピング ⇒ <a target="object-sql" th:href="@{/references/object-sql}">オブジェクト ⇔ SQL</a></li>
-  <li>JSONとのマッピング ⇒ <a target="object-json" th:href="@{/references/object-json}">オブジェクト ⇔ JSON</a></li>
+  <li>画面 ⇒ <a target="object-html" th:href="@{/references/object-html}">オブジェクト ⇔ HTMLのマッピング</a></li>
+  <li>テーブル ⇒ <a target="object-sql" th:href="@{/references/object-sql}">オブジェクト ⇔ SQLのマッピング</a></li>
+  <li>JSON ⇒ <a target="object-json" th:href="@{/references/object-json}">オブジェクト ⇔ JSONのマッピング</a></li>
 </ul>
+<h2>ダイレクトフィールドアクセス</h2>
+<p>
+  どのマッピングも<strong>ダイレクトフィールドアクセス</strong>という方式を使っています。<br />
+</p>
+<p>
+  Javaの伝統的な方法は、getter/setterメソッドを使ったフィールドアクセスです。<br />
+  それに対し<strong>ダイレクトフィールドアクセス</strong>は、Javaのリフレクションを使って、
+  マッピングのフレームワークがフィールドを直接参照する方式です。<br />
+  publicでないフィールドも直接参照します。
+</p>
+<p>
+  冗長なgetter/setterメソッドを書く必要がなく、ドメインオブジェクトのクラス定義を簡潔に保てます。
+</p>
 </body>
 </html>

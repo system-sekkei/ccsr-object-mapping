@@ -120,7 +120,7 @@
 <!-- example.domain.model.kit.row.validation.RemoveRow -->
 <g id="node10" class="node"><title>example.domain.model.kit.row.validation.RemoveRow</title>
 <polygon fill="#eedd82" stroke="black" points="338.5,-535 219.5,-535 219.5,-497 338.5,-497 338.5,-535"/>
-<text text-anchor="middle" x="279" y="-519.8" font-family="Times New Roman,serif" font-size="14.00">　列の削除の制約</text>
+<text text-anchor="middle" x="279" y="-519.8" font-family="Times New Roman,serif" font-size="14.00">列の削除の制約</text>
 <text text-anchor="middle" x="279" y="-504.8" font-family="Times New Roman,serif" font-size="14.00">RemoveRow</text>
 </g>
 <!-- example.domain.model.kit.specification.DateOfSeed -->

@@ -6,6 +6,14 @@
   <link th:replace="_fragments/head :: css-light">
 </head>
 <body>
+<header>
+  <nav>
+    <a target="top" th:href="@{/}">トップに戻る</a>
+    | <a target="_self" th:href="@{/references/application}">アプリケーションの紹介</a>
+    | <a target="object-mapping" th:href="@{/references/object-mapping}">オブジェクトマッピングの概要</a>
+    | <a target="jig-report" th:href="@{/references/jig-report}">Jigドキュメント</a>
+  </nav>
+</header>
 <h1>ハーブ栽培キット管理アプリケーション</h1>
 <h2>アプリケーションの紹介</h2>
 <p>
@@ -24,17 +32,17 @@
 </p>
 <p>
   それぞれのマッピングの説明は以下を参考にしてください。<br />
-<a target="object-html" th:href="@{/references/object-html}">オブジェクト ⇔ HTML</a><br />
-<a target="object-sql" th:href="@{/references/object-sql}">オブジェクト ⇔ SQL</a><br />
-<a target="object-json" th:href="@{/references/object-json}">オブジェクト ⇔ JSON</a><br />
+　<a target="object-html" th:href="@{/references/object-html}">オブジェクト ⇔ HTMLのマッピング</a>
+ | <a target="object-sql" th:href="@{/references/object-sql}">オブジェクト ⇔ SQLのマッピング</a>
+ | <a target="object-json" th:href="@{/references/object-json}">オブジェクト ⇔ JSONのマッピング</a>
 </p>
 
-<h2>Jigレポート</h2>
+<h2>Jigドキュメント</h2>
 <p>
   ソースコードから各種のドキュメントを自動生成するツール Jig の説明です。<br />
   このアプリケーションの設計内容を理解するために役に立ちます。<br />
   <strong>
-   ⇒ <a target="jig-report" th:href="@{/references/jig-report}">Jigレポート</a>
+   ⇒ <a target="jig-report" th:href="@{/references/jig-report}">Jigドキュメント</a>
   </strong>
 </p>
 </body>

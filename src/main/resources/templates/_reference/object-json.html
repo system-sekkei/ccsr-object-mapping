@@ -217,8 +217,8 @@ public class VarietyController {
   ソースコードの記述を説明します。
 </p>
 <hr>
-<h2>APIコントローラの宣言</h2>
-<p>このクラスがAPIコントローラであることを宣言します。</p>
+<h2>RESTコントローラの宣言</h2>
+<p>このクラスがAPI用のRESTコントローラであることを宣言します。</p>
 <pre>
   <code>
 <mark>@RestController("APIハーブの品種")</mark>
@@ -229,7 +229,7 @@ public class VarietyController {
   </code>
 </pre>
 <p>
-  @Controllerは、このクラスがコントローラクラスであることの宣言です。<br />
+  <code>@RestController</code>は、このクラスがRESTコントローラクラスであることの宣言です。<br />
   引数でコントローラ名を指定しています。指定しない場合は、クラス名が使われます。
   画面用のコントローラとクラス名が同じため、引数で固有名を指定しています。<br />
 </p>
