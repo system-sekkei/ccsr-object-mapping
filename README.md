@@ -3,7 +3,7 @@
 CCSR(Continuous Concurrent Stepwise Refinement)手法を学ぶための参照プロジェクトの一つです。  
 このプロジェクトは、実装面、特にオブジェクトと画面・テーブル・JSONデータとのマッピングのやり方を中心にしたサンプルアプリケーションです。
 
-##　CCSR手法
+## CCSR手法
 
 CCSR手法は、ソフトウェアのもっとも重要な品質は発展性であるという考え方に基づく開発手法です。  
 
@@ -45,8 +45,8 @@ Javaを使ったアプリケーション開発の経験者を対象に、Spring 
 
 ### アーキテクチャ
 レイヤ構造は **三層＋ドメインロジック** です。
-<details open>
-<summary>application　アプリケーション層</summary>
+<details>
+<summary>```application```　アプリケーション層</summary>
  <ul>
  <li>coordinator ← 複合サービス</li>
  <li>repository ← リポジトリ</li>
@@ -54,7 +54,7 @@ Javaを使ったアプリケーション開発の経験者を対象に、Spring 
  </ul>
 </details>
 <details>
- <summary>domain ドメインロジック</summary>
+ <summary>```domain``` ドメインロジック</summary>
  <ul>
  <li>identity ← 識別情報</li>
  <li>model ← ドメインモデル</li>
@@ -62,14 +62,14 @@ Javaを使ったアプリケーション開発の経験者を対象に、Spring 
  </ul>
 </details>
 <details>
- <summary>infrastructure インフラストラクチャ層</summary>
+ <summary>```infrastructure``` インフラストラクチャ層</summary>
  <ul>
  <li>datasource ← データソース</li>
  <li>transfer ← 通信</li>
  </ul>
 </details>
 <details>
- <summary>presentation プレゼンテーション層</summary>
+ <summary>```presentation``` プレゼンテーション層</summary>
  <ul>
  <li>api ← API</li>
  <li>web ← 画面</li>
