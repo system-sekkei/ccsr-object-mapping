@@ -39,14 +39,14 @@ Javaを使ったアプリケーション開発の経験者を対象に、Spring 
 
 以下の３つのマッピング技術の実装例です。
 
-* オブジェクト ⇔　HTML
+* オブジェクト ⇔ HTML
 * オブジェクト ⇔ JSON
 * オブジェクト ⇔ SQL(テーブル)
 
 ### アーキテクチャ
 レイヤ構造は **三層＋ドメインロジック** です。
 <details>
-<summary>```application```　アプリケーション層</summary>
+<summary>```application``` アプリケーション層</summary>
  <ul>
  <li>coordinator ← 複合サービス</li>
  <li>repository ← リポジトリ</li>
@@ -78,9 +78,9 @@ Javaを使ったアプリケーション開発の経験者を対象に、Spring 
   
 ### 要素技術
 
-* 全体　：　Spring Boot , Gradle
-* プレゼンテーション層　：　Spring MVC, Thymeleaf
-* データソース層とデータベース　：　myBatis, flyway, H2Database
+* 全体 ： Spring Boot , Gradle
+* プレゼンテーション層 ： Spring MVC, Thymeleaf
+* データソース層とデータベース ： myBatis, flyway, H2Database
 * ドキュメント生成 ： Jig
 
 詳細はオンラインのドキュメントとソースコードを参考にしてください。
