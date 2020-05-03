@@ -16,7 +16,7 @@ CCSR手法は、ソフトウェアのもっとも重要な品質は発展性で�
 - 要件定義手法として、要件の関係性・その可視化・関係者の合意形成を重視したRDRA手法を使用
 - ソフトウェア仕様を正確に記述する方法として、プログラミング言語(Java)による記述、Jigレポートによる可視化、IDE IntelliJ IDEAを活用
 - アーキテクチャとして三層＋ドメインロジックを採用
-- 実装技術としてSpring MVC, Thymeleaf, myBatisを使用
+- 実装技術としてSpring MVC, Thymeleaf, MyBatisを使用
 
 #### 参考資料
 - 記事：[ソフトウェアのもっとも重要な品質は発展性](https://masuda220.hatenablog.com/entry/2020/04/05/172125) (2020/4/5)
@@ -80,7 +80,7 @@ Javaを使ったアプリケーション開発の経験者を対象に、Spring 
 
 * 全体 ： Spring Boot , Gradle
 * プレゼンテーション層 ： Spring MVC, Thymeleaf
-* データソース層とデータベース ： myBatis, flyway, H2Database
+* データソース層とデータベース ： MyBatis, Flyway, H2 Database Engine
 * ドキュメント生成 ： Jig
 
 詳細はオンラインのドキュメントとソースコードを参考にしてください。
