@@ -1,21 +1,19 @@
 # CCSR オブジェクトマッピング
-
 CCSR(Continuous Concurrent Stepwise Refinement)手法を学ぶための参照プロジェクトの一つです。  
 このプロジェクトは、実装面、特にオブジェクトと画面・テーブル・JSONデータとのマッピングのやり方を中心にしたサンプルアプリケーションです。
 
 ## CCSR手法
-
 CCSR手法は、ソフトウェアのもっとも重要な品質は発展性であるという考え方に基づく開発手法です。  
 
 #### 基本コンセプト
-- 要件定義・仕様化・実装の継ぎ目をなくす
-- ビジネスロジックに焦点を合わせる
-- 型によるモジュール構造を基本にする
+- 要件定義・仕様化・実装の**継ぎ目をなくす**
+- **ビジネスロジック**に焦点を合わせる
+- **型によるモジュール構造**を基本にする
 
 #### CCSR手法の特徴
-- 要件定義手法として、要件の関係性・その可視化・関係者の合意形成を重視したRDRA手法を使用
-- ソフトウェア仕様を正確に記述する方法として、プログラミング言語(Java)による記述、Jigレポートによる可視化、IDE IntelliJ IDEAを活用
-- アーキテクチャとして三層＋ドメインロジックを採用
+- 要件定義手法として、要件の**関係性**・その**可視化**・関係者の**合意形成**を重視したRDRA手法を使用
+- **ソフトウェア仕様を記述**する方法として、プログラミング言語(Java)による記述、Jigレポートによる可視化、IDE IntelliJ IDEAを活用
+- アーキテクチャとして**三層＋ドメインロジック**を採用
 - 実装技術としてSpring MVC, Thymeleaf, MyBatisを使用
 
 #### 参考資料
@@ -36,11 +34,9 @@ Javaを使ったアプリケーション開発の経験者を対象に、Spring 
 マッピングのやり方の参考情報を提供します。
 
 ### オブジェクトとのマッピング技術
-
-以下の３つのマッピング技術の実装例です。
-
-* オブジェクト ⇔ HTML
-* オブジェクト ⇔ JSON
+以下の3領域のマッピングの実装例です。
+* オブジェクト ⇔ HTML(画面)
+* オブジェクト ⇔ JSON(Web API)
 * オブジェクト ⇔ SQL(テーブル)
 
 ### アーキテクチャ
@@ -48,40 +44,39 @@ Javaを使ったアプリケーション開発の経験者を対象に、Spring 
 <details>
 <summary><code>application/</code> アプリケーション層</summary>
  <ul>
- <li><code>coordinator/</code> ← 複合サービス</li>
- <li><code>repository/</code> ← リポジトリ</li>
- <li><code>service/</code> ← 要素サービス</li>
+ <li><code>coordinator/</code> 複合サービス</li>
+ <li><code>repository/</code> リポジトリ定義</li>
+ <li><code>service/</code> 要素サービス</li>
  </ul>
 </details>
 <details>
  <summary><code>domain/</code> ドメインロジック</summary>
  <ul>
- <li><code>identity/</code> ← 識別情報</li>
- <li><code>model/</code> ← モデル</li>
- <li><code>type/</code> ← 基本型</li>
+ <li><code>identity/</code> ← 識別番号</li>
+ <li><code>model/</code> モデル</li>
+ <li><code>type/</code> 基本型</li>
  </ul>
 </details>
 <details>
  <summary><code>infrastructure/</code> インフラストラクチャ層</summary>
  <ul>
  <li><code>_configuration/</code> ← 設定</li>
- <li><code>datasource/</code> ← データソース</li>
- <li><code>transfer/</code> ← 通信</li>
+ <li><code>datasource/</code> データソース</li>
+ <li><code>transfer/</code> 通信</li>
  </ul>
 </details>
 <details>
  <summary><code>presentation/</code> プレゼンテーション層</summary>
  <ul>
- <li><code>api/</code> ← API</li>
- <li><code>web/</code> ← 画面</li>
+ <li><code>api/</code> API RESTコントローラ</li>
+ <li><code>web/</code> 画面コントローラ</li>
  </ul>
 </details>
   
 ### 要素技術
-
 * 全体 ： Spring Boot , Gradle
 * プレゼンテーション層 ： Spring MVC, Thymeleaf
 * データソース層とデータベース ： MyBatis, Flyway, H2 Database Engine
 * ドキュメント生成 ： Jig
 
-詳細はオンラインのドキュメントとソースコードを参考にしてください。
+詳細は、オンラインのドキュメント（```localhost:8080```で表示）とソースコードを参考にしてください。
