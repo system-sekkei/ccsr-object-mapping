@@ -46,33 +46,34 @@ Javaを使ったアプリケーション開発の経験者を対象に、Spring 
 ### アーキテクチャ
 レイヤ構造は **三層＋ドメインロジック** です。
 <details>
-<summary><code>application</code> アプリケーション層</summary>
+<summary><code>application/</code> アプリケーション層</summary>
  <ul>
- <li>coordinator ← 複合サービス</li>
- <li>repository ← リポジトリ</li>
- <li>service ← サービス</li>
+ <li><code>coordinator/</code> ← 複合サービス</li>
+ <li><code>repository/</code> ← リポジトリ</li>
+ <li><code>service/</code> ← 要素サービス</li>
  </ul>
 </details>
 <details>
- <summary><code>domain</code> ドメインロジック</summary>
+ <summary><code>domain/</code> ドメインロジック</summary>
  <ul>
- <li>identity ← 識別情報</li>
- <li>model ← ドメインモデル</li>
- <li>type ← 基本型</li>
+ <li><code>identity/</code> ← 識別情報</li>
+ <li><code>model/</code> ← モデル</li>
+ <li><code>type/</code> ← 基本型</li>
  </ul>
 </details>
 <details>
- <summary><code>infrastructure</code> インフラストラクチャ層</summary>
+ <summary><code>infrastructure/</code> インフラストラクチャ層</summary>
  <ul>
- <li>datasource ← データソース</li>
- <li>transfer ← 通信</li>
+ <li><code>_configuration/</code> ← 設定</li>
+ <li><code>datasource/</code> ← データソース</li>
+ <li><code>transfer/</code> ← 通信</li>
  </ul>
 </details>
 <details>
- <summary><code>presentation</code> プレゼンテーション層</summary>
+ <summary><code>presentation/</code> プレゼンテーション層</summary>
  <ul>
- <li>api ← API</li>
- <li>web ← 画面</li>
+ <li><code>api/</code> ← API</li>
+ <li><code>web/</code> ← 画面</li>
  </ul>
 </details>
   
