@@ -1,6 +1,5 @@
 package example.infrastructure.datasource.kit.kit;
 
-import example.domain.identity.KitNumber;
 import example.domain.model.kit.StarterKit;
 import org.apache.ibatis.annotations.Mapper;
 
