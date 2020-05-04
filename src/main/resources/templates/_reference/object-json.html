@@ -200,7 +200,7 @@ public class VarietyController {
         return varietyService.listAll();
     }
 
-    <mark>@PostMapping</mark>
+    <mark>@PostMapping("")</mark>
     VarietyNumber register(<mark>@RequestBody</mark> <mark>@Validated</mark> VarietyName varietyName,
                            BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
