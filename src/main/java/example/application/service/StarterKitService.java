@@ -1,8 +1,6 @@
 package example.application.service;
 
 import example.application.repository.StarterKitRepository;
-import example.domain.identity.KitNumber;
-import example.domain.model.kit.StarterKit;
 import example.domain.model.kit.StarterKitList;
 import org.springframework.stereotype.Service;
 

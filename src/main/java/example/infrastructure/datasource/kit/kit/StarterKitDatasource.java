@@ -1,10 +1,9 @@
 package example.infrastructure.datasource.kit.kit;
 
 import example.application.repository.StarterKitRepository;
-import example.domain.identity.KitNumber;
-import example.domain.model.kit.specification.Specification;
 import example.domain.model.kit.StarterKit;
 import example.domain.model.kit.StarterKitList;
+import example.domain.model.kit.specification.Specification;
 import example.infrastructure.datasource.kit.feature.FeatureMapper;
 import example.infrastructure.datasource.kit.row.RowMapper;
 import org.springframework.stereotype.Repository;

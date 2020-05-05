@@ -14,7 +14,7 @@ public class Application {
     }
 
     @Bean
-    public ObjectMapper customeObjectMapper() {
+    public ObjectMapper customObjectMapper() {
         return CustomObjectMapper.create();
     }
 
