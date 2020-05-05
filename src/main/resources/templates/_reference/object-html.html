@@ -269,13 +269,16 @@ void allVarieties(Model model) {
 </details>
 <h3 id="http-response">HTTPレスポンスの生成</h3>
 <p>
-  <code>return "variety/listAndForm</code>で、HTTPレスポンスを、HTMLテンプレートファイル<code>listAndForm.html</code>を使って生成します。<br />
-  テンプレートファイルの中では、modelオブジェクトに追加したハーブ品種の一覧を<code>${allVarieties}</code>、登録フォームの初期値を<code>${variety}</code>で参照しています。
+  <code>return "variety/listAndForm</code>は、HTMLテンプレートファイル
+  <code>variety/listAndForm.html</code>を使ったHTTPレスポンスの生成を指示します。
 </p>
 <p>
   HTMLテンプレートファイルは<code>/resource/templates</code>以下に配置します。<br />
-  テンプレートファイルを指定する文字列<code>"variety/listAndForm"</code>では、先頭に<code>"/"</code>を記述しません。<br />
+  テンプレートファイルを指定する文字列<code>"variety/listAndForm"</code>では、先頭に<code>"/"</code>を<strong>記述しません。</strong><br />
   ファイルの拡張子<code>.html</code>も記述しません。<br />
+</p>
+<p>
+  テンプレートファイル内ではmodelオブジェクトに追加したハーブ品種の一覧を<code>${allVarieties}</code>で、登録フォームの初期値を<code>${variety}</code>で参照しています。
 </p>
 <details>
   <summary><em>HTMLテンプレートのソースコード</em></summary>

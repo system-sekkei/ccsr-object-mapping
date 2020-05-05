@@ -32,6 +32,8 @@ public class SwaggerConfig {
                 ;
     }
 
+    // 総称型配列の無検査作成警告が発生するため、抑制
+    @SuppressWarnings("unchecked")
     private Predicate<String> patterns() {
         return or(
                 regex("/api.*")
