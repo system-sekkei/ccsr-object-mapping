@@ -12,7 +12,7 @@ description = 'mapping sample'
 
 sourceCompatibility = '1.8'
 
-//　myBatisのMapper.xmlを、Mapper.javaと同じディレクトリに置く
+//　MyBatisのMapper.xmlを、Mapper.javaと同じディレクトリに置く
 sourceSets {
     main {
         resources.srcDirs = ["src/main/java", "src/main/resources"]

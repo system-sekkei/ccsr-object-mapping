@@ -49,15 +49,15 @@ CREATE TABLE 商品.品種
 <hr>
 <h2>基本的な仕組み</h2>
 <p>
-  このサンプルではマッピングの仕組みとしてmyBatis SQL Mapperを使っています。<br />
-  myBatis SQL Mapperは、オブジェクトとSQLとのマッピングを明示的に行う、比較的軽量の永続化フレームワークです。
+  このサンプルではマッピングの仕組みとしてMyBatis SQL Mapperを使っています。<br />
+  MyBatis SQL Mapperは、オブジェクトとSQLとのマッピングを明示的に行う、比較的軽量の永続化フレームワークです。
 </p>
 <h2>依存ライブラリ</h2>
 <p>
   必要なライブりをbuild.gradleに指定します。
 </p>
 <ul>
-  <li>永続化フレームワークとしてmyBatis SQL Mapperを使います</li>
+  <li>永続化フレームワークとしてMyBatis SQL Mapperを使います</li>
   <li>データベースはインメモリのH2 Databaseを使います</li>
   <li>データベースマイグレーションツールとしてFlywayを使います</li>
 </ul>
@@ -74,16 +74,16 @@ dependencies {
   </pre>
 </details>
 <h2>設定</h2>
-<h3>myBatis</h3>
+<h3>MyBatis</h3>
 <details>
   <summary>SQL Mapファイルの検索パスの設定</summary>
   <p>
-    myBatisのSQL Mapper定義ファイルを、<code>/src/main/java</code>以下に配置可能にします。
+    MyBatisのSQL Mapper定義ファイルを、<code>/src/main/java</code>以下に配置可能にします。
   </p>
   <h4>build.gradleの記述</h4>
   <pre>
     <code>
-  //　myBatisのXxxMapper.xmlを、XxxMapper.javaと同じディレクトリに配置
+  //　MyBatisのXxxMapper.xmlを、XxxMapper.javaと同じディレクトリに配置
   sourceSets {
     main {
         resources.srcDirs = ["src/main/java", "src/main/resources"]
@@ -218,7 +218,7 @@ public class VarietyDatasource <mark>implements VarietyRepository</mark> {
 </p>
 <h3>ドキュメントタイプ宣言</h3>
 <p>
-  myBatis Mapperの書式を使うことを宣言します。<br />
+  MyBatis Mapperの書式を使うことを宣言します。<br />
   3行目と4行目は<code>&lt;!ENTITY 別名 "クラスへの完全パス"&gt;</code>の形式で、長いパス名の別名を定義しています。<br />
   この別名の宣言は任意です。別名の参照<code>&amp;別名;</code>ではなく、該当個所にパス名をそのまま記述してもかまいません。
 </p>
@@ -261,7 +261,7 @@ public class VarietyDatasource <mark>implements VarietyRepository</mark> {
 <p>
   select要素のresultType属性は、SELECTの結果をマッピングするオブジェクトの型(クラス名)を指定します。<br />
   SELECT文は多くの場合、複数行を返しますが、resultTypeには、コレクション型ではなくコレクションが持つ「要素」の型を指定します。<br />
-  コレクションは、myBatisが、Java Mapperインタフェース宣言のメソッドの返す型をもとに自動的に生成します。
+  コレクションは、MyBatisが、Java Mapperインタフェース宣言のメソッドの返す型をもとに自動的に生成します。
 </p>
 <p>
   AS句で、マッピング先のフィールドを記述します。<br/>
@@ -285,7 +285,7 @@ public class VarietyDatasource <mark>implements VarietyRepository</mark> {
 </pre>
 <p>
   VALUES句の<code>#{varietyNumber.value}</code>と<code>#{varietyName.value}</code>は、バインド変数です。<br />
-  JavaのMapperインタフェース宣言で指定した引数オブジェクトへの参照です。myBatisのバインド変数の記法はOGNLという標準的な記法に準拠しています。
+  JavaのMapperインタフェース宣言で指定した引数オブジェクトへの参照です。MyBatisのバインド変数の記法はOGNLという標準的な記法に準拠しています。
 </p>
 <p>
   バインド変数の記号<code>#</code>に注意してください。<code>$</code>ではなく<code>#</code>です。<br />
@@ -311,8 +311,8 @@ public interface VarietyMapper {
 </code>
 </pre>
 <p>
-  <code>@Mapper</code>アノテーションを使って、myBatisのSQL Mapperインタフェースであることを宣言します。<br />
-  このインタフェースの実体となるオブジェクトは、<mark>myBatisが実行時に自動生成</mark>します。<br />
+  <code>@Mapper</code>アノテーションを使って、MyBatisのSQL Mapperインタフェースであることを宣言します。<br />
+  このインタフェースの実体となるオブジェクトは、<mark>MyBatisが実行時に自動生成</mark>します。<br />
   アプリケーション開発が実装クラスを記述する必要はありません。
 </p>
 <p>
@@ -383,7 +383,7 @@ public class VarietyDatasource <mark>implements VarietyRepository</mark> {
   VarietyMapperインタフェースのオブジェクトのコンストラクタによるインジェクション(autowiring)を宣言します。<br />
   <code>@SuppressWarnings</code>は、autowiringすべき実装クラスの定義が見つからないというエラーを抑止します。<br />
   「SQL Mapperのインタフェース宣言」で説明したように、<code>interface VarietyMapper</code>の実装クラスは、
-  myBatisが実行時に自動生成します。
+  MyBatisが実行時に自動生成します。
 </p>
 <pre>
   <code>
