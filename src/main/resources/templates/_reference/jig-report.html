@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Jig</title>
+  <title>JIG</title>
   <link th:replace="_fragments/head :: css-light">
 </head>
 <body>
@@ -11,14 +11,14 @@
     <a target="top" th:href="@{/}">トップに戻る</a>
     | <a target="application" th:href="@{/references/application}">アプリケーションの紹介</a>
     | <a target="object-mapping" th:href="@{/references/object-mapping}">オブジェクトマッピングの概要</a>
-    | <a target="_self" th:href="@{/references/jig-report}">Jigドキュメント</a>
+    | <a target="_self" th:href="@{/references/jig-report}">JIGドキュメント</a>
   </nav>
 </header>
 
-<h1>Jigドキュメント</h1>
+<h1>JIGドキュメント</h1>
 <p>
   このサンプルアプリケーションには、ソースコードからさまざまな設計ドキュメントを自動生成できる、
-  Jigレポート機能をGradleプラグインとして組み込んであります。<br />
+  JIGレポート機能をGradleプラグインとして組み込んであります。<br />
   Gradleタスク<code>jigReports</code>を実行すると、
   <code>build/jig</code>ディレクトリに各種のドキュメントが生成されます。
 </p>
@@ -27,8 +27,8 @@
   以下に主なダイアグラムを紹介します。
 </p>
 <p>
-  Jigの詳細は
-  <a target="jig-repository" href="https://github.com/dddjava/jig">GitHubのJigリポジトリ</a>
+  JIGの詳細は
+  <a target="jig-repository" href="https://github.com/dddjava/jig">GitHubのJIGリポジトリ</a>
   をご覧ください。
 </p>
 <hr>
@@ -148,7 +148,7 @@
 </p>
 <object data="/diagram/use-case-and-fellows.svg"></object>
 <hr>
-<h2>Jigを活用するためのコードの書き方</h2>
+<h2>JIGを活用するためのコードの書き方</h2>
 <h3>クラス・メソッド・パッケージの日本語の別名</h3>
 <p>
   日本語の別名は、JavaDoc形式のコメントに記述します。<br />
