@@ -8,8 +8,9 @@
 <body>
 <header>
   <nav>
-    <a target="top" th:href="@{/}">トップに戻る</a>
-    | <a target="_self" th:href="@{/references/application}">アプリケーションの紹介</a>
+    <a target="_self" th:href="@{/}">トップに戻る</a>
+    | <a target="application" th:href="@{/references/application}">アプリケーションの紹介</a>
+    | <a target="architecture" th:href="@{/references/architecture}">アーキテクチャの概要</a>
     | <a target="object-mapping" th:href="@{/references/object-mapping}">オブジェクトマッピングの概要</a>
     | <a target="jig-report" th:href="@{/references/jig-report}">JIGドキュメント</a>
   </nav>
@@ -17,13 +18,18 @@
 <h1>ハーブ栽培キット管理アプリケーション</h1>
 <h2>アプリケーションの紹介</h2>
 <p>
-  このアプリケーションの概要説明です。<br />
-  アプリケーションの目的、ドメインモデルのクラス構成、画面のイメージ、データモデルの概要を紹介します。<br />
+  このアプリケーションの概要説明です。
+</p>
+  <h4>アプリケーションの目的、ドメインモデル、画面イメージ、データモデル</h4>
   <strong>
-    ⇒ <a target="application" th:href="@{/references/application}">アプリケーションの紹介</a>
+   ⇒ <a target="application" th:href="@{/references/application}">アプリケーションの紹介</a>
   </strong>
-  </p>
-<h2>オブジェクトマッピングの概要</h2>
+  <br />
+  <h4>レイヤ構造、使っているフレームワーク、設計ガイドライン</h4>
+<strong>
+   ⇒ <a target="architecture" th:href="@{/references/architecture}">技術方式と設計ガイドライン</a>
+</strong>
+<h2>オブジェクトマッピング</h2>
 <p>
   このアプリケーションはドメイン層のオブジェクトと画面・テーブル・JSONとのマッピングのやり方の学習用に作成しました。<br />
 <strong>
