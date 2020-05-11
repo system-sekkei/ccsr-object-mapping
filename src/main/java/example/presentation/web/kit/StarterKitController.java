@@ -6,7 +6,7 @@ import example.application.service.VarietyService;
 import example.domain.model.kit.StarterKit;
 import example.domain.model.kit.StarterKitList;
 import example.domain.model.kit.feature.Feature;
-import example.domain.model.kit.row.Variety;
+import example.domain.model.kit.row.Varieties;
 import example.domain.model.kit.row.validation.AddRow;
 import example.domain.model.kit.row.validation.RemoveRow;
 import example.domain.model.kit.specification.Specification;
@@ -18,10 +18,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 /**
- * ハーブ栽培キットの管理画面
+ * ハーブ栽培キット管理画面
  */
 @Controller
 @RequestMapping("/kits")
@@ -52,7 +50,7 @@ public class StarterKitController {
     }
 
     @ModelAttribute("allVarieties")
-    List<Variety> allVarieties() {
+    Varieties allVarieties() {
         return varietyService.listAll();
     }
 
@@ -61,12 +59,12 @@ public class StarterKitController {
      * @param specification
      * @return
      */
-    @GetMapping("")
+    @GetMapping
     String listAll(@ModelAttribute("specification") Specification specification) {
         return "kit/listAndForm";
     }
 
-    @PostMapping(value = "", params = "save")
+    @PostMapping(params = "save")
     String register(@ModelAttribute("specification") @Validated Specification specification,
                     BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -78,7 +76,7 @@ public class StarterKitController {
         return "redirect:/kits";
     }
 
-    @PostMapping(value = "", params = "addRow")
+    @PostMapping(params = "addRow")
     String addRow(@ModelAttribute("specification") @Validated(AddRow.class) Specification specification,
                   BindingResult bindingResult,
                   Model model) {

@@ -47,6 +47,3 @@ test {
 
 [compileJava, processResources]*.shouldRunAfter(clean)
 jigReports.dependsOn(clean, classes)
-
-//def defaultEncoding = 'UTF-8'
-//tasks.withType(org.springframework.boot.gradle.tasks.run.BootRun) { defaultCharacterEncoding = defaultEncoding }

@@ -1,7 +1,5 @@
 package example.domain.model.kit.row;
 
-import example.domain.identity.VarietyNumber;
-
 import javax.validation.Valid;
 
 /**

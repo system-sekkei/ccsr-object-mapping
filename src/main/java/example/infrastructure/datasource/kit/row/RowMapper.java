@@ -1,6 +1,6 @@
 package example.infrastructure.datasource.kit.row;
 
-import example.domain.identity.KitNumber;
+import example.domain.model.kit.KitNumber;
 import example.domain.model.kit.row.Row;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;

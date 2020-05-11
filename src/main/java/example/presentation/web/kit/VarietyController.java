@@ -2,6 +2,7 @@ package example.presentation.web.kit;
 
 import example.application.service.VarietyRegisterService;
 import example.application.service.VarietyService;
+import example.domain.model.kit.row.Varieties;
 import example.domain.model.kit.row.Variety;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -9,12 +10,10 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 /**
  * ハーブ品種の管理画面
  */
-@Controller("ハーブ品種の管理画面")
+@Controller("ハーブ品種管理画面")
 @RequestMapping("/varieties")
 public class VarietyController {
 
@@ -28,16 +27,16 @@ public class VarietyController {
     }
 
     @ModelAttribute("allVarieties")
-    List<Variety> allVarieties() {
+    Varieties allVarieties() {
         return varietyService.listAll();
     }
 
-    @GetMapping("")
+    @GetMapping
     public String list(@ModelAttribute("variety") Variety variety) {
         return "variety/listAndForm";
     }
 
-    @PostMapping("")
+    @PostMapping
     public String register(
             @ModelAttribute("variety") @Validated Variety variety,
             BindingResult bindingResult) {

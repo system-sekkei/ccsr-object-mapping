@@ -21,7 +21,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="each : ${allVarieties}">
+    <tr th:each="each : ${allVarieties.asList()}">
         <td th:text="${each.show()}"></td>
     </tr>
     </tbody>
@@ -34,7 +34,7 @@
         <mark><span th:text="${#fields.allErrors()}"></span></mark>
     </block>
     <fieldset>
-        <!--/*@thymesVar id="varietyNumber" type="example.domain.identity.VarietyNumber"*/-->
+        <!--/*@thymesVar id="varietyNumber" type="example.domain.model.kit.row.VarietyNumber"*/-->
         <p>
             <label th:for="varietyNumber.value">ハーブの品種番号</label>
             <input type="text" disabled="disabled" th:field="*{varietyNumber.value}">

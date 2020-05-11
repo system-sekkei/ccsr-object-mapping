@@ -2,19 +2,17 @@ package example.presentation.api.kit;
 
 import example.application.service.VarietyRegisterService;
 import example.application.service.VarietyService;
-import example.domain.identity.VarietyNumber;
+import example.domain.model.kit.row.Varieties;
 import example.domain.model.kit.row.Variety;
 import example.domain.model.kit.row.VarietyName;
-import org.springframework.validation.BindingResult;
+import example.domain.model.kit.row.VarietyNumber;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * API ハーブ品種
  */
-@RestController("APIハーブの品種")
+@RestController("ハーブ品種API")
 @RequestMapping("/api/varieties")
 public class VarietyController {
     VarietyService varietyService;
@@ -25,17 +23,13 @@ public class VarietyController {
         this.varietyRegisterService = varietyRegisterService;
     }
 
-    @GetMapping("")
-    List<Variety> listAll() {
+    @GetMapping
+    Varieties listAll() {
         return varietyService.listAll();
     }
 
-    @PostMapping("")
-    VarietyNumber register(@RequestBody @Validated VarietyName varietyName,
-                           BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            throw new IllegalArgumentException(bindingResult.toString());
-        }
+    @PostMapping
+    VarietyNumber register(@RequestBody @Validated VarietyName varietyName) {
         Variety variety = Variety.from(varietyName);
         varietyRegisterService.register(variety);
         return variety.number();

@@ -66,6 +66,7 @@ th:text属性に変数式 ${...}で、Modelに追加したattribute名を参照�
         <fieldset>
             <p>
             <label th:for="dateOfSeed.value">種を植えた日</label>
+            <!--/*@thymesVar id="dateOfSeed" type="example.domain.model.kit.specification.DateOfSeed"*/-->
             <input type="date" th:field="*{dateOfSeed.value}">
             <mark><span th:errors="*{dateOfSeed.value}"></span></mark>
             </p>
@@ -132,8 +133,9 @@ th:text属性に変数式 ${...}で、Modelに追加したattribute名を参照�
                 <tr th:each="eachRow,iterationStatus : ${specification.rows()}">
                     <td th:text="${iterationStatus.count}">1</td>
                     <td>
+                        <!--/*@thymesVar id="list" type="java.util.List<example.domain.model.kit.row.Row>"*/-->
                         <select th:field="*{rows.list[__${iterationStatus.index}__].variety.varietyNumber.value}">
-                            <option th:each="eachVariety : ${allVarieties}"
+                            <option th:each="eachVariety : ${allVarieties.asList()}"
                                     th:value="${eachVariety.number()}"
                                     th:text="${eachVariety.show()}">Thymus Thymi</option>
                         </select>

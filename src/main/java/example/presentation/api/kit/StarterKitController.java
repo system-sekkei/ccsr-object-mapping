@@ -2,7 +2,7 @@ package example.presentation.api.kit;
 
 import example.application.service.StarterKitRegisterService;
 import example.application.service.StarterKitService;
-import example.domain.identity.KitNumber;
+import example.domain.model.kit.KitNumber;
 import example.domain.model.kit.StarterKit;
 import example.domain.model.kit.StarterKitList;
 import example.domain.model.kit.specification.Specification;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 /**
  * API ハーブ栽培キット
  */
-@RestController("APIハーブ栽培キット")
+@RestController("ハーブ栽培キットAPI")
 @RequestMapping("/api/starterkits")
 public class StarterKitController {
 
@@ -31,12 +31,7 @@ public class StarterKitController {
     }
 
     @PostMapping
-    KitNumber register(@RequestBody @Validated Specification specification,
-                       BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            throw new IllegalArgumentException(bindingResult.toString());
-        }
-
+    KitNumber register(@RequestBody @Validated Specification specification) {
         StarterKit starterKit = StarterKit.from(specification);
         registerService.register(starterKit);
         return starterKit.kitNumber();

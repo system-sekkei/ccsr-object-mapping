@@ -1,6 +1,5 @@
 package example.domain.model.kit;
 
-import example.domain.identity.KitNumber;
 import example.domain.model.kit.specification.Specification;
 
 /**

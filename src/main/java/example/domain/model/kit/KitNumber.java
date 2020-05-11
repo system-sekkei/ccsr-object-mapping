@@ -1,4 +1,6 @@
-package example.domain.identity;
+package example.domain.model.kit;
+
+import example.domain.type.Identity;
 
 /**
  * 栽培キット番号
@@ -19,6 +21,7 @@ public class KitNumber {
 
     static String format = "KN-%s-%s";
     public static KitNumber numbering() {
-        return new KitNumber(IdentityGenerator.generate(format));
+        String result = new Identity(format).generate();
+        return new KitNumber(result);
     }
 }
