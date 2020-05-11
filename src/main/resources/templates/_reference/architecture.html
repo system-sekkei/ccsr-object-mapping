@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>アーキテクチャ</title>
+  <title>技術方式と設計ガイドライン</title>
   <link th:replace="_fragments/head :: css-light">
 </head>
 <body>
@@ -10,19 +10,27 @@
   <nav>
     <a target="top" th:href="@{/}">トップに戻る</a>
     | <a target="application" th:href="@{/references/application}">アプリケーションの紹介</a>
-    | <a target="_self" th:href="@{/references/architecture}">アーキテクチャの概要</a>
+    | <a target="_self" th:href="@{/references/architecture}">技術方式と設計ガイドライン</a>
     | <a target="object-mapping" th:href="@{/references/object-mapping}">オブジェクトマッピングの概要</a>
     | <a target="jig-report" th:href="@{/references/jig-report}">JIGドキュメント</a>
   </nav>
 </header>
 
-<h1>アーキテクチャの概要</h1>
+<h1>技術方式と設計ガイドライン</h1>
 
-<h2>三層＋ドメインロジック</h2>
+<h2>レイヤ構造：三層＋ドメインロジック</h2>
 <p>
   ビジネスロジックとドメインロジックを同じ意味で使っています。
 </p>
 <h2>使っているフレームワークと参考資料</h2>
+<p>
+  使用している要素技術は以下の通りです。
+</p>
+<ul>
+  <li>画面：Spring MVC (WebDataBinder), Thymeleaf</li>
+  <li>データベース：MyBatis SQL Mapper, H2 Database, Flyway</li>
+  <li>JSON(API)：Spring MVC (Jackson ObjectMapper), Swagger-UI</li>
+</ul>
 <h2>ドメインオブジェクトの設計ガイドライン</h2>
 <p>
   <a href="#">ページの先頭に戻る</a>

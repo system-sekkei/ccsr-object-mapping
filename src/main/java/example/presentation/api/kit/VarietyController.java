@@ -9,6 +9,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * API ハーブ品種
  */
@@ -24,7 +26,7 @@ public class VarietyController {
     }
 
     @GetMapping("")
-    Variety[] listAll() {
+    List<Variety> listAll() {
         return varietyService.listAll();
     }
 

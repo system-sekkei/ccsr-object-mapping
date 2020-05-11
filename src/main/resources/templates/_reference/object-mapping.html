@@ -10,7 +10,7 @@
   <nav>
     <a target="top" th:href="@{/}">トップに戻る</a>
     | <a target="application" th:href="@{/references/application}">アプリケーションの紹介</a>
-    | <a target="architecture" th:href="@{/references/architecture}">アーキテクチャの概要</a>
+    | <a target="architecture" th:href="@{/references/architecture}">技術方式と設計ガイドライン</a>
     | <a target="_self" th:href="@{/references/object-mapping}">オブジェクトマッピングの概要</a>
     | <a target="jig-report" th:href="@{/references/jig-report}">JIGドキュメント</a>
   </nav>
@@ -45,6 +45,26 @@ public class Variety {
   <li>テーブル ⇒ <a target="object-sql" th:href="@{/references/object-sql}">オブジェクト ⇔ SQLのマッピング</a></li>
   <li>JSON ⇒ <a target="object-json" th:href="@{/references/object-json}">オブジェクト ⇔ JSONのマッピング</a></li>
 </ul>
+<h2>ドメインオブジェクトと外部形式のマッピング</h2>
+<p>
+  ドメインオブジェクトは、ビジネスロジックの置き場所として、またビジネスの関心事をソースコードで
+  表現するために設計します。<br />
+  外部形式とのマッピングは、ドメインオブジェクト設計の主たる関心事ではありません。
+</p>
+<p>
+  一方、ドメインオブジェクトと画面・データベース・JSONなどの外部データ形式とのマッピングは、
+  アプリケーション全体を完成させるためには重要な構成要素です。
+</p>
+<p>
+  オブジェクトと外部データ形式のマッピングは、フレームワークによって簡単にできるようになりました。
+  その反面、ドメインオブジェクトの設計が、フレームワーク側の要求や制約に歪められる危険があります。<br />
+  ドメインオブジェクトの設計を、フレームワークの制約からできるだけ隔離すべきです。
+</p>
+<h2>フレームワークの要求・制約</h2>
+<p>
+  JavaBeans、プロパティの getter/setterメソッドを使う。
+  この方法は、カプセル化違反であり、ビジネスロジックの置き場所として設計方針に反します。
+</p>
 <h2>ダイレクトフィールドアクセス</h2>
 <p>
   どのマッピングも<strong>ダイレクトフィールドアクセス</strong>という方式を使っています。<br />

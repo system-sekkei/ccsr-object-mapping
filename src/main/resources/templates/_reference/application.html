@@ -10,7 +10,7 @@
   <nav>
     <a target="top" th:href="@{/}">トップに戻る</a>
     | <a target="_self" th:href="@{/references/application}">アプリケーションの紹介</a>
-    | <a target="architecture" th:href="@{/references/architecture}">アーキテクチャの概要</a>
+    | <a target="architecture" th:href="@{/references/architecture}">技術方式と設計ガイドライン</a>
     | <a target="object-mapping" th:href="@{/references/object-mapping}">オブジェクトマッピングの概要</a>
     | <a target="jig-report" th:href="@{/references/jig-report}">JIGドキュメント</a>
   </nav>
@@ -24,20 +24,16 @@
   </a>
   に登場するアプリケーションを元にしています。
 </p>
+<h2>アプリケーションの目的</h2>
 <p>
-  このアプリケーションとドキュメントはオブジェクトと画面、オブジェクトとデータベース、オブジェクトとJSONデータをマッピングするやり方の学習用に作成しました。
+  このアプリケーションはオブジェクトと画面、オブジェクトとデータベース、オブジェクトとJSONデータをマッピングするやり方の学習用に作成しました。
 </p>
-<p>
-  使用している要素技術は以下の通りです。
-</p>
-<ul>
-  <li>画面：Spring MVC (WebDataBinder), Thymeleaf</li>
-  <li>データベース：MyBatis SQL Mapper, H2 Database, Flyway</li>
-  <li>JSON(API)：Spring MVC (Jackson ObjectMapper), Swagger-UI</li>
-</ul>
+
 <h2>ドメインモデル</h2>
 <p>
-  ハーブの栽培キットを表現するドメインモデルです。
+  ハーブの栽培キットを表現するドメインモデルです。<br />
+  このモデルのオブジェクトを、画面・データベース・JSONと双方向でマッピングする方法の説明が、
+  このアプリケーションの目的です。
 </p>
 <object data="/diagram/business-rule-relation.svg"></object>
 <h2>画面</h2>

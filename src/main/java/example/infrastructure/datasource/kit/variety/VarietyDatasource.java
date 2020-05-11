@@ -4,6 +4,8 @@ import example.application.repository.VarietyRepository;
 import example.domain.model.kit.row.Variety;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class VarietyDatasource implements VarietyRepository {
 
@@ -15,7 +17,7 @@ public class VarietyDatasource implements VarietyRepository {
     }
 
     @Override
-    public Variety[] listAll() {
+    public List<Variety> listAll() {
         return varietyMapper.listAll();
     }
 

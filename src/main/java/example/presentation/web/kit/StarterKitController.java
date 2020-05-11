@@ -18,6 +18,8 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * ハーブ栽培キットの管理画面
  */
@@ -50,7 +52,7 @@ public class StarterKitController {
     }
 
     @ModelAttribute("allVarieties")
-    Variety[] allVarieties() {
+    List<Variety> allVarieties() {
         return varietyService.listAll();
     }
 
