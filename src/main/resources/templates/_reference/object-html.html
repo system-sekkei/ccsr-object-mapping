@@ -44,7 +44,7 @@ public class Variety {
 </p>
 <pre>
   <code>
-    &lt;p th:text="${product}"&gt;商品の説明&lt;p&gt;
+    &lt;p <mark>th:text="${product}"</mark>&gt;商品の説明&lt;/p&gt;
   </code>
 </pre>
 <p>
@@ -86,7 +86,7 @@ dependencies {
 <p>
   HTTPリクエストをオブジェクトにバインドする方式として<strong>ダイレクトフィールドアクセス</strong>を指定します。<br />
   対象クラスのフィールドに直接バインドするので、getter/setterメソッドを書く必要がありません。<br />
-  ドメイン層のクラスの記述をシンプルにできます。
+  ドメイン層のクラスの記述をビジネスロジックの関心事だけに集中できます。
 </p>
   <pre>
     <code>
@@ -143,14 +143,13 @@ public class VarietyController {
     VarietyService varietyService;
     VarietyRegisterService varietyRegisterService;
 
-    // コンストラクタでインジェクション @Autowiredは記述不要
     public VarietyController(VarietyService varietyService, VarietyRegisterService varietyRegisterService) {
         this.varietyService = varietyService;
         this.varietyRegisterService = varietyRegisterService;
     }
 
     <mark>@ModelAttribute("allVarieties")</mark>
-    Variety[] allVarieties() {
+    Varieties allVarieties() {
         return varietyService.listAll();
     }
 
@@ -208,32 +207,17 @@ public class VarietyController {
 <pre>
   <code>
 <mark>@ModelAttribute("allVarieties")</mark>
-Variety[] allVarieties() {
+Varieties allVarieties() {
   return varietyService.listAll();
 }
   </code>
 </pre>
 <p>
-  このコードは、一覧に表示するVarietyの配列を、参照名<code>"allVarieties"</code>でModel型のmodelオブジェクトに登録しています。<br />
-  Varietyの配列は、一覧を表示するHTMLテンプレートの中で、<code>${allVarieties}</code>で参照できます。
+  このコードは、一覧に表示するVarietyのListを内部に持つVarietiesクラスのオブジェクトを、参照名<code>"allVarieties"</code>でModel型のmodelオブジェクトに登録しています。<br />
+  VarietyのListは、一覧を表示するHTMLテンプレートの中で、<code>${allVarieties.asList()}</code>で参照できます。
 </p>
 <p>
   @ModelAttributeを宣言したメソッドは、@GetMappingまたは@PostMappingを宣言したメソッドを呼び出す前に、毎回実行されます。
-</p>
-<p>
-  このメソッドは次のように書いても同じ意味です。
-</p>
-<pre>
-  <code>
-<mark>@ModelAttribute()</mark>
-void allVarieties(Model model) {
-    Variety[] result = varietyService.listAll();
-    model.addAttribute("allVarieties", result);
-}
-  </code>
-</pre>
-<p>
-  Model型のオブジェクトをmodelとして明示的に引数として宣言する書き方です。
 </p>
 <hr>
 <h2>GETリクエストの処理：@GetMapping</h2>
@@ -242,7 +226,7 @@ void allVarieties(Model model) {
 </p>
 <pre>
   <code>
-<mark>@GetMapping("")</mark>
+<mark>@GetMapping</mark>
 public String list(<mark>@ModelAttribute("variety")</mark> Variety variety) {
     return "variety/listAndForm";
 }
@@ -299,7 +283,7 @@ public String list(<mark>@ModelAttribute("variety")</mark> Variety variety) {
     &lt;/tr&gt;
     &lt;/thead&gt;
     &lt;tbody&gt;
-      &lt;tr th:each="each : <mark>${allVarieties}</mark>"&gt;
+      &lt;tr th:each="each : <mark>${allVarieties.asList()}</mark>"&gt;
         &lt;td th:text="${each.show()}"&gt;&lt;/td&gt;
     &lt;/tr&gt;
     &lt;/tbody&gt;
@@ -330,7 +314,7 @@ public String list(<mark>@ModelAttribute("variety")</mark> Variety variety) {
 </details>
 <p>
   このサンプルアプリケーションの画面は最小限のスタイルだけを指定した<code>Water.css</code>で作成しています。<br />
-  <code>Water.css</code>を使った画面の例：<a target="plain-html" th:href="@{/references/plain-html}">シンプルなHTMLを書く</a>
+  <code>Water.css</code>を使った画面の例 ⇒ <a target="plain-html" th:href="@{/references/plain-html}">シンプルなHTMLを書く</a>
 </p>
 <p>
   Thymeleafの詳細は、<a target="thymeleaf-document" href="https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf_ja.html">日本語ドキュメント</a>を参考にしてください。
@@ -342,7 +326,7 @@ public String list(<mark>@ModelAttribute("variety")</mark> Variety variety) {
 </p>
 <pre>
   <code>
-<mark>@PostMapping("")</mark>
+<mark>@PostMapping</mark>
 public String register(
         <mark>@ModelAttribute("variety")</mark> <mark>@Validated</mark> Variety variety,
         BindingResult bindingResult) {
@@ -385,7 +369,7 @@ public class Variety {
   <code>
 public class VarietyName {
 
-    <mark>@NotNull(message = "必須")</mark>
+    <mark>@NotEmpty(message = "必須")</mark>
     <mark>@Size(min=3, message = "{min}字以上")</mark>
     <mark>@Size(max=20, message = "{max}字以内")</mark>
     String value = "";
@@ -430,20 +414,21 @@ public class VarietyName {
 <hr>
 <h2 id="allow-fields">バインドを許可するフィールドを指定する：@InitBinder</h2>
 <p>
-  <a href="#direct-field-access">ダイレクトフィールドアクセス</a>で説明したように基本の設定では、フィールドへのバインドを禁止しています。<br />
-  フィールドへのバインドを許可するのは、各コントローラの責任です。
+  <a href="#direct-field-access">ダイレクトフィールドアクセス</a>で説明したように基本の設定では、
+  フィールドへのバインドを禁止しています。<br />
+  どのフィールドへのバインドを許可するかを指定するのは、各コントローラの責任です。
 </p>
 <pre>
   <code>
-@InitBinder
+<mark>@InitBinder</mark>
 public void initBinder(WebDataBinder binder) {
-    binder.setAllowedFields("varietyName.value");
+    binder.<mark>setAllowedFields</mark>("<mark>varietyName.value</mark>");
 }
   </code>
 </pre>
 <p>
   <code>WebDataBinder#setAllowFields()</code>メソッドを使って、バインドを許可するフィールドを指定します。<br />
-  このメソッドの引数は可変長です。複数のフィールドを記述できます。
+  <code>setAllowFields()</code>メソッドの引数は<strong>可変長</strong>です。複数のフィールドを記述できます。
 </p>
 <p>
   <a href="#">ページの先頭に戻る</a>

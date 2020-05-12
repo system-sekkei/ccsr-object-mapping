@@ -12,17 +12,17 @@
     | <a target="_self" th:href="@{/references/application}">アプリケーションの紹介</a>
     | <a target="architecture" th:href="@{/references/architecture}">技術方式と設計ガイドライン</a>
     | <a target="object-mapping" th:href="@{/references/object-mapping}">オブジェクトマッピングの概要</a>
-    | <a target="jig-report" th:href="@{/references/jig-report}">JIGドキュメント</a>
+    | <a target="jig" th:href="@{/references/jig}">JIGドキュメント</a>
   </nav>
 </header>
 
 <h1>アプリケーションの紹介</h1>
 <p>
-  ハーブ栽培キットの販売会社が、商品を管理する社内アプリケーションです。<br />
+  ハーブ栽培キットの販売会社が、商品を管理するための社内アプリケーションです。<br />
   <a target="Thymeleaf-Spring Document" href="https://www.thymeleaf.org/doc/tutorials/3.0/thymeleafspring.html#spring-thyme-seed-starter-manager">
     Thymeleaf-Springのドキュメント(英語)
   </a>
-  に登場するアプリケーションを元にしています。
+  に登場するアプリケーションを参考にしました。
 </p>
 <h2>アプリケーションの目的</h2>
 <p>
@@ -33,7 +33,9 @@
 <p>
   ハーブの栽培キットを表現するドメインモデルです。<br />
   このモデルのオブジェクトを、画面・データベース・JSONと双方向でマッピングする方法の説明が、
-  このアプリケーションの目的です。
+  このアプリケーションの目的です。<br />
+  本来であれば、ドメインモデルは種をまいた日による出荷タイミングの管理、キットの素材や特徴による価格設定などのビジネスルールを表現すべきですが、
+  このサンプルでは、具体的なビジネスロジックの記述は省略しています。
 </p>
 <object data="/diagram/business-rule-relation.svg"></object>
 <h2>画面</h2>

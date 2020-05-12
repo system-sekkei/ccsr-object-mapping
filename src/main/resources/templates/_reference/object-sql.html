@@ -138,7 +138,7 @@ package example.<mark>application</mark>.repository;
  * ハーブ品種リポジトリ
  */
 public <mark>interface VarietyRepository</mark> {
-    Variety[] listAll() ;
+    Varieties listAll() ;
 
     void register(Variety variety);
 }
@@ -157,7 +157,7 @@ public class VarietyDatasource <mark>implements VarietyRepository</mark> {
     ...
 
     @Override
-    public Variety[] listAll() { ... }
+    public Varieties listAll() { ... }
 
     @Override
     public void register(Variety variety) { ... }
@@ -289,8 +289,8 @@ public class VarietyDatasource <mark>implements VarietyRepository</mark> {
 </p>
 <p>
   バインド変数の記号<code>#</code>に注意してください。<code>$</code>ではなく<code>#</code>です。<br />
-  <code>#</code>で参照した内容は、SQLインジェクションを回避するためにエスケープ処理され実行されます。<br />
-  <code>$</code>は、文字列がそのまま実行されるため危険です。できるだけ使うべきではありません。
+  <code>#{...}</code>で参照した内容は、プリペアドステートメントのパラメータとして設定されます。<br />
+  <code>${...}</code>は、文字列がそのままSQL文の一部として評価されるため、SQLインジェクションなどのセキュリティホールになる可能性があります。できるだけ使うべきではありません。
 </p>
 <hr>
 <h2>SQL Mapperのインタフェース宣言</h2>
@@ -304,7 +304,7 @@ package example.infrastructure.datasource.kit.variety;
 
 <mark>@Mapper</mark>
 public interface VarietyMapper {
-  <mark>Variety[]</mark> <mark>listAll</mark>();
+  <mark>List&lt;Variety&gt;</Variety></mark> <mark>listAll</mark>();
 
   void <mark>register</mark>(<mark>Variety variety</mark>);
 }
@@ -317,7 +317,7 @@ public interface VarietyMapper {
 </p>
 <p>
   listAll()メソッドは、Mapper XMLファイルのselect要素(id="listAll")で記述したSELECTを実行し、
-  ハーブ品種(Variety)オブジェクトの配列を返します。
+  ハーブ品種(Variety)オブジェクトのListを返します。
 </p>
 <p>
   register()メソッドは、ハーブ品種(Variety)オブジェクトをパラメータとして渡して、
@@ -355,8 +355,9 @@ public class VarietyDatasource <mark>implements VarietyRepository</mark> {
     }
 
     @Override
-    public Variety[] listAll() {
-        return <mark>varietyMapper.listAll()</mark>;
+    public Varieties listAll() {
+        List&lt;Variety&gt; result = varietyMapper.listAll();
+        return Varieties.from(result);
     }
 
     @Override
@@ -378,19 +379,19 @@ public class VarietyDatasource <mark>implements VarietyRepository</mark> {
 }
   </code>
 </pre>
-<h3>コンストラクタによるautowiring</h3>
+<h3>インジェクションの警告の抑止</h3>
 <p>
-  VarietyMapperインタフェースのオブジェクトのコンストラクタによるインジェクション(autowiring)を宣言します。<br />
-  <code>@SuppressWarnings</code>は、autowiringすべき実装クラスの定義が見つからないというエラーを抑止します。<br />
-  「SQL Mapperのインタフェース宣言」で説明したように、<code>interface VarietyMapper</code>の実装クラスは、
-  MyBatisが実行時に自動生成します。
+  VarietyMapperフィールドへのインジェクションで警告が発生します。<br />
+  <code>@SuppressWarnings</code>アノテーションを使って、インジェクションする実装クラスの定義が見つからないという警告の表示を抑止します。<br />
+  「SQL Mapperのインタフェース宣言」で説明したように、<code>VarietyMapper</code>インタフェースの実装クラスは、
+  MyBatisが実行時に自動生成するために発生する警告です。
 </p>
 <pre>
   <code>
-  VarietyMapper varietyMapper;
+  <mark>VarietyMapper varietyMapper;</mark>
 
   <mark>@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")</mark>
-  <mark>public VarietyDatasource(VarietyMapper varietyMapper)</mark> {
+  public VarietyDatasource(VarietyMapper varietyMapper) {
       this.varietyMapper = varietyMapper;
   }
   </code>
@@ -398,13 +399,14 @@ public class VarietyDatasource <mark>implements VarietyRepository</mark> {
 <h3>ハーブ品種一覧の取得</h3>
 <p>
   <code>VarietyMapper#listAll()</code>メソッドを使って、
-  データベースからハーブ品種一覧を取り出しVarietyオブジェクトの配列を返します。
+  データベースからハーブ品種一覧を取り出しVarietyオブジェクトのListを持つVarietiesクラスのオブジェクトを返します。
 </p>
 <pre>
   <code>
     @Override
-    public Variety[] listAll() {
-        return <mark>varietyMapper.listAll()</mark>;
+    public Varieties listAll() {
+        List&lt;Variety&gt; result = varietyMapper.listAll();
+        return Varieties.from(result);
     }
   </code>
 </pre>

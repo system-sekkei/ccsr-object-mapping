@@ -109,56 +109,27 @@ dependencies {
   </code>
 </pre>
 </details>
-<h2>ダイレクトフィールドアクセスの設定</h2>
+<h2>フィールドを直接アクセスするための設定</h2>
   <p>
-    オブジェクトとJSONのマッピングでも<strong>ダイレクトフィールドアクセス</strong>を指定します。<br />
-    JSONとのマッピングのためのgetter/setterメソッドを書く必要がなく、ドメイン層のクラスの記述をシンプルにできます。
+    オブジェクトとJSONのマッピングも<strong>フィールドの直接アクセス</strong>で行います。<br />
+    マッピングのためにgetter/setterメソッドを書く必要はありません。<br />
+    ドメイン層のクラスの記述をビジネスロジックの関心事だけに集中できます。
   </p>
   <p>
-    ObjectMapperのカスタム設定をします。<br />
-    ソースコードで強調表示した個所が、ダイレクトフィールドアクセスの設定です。<br />
-    その後の設定は、JSONとLocalDate型のマッピングを行うための設定と、JSONの出力を成形する設定です。
+    ObjectMapperのカスタム設定を、application.propertiesファイルに記述します。
   </p>
+<details open>
+  <summary><em>application.propertiesの記述</em></summary>
   <pre>
     <code>
-package example.infrastructure._configuration;
-
-public class CustomObjectMapper {
-
-    public static ObjectMapper create() {
-        return new ObjectMapper()
-            <mark>.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY)</mark>
-            <mark>.setVisibility(PropertyAccessor.GETTER, JsonAutoDetect.Visibility.NONE)</mark>
-            <mark>.setVisibility(PropertyAccessor.SETTER, JsonAutoDetect.Visibility.NONE)</mark>
-            .registerModule(new JavaTimeModule())
-            .configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
-            .enable(SerializationFeature.INDENT_OUTPUT)
-            ;
-    }
-}
+# Jackson ObjectMapper
+spring.jackson.visibility.field=any
+spring.jackson.visibility.getter=none
+spring.jackson.visibility.setter=none
+spring.jackson.serialization.indent_output=true
     </code>
   </pre>
-  <p>
-  カストマイズしたObjectMapperをアプリケーションに組み込みます。
-  </p>
-  <pre>
-    <code>
-package example;
-
-<mark>@SpringBootApplication</mark>
-public class Application {
-
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
-    }
-
-    <mark>@Bean</mark>
-    public ObjectMapper customObjectMapper() {
-        return CustomObjectMapper.create();
-    }
-}
-    </code>
-  </pre>
+</details>
   <hr>
 <h2>コントローラ</h2>
 <p>HTTPリクエストを受け取り処理するクラスです。</p>
@@ -184,7 +155,7 @@ package example.presentation.api.kit;
 /**
  * API ハーブ品種
  */
-<mark>@RestController("APIハーブの品種")</mark>
+<mark>@RestController("ハーブ品種API")</mark>
 <mark>@RequestMapping("/api/varieties")</mark>
 public class VarietyController {
     VarietyService varietyService;
@@ -195,17 +166,13 @@ public class VarietyController {
         this.varietyRegisterService = varietyRegisterService;
     }
 
-    <mark>@GetMapping("")</mark>
+    <mark>@GetMapping</mark>
     Variety[] listAll() {
         return varietyService.listAll();
     }
 
-    <mark>@PostMapping("")</mark>
-    VarietyNumber register(<mark>@RequestBody</mark> <mark>@Validated</mark> VarietyName varietyName,
-                           BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            throw new IllegalArgumentException(bindingResult.toString());
-        }
+    <mark>@PostMapping</mark>
+    VarietyNumber register(<mark>@RequestBody</mark> <mark>@Validated</mark> VarietyName varietyName) {
         Variety variety = Variety.from(varietyName);
         varietyRegisterService.register(variety);
         return variety.number();
@@ -221,7 +188,7 @@ public class VarietyController {
 <p>このクラスがAPI用のRESTコントローラであることを宣言します。</p>
 <pre>
   <code>
-<mark>@RestController("APIハーブの品種")</mark>
+<mark>@RestController("ハーブ品種API")</mark>
 <mark>@RequestMapping("/api/varieties")</mark>
 public class VarietyController {
     ...
@@ -230,8 +197,8 @@ public class VarietyController {
 </pre>
 <p>
   <code>@RestController</code>は、このクラスがRESTコントローラクラスであることの宣言です。<br />
-  引数でコントローラ名を指定しています。指定しない場合は、クラス名が使われます。
-  画面用のコントローラとクラス名が同じため、引数で固有名を指定しています。<br />
+  引数でコントローラ名を指定しています。指定しない場合は、クラス名が使われます。<br />
+  画面用のコントローラとクラス名が同じため、引数で固有名を指定しています。
 </p>
 <p>
   @RequestMappingは、パラメータ<code>"/api/varieties"</code>で指定したURLへのリクエストを処理することを宣言します。
@@ -244,14 +211,14 @@ public class VarietyController {
 </p>
 <pre>
   <code>
-    <mark>@GetMapping("")</mark>
-    Variety[] listAll() {
+    <mark>@GetMapping</mark>
+    Varieties listAll() {
         return varietyService.listAll();
     }
   </code>
 </pre>
 <p>
-  メソッドの返すVarietyの配列を、Spring MVCがJSONに変換してレスポンスとして返します。
+  Varietyのコレクションを内部に持つVarietiesクラスをSpring MVCがJSONに変換してレスポンスとして返します。
 </p>
 <h2>POSTリクエストの処理：@PostMapping</h2>
 <p>
@@ -261,12 +228,8 @@ public class VarietyController {
 </p>
 <pre>
   <code>
-<mark>@PostMapping("")</mark>
-    VarietyNumber register(<mark>@RequestBody</mark> <mark>@Validated</mark> VarietyName varietyName,
-                       BindingResult bindingResult) {
-    if (bindingResult.hasErrors()) {
-        throw new IllegalArgumentException(bindingResult.toString());
-    }
+<mark>@PostMapping</mark>
+    VarietyNumber register(<mark>@RequestBody</mark> <mark>@Validated</mark> VarietyName varietyName) {
     Variety variety = Variety.from(varietyName);
     varietyRegisterService.register(variety);
     return variety.number();
@@ -287,7 +250,7 @@ public class VarietyController {
 package example.domain.model.kit.row;
 
 public class VarietyName {
-    <mark>@NotNull(message = "必須")</mark>
+    <mark>@NotEmpty(message = "必須")</mark>
     <mark>@Size(min=3, message = "{min}字以上")</mark>
     <mark>@Size(max=20, message = "{max}字以内")</mark>
     String value;
@@ -298,16 +261,36 @@ public class VarietyName {
 </pre>
 <h3>バリデーションエラー</h3>
 <p>
-  エラーの有無を<code>BindingResult#hasErrors()</code>メソッドで判断します。<br />
-  エラーが発生した場合は、例外を投げます。（例外を処理する仕組みは後述）
+  バインドの失敗や、バリデーションでエラーが発生した場合は、Spring MVCが、例外を発生させます。<br />
+  そして、例外に応じたHTTPステータスコードで、エラー内容をJSON形式に変換してレスポンスとして返します。
 </p>
 <pre>
   <code>
-if (bindingResult.hasErrors()) {
-    throw new IllegalArgumentException(bindingResult.toString());
+{
+  "timestamp": "2020-05-11T22:32:04.865+0000",
+  "status": 400,
+  "error": "Bad Request",
+  "errors": [
+    {
+      ...
+
+      "defaultMessage": "3字以上",
+      "objectName": "varietyName",
+      "field": "value",
+      "rejectedValue": "AX",
+      "bindingFailure": false
+    }
+  ],
+  "message": "Validation failed for object='varietyName'. Error count: 1",
+  "path": "/api/varieties"
 }
   </code>
 </pre>
+<p>
+  Spring MVCが標準で提供するエラーハンドリングで問題がなければ、アプリケーションの開発者がエラー処理を記述する必要はありません。<br />
+  独自のHTTPステータスやエラー内容を返したい場合は、<code>@RestControllerAdvice</code>アノテーションを使って、
+  独自の例外ハンドリングを記述できます。
+</p>
 <h3>Varietyオブジェクトの生成と保存</h3>
 <p>
   ハーブの品種名(VarietyName)オブジェクトを使って、ハーブ品種(Variety)オブジェクトを生成して保存します。
@@ -322,31 +305,6 @@ if (bindingResult.hasErrors()) {
 <p>
   ハーブ品種(Variety)オブジェクトを生成した時に自動的に発番された品種番号(VarietyNumber)オブジェクトをJSONデータとして返します。
 </p>
-<hr>
-<h2>エラーの処理</h2>
-<p>
-  エラー時に発生した例外は、専用のコントローラで処理します。<br />
-  指定したHTTPステータスコードとメッセージをHTTPレスポンスとして返します。
-</p>
-<pre>
-  <code>
-package example.presentation.api._support;
-
-<mark>@RestControllerAdvice(basePackages = {"example.presentation.api"})</mark>
-public class ApplicationErrorHandler {
-
-    static final Logger logger = LoggerFactory.getLogger(ApplicationErrorHandler.class);
-
-    // Validation Errors
-    <mark>@ResponseStatus(value = HttpStatus.BAD_REQUEST)</mark>
-    <mark>@ExceptionHandler({IllegalArgumentException.class})</mark>
-    public String validationErrors(Exception exception) {
-        logger.error(exception.getMessage());
-        return exception.getMessage();
-    }
-}
-  </code>
-</pre>
 <hr>
 <h2>APIドキュメントの自動生成</h2>
 <p>

@@ -12,7 +12,7 @@
     | <a target="application" th:href="@{/references/application}">アプリケーションの紹介</a>
     | <a target="architecture" th:href="@{/references/architecture}">技術方式と設計ガイドライン</a>
     | <a target="object-mapping" th:href="@{/references/object-mapping}">オブジェクトマッピングの概要</a>
-    | <a target="_self" th:href="@{/references/jig-report}">JIGドキュメント</a>
+    | <a target="_self" th:href="@{/references/jig}">JIGドキュメント</a>
   </nav>
 </header>
 
@@ -153,9 +153,52 @@
 <h3>クラス・メソッド・パッケージの日本語の別名</h3>
 <p>
   日本語の別名は、JavaDoc形式のコメントに記述します。<br />
-  クラスの別名とメソッドの別名はそれぞれの定義の直前のJavaDocコメントの一行目を表示します。<br />
+  クラスの別名とメソッドの別名はそれぞれの定義の直前のJavaDocコメントの一行目を表示します。
+</p>
+<pre>
+  <code>
+package example.domain.model.kit.row;
+
+/**
+ * ハーブの品種
+ */
+public class Variety {
+ ...
+}
+  </code>
+</pre>
+<pre>
+  <code>
+package example.application.service;
+
+/**
+ * ハーブ品種の参照サービス
+ */
+@Service
+public class VarietyService {
+
+    ...
+
+    /**
+     * ハーブ品種を一覧する
+     */
+    public Varieties listAll() {
+        return varietyRepository.listAll();
+    }
+}
+  </code>
+</pre>
+<p>
   パッケージの別名は、それぞれのディレクトリの<code>package-info.java</code>ファイルのJavaDocコメントの一行目を表示します。
 </p>
+<pre>
+  <code>
+/**
+ * ハーブ栽培キット
+ */
+package example.domain.model.kit;
+  </code>
+</pre>
 <h3>enumの要素名</h3>
 <p>
   日本語で要素名を書きます。
