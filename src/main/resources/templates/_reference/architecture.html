@@ -17,21 +17,55 @@
 </header>
 
 <h1>技術方式と設計ガイドライン</h1>
-
+<p>
+  このサンプルアプリケーションのレイヤ構造・使用技術・設計方針について説明します。
+</p>
 <h2>レイヤ構造：三層＋ドメインロジック</h2>
 <p>
-  ビジネスロジックとドメインロジックを同じ意味で使っています。
+  このサンプルアプリケーションのレイヤ構造は、
+  CCSR(Continuous Concurrent Stepwise Refinement)開発手法で取り入れている
+  <stong>三層＋ビジネスロック</stong>です。
+<br />
+<img src="/diagram/layers.jpg" width="480">
+  <br />
+  ビジネスルールに基づく計算・判断を表現するオブジェクトは<strong>ビジネスロジック</strong>に集めます。
 </p>
-<h2>使っているフレームワークと参考資料</h2>
+<h2>使っている要素技術</h2>
 <p>
-  使用している要素技術は以下の通りです。
+  使っている要素技術は以下の通りです。
 </p>
 <ul>
-  <li>画面：Spring MVC (WebDataBinder), Thymeleaf</li>
+  <li>プレゼンテーション層（画面）：Spring MVC (WebDataBinder), Thymeleaf</li>
+  <li>プレゼンテーション層（API）：Spring MVC (Jackson ObjectMapper), Swagger-UI</li>
   <li>データベース：MyBatis SQL Mapper, H2 Database, Flyway</li>
-  <li>JSON(API)：Spring MVC (Jackson ObjectMapper), Swagger-UI</li>
 </ul>
-<h2>ドメインオブジェクトの設計ガイドライン</h2>
+<h2>設計方針</h2>
+<p>
+  CCSRの基本的な設計方針は次の通りです。
+</p>
+<ul>
+  <li>ビジネスロジック（ドメインロジック）を入出力の関心事から独立させる</li>
+  <li>ビジネスロジックを表現するオブジェクト（ドメインオブジェクト）を中心に設計・実装を進める</li>
+</ul>
+<p>
+  この設計の考え方とやり方は以下を参考にしてください。
+</p>
+<h3>ビジネスロジックを独立させる</h3>
+<p>
+  ビジネスロジック（ドメインロジック）を独立するためのレイヤー構造である<strong>三層＋ビジネスロジック</strong>の説明です。<br />
+  ⇒ <a target="isolating-the-domain" href="https://github.com/system-sekkei/isolating-the-domain/wiki">ドメインを独立させる</a>
+</p>
+<h3>ドメインオブジェクトの設計方針</h3>
+<p>
+  ビジネスロジックを記述するためのクラス設計のガイドラインです。<br />
+  ⇒ <a target="design-guideline" href="https://github.com/masuda220/business-logic-patterns/wiki/%E8%A8%AD%E8%A8%88%E3%82%AC%E3%82%A4%E3%83%89%E3%83%A9%E3%82%A4%E3%83%B3">設計ガイドライン</a>
+</p>
+<h2>参考：Springフレームワークなどの技術情報</h2>
+<p>
+  Springフレームワークや関連技術については、以下が参考になります。<br />
+  NTTデータが作成し公開している、Springフレームワークを中心にした日本語のアプリケーション開発ガイドです。<br />
+  ⇒ <a target="terasoluna" href="http://terasolunaorg.github.io/guideline/5.5.1.RELEASE/ja/">TERASOLUNA</a>
+</p>
 <p>
   <a href="#">ページの先頭に戻る</a>
 </p>
