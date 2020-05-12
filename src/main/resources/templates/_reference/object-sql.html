@@ -268,6 +268,38 @@ public class VarietyDatasource <mark>implements VarietyRepository</mark> {
   <code>AS "varietyNumber.value"</code>は、resultTypeのVarietyクラスが持つvarietyNumberオブジェクトの
   valueフィールドへのマッピングです。
 </p>
+<h4>マッピング先のオブジェクトの生成の失敗と対応方法</h4>
+<p>
+  MyBatisを使っている時に、オブジェクトの生成に失敗という例外が発生することあります。
+</p>
+<pre>
+  <code>
+There was an unexpected error (type=Internal Server Error, status=500).
+nested exception is org.apache.ibatis.reflection.ReflectionException: <mark>Error instantiating class example.domain.model.kit.row.Variety</mark> with invalid types (VarietyName) or values (SN-040Z). Cause: java.lang.IllegalArgumentException: argument type mismatch
+  </code>
+</pre>
+<p>
+  エラーの発生する理由は、引数を持つコンストラクタを定義したクラスに、引数なしのコンストラクタが見つからないためです。<br />
+  MyBatisは、マッピング対象のオブジェクトが存在しない場合、引数なしのコンストラクタでオブジェクトを生成します。<br />
+  引数ありのコンストラクタを定義した場合は、<strong>引数なし</strong>のコンストラクタも定義すれば、このエラーを回避できます。
+</p>
+<p>
+  あるいは、対象のオブジェクトが他のオブジェクトのフィールドとして宣言されている場合は、対象のオブジェクトを保持するクラスで、
+  対象のオブジェクトを生成しておくことで、このエラーは回避できます。
+</p>
+<h4>フィールドがnullになる</h4>
+<p>
+  フィールドに期待された値が設定されずnullになることがあります。<br />
+  考え得られる理由は２つあります。
+</p>
+<p>
+  ひとつは、SQLがnullを返している場合です。<br />
+  SQL文を単独で実行して、値が返ってくることを確認してください。
+</p>
+<p>
+  SQlが値を返しているのに、対象のフィールドがnullになる場合は、AS句で指定したフィールドへのパスがまちがっている可能性があります。<br />
+  パス記述がまちがっていないか、スペルミスがないか、確認してください。
+</p>
 <h3>insert要素の記述</h3>
 <p>
   INSERT文はinsert要素で記述します。<br />
