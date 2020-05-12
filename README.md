@@ -52,7 +52,6 @@ Javaを使ったアプリケーション開発の経験者を対象に、Spring 
 <details>
  <summary><code>domain/</code> ドメインロジック</summary>
  <ul>
- <li><code>identity/</code> ← 識別番号</li>
  <li><code>model/</code> モデル</li>
  <li><code>type/</code> 基本型</li>
  </ul>
