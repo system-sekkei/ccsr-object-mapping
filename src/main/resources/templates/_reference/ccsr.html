@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>CCSR手法</title>
+  <link th:replace="_fragments/head :: css-light">
+</head>
+<body>
+<header>
+  <nav>
+    <a target="top" th:href="@{/}">トップに戻る</a>
+    | <a target="application" th:href="@{/references/application}">アプリケーションの紹介</a>
+    | <a target="object-mapping" th:href="@{/references/object-mapping}">オブジェクトマッピングの概要</a>
+    | <a target="architecture" th:href="@{/references/architecture}">技術方式と設計ガイドライン</a>
+    | <a target="_self" th:href="@{/references/ccsr}">CCSR手法</a>
+    | <a target="jig" th:href="@{/references/jig}">JIGドキュメント</a>
+  </nav>
+</header>
+
+<h1>CCSR手法</h1>
+<p>
+  CCSR手法は、ソフトウェアのもっとも重要な品質は<strong>発展性</strong>であるという考え方に基づく開発手法です。<br />
+</p>
+<h4><em>CCSR:Continuous Concurrent Stepwise Refinement</em> (継続的・並行的・段階的な発展)</h4>
+<h2>基本コンセプト</h2>
+<ul>
+  <li>要件定義・仕様化・実装の<strong>継ぎ目をなくす</strong></li>
+  <li><strong>ビジネスロジック</strong>に焦点を合わせる</li>
+  <li><strong>型によるモジュール構造</strong>を基本にする</li>
+</ul>
+<p>
+  <img src="/diagram/ccsr.jpg">
+</p>
+
+<h2>CCSR手法の特徴</h2>
+<ul>
+  <li>要件定義手法として、要件の<strong>関係性</strong>・その<strong>可視化</strong>・関係者の<strong>合意形成</strong>を重視したRDRA手法を使用</li>
+  <li><strong>ソフトウェア仕様を記述</strong>する方法として、プログラミング言語(Java)による記述、JIGによる可視化、IDE IntelliJ IDEAを活用</li>
+  <li>アーキテクチャとして<strong>三層＋ドメインロジック</strong>を採用</li>
+  <li>実装技術としてSpring MVC, Thymeleaf, MyBatisを使用</li>
+</ul>
+
+<h2>参考資料</h2>
+<ul>
+  <li>
+    <a target="発展性" href="https://masuda220.hatenablog.com/entry/2020/04/05/172125">
+    記事：ソフトウェアのもっとも重要な品質は発展性 (2020/4/5)
+  </a>
+  </li>
+  <li>
+    <a target="ドメイン駆動設計" href="https://www.slideshare.net/masuda220/ss-231096753">
+    スライド：ドメイン駆動設計 15年の取り組みでわかったこと (2020/3/30)
+  </a>
+  </li>
+  <li>
+    <a target="YouTube-RDRA-JIG" href="https://www.youtube.com/watch?v=Jf8y5fd9OhM&feature=youtu.be">
+    YouTube：RDRA2.0のサンプルをJIGで実装してみたよ (2020/4/30)
+    </a>
+  </li>
+</ul>
+<p>
+  <a href="#">ページの先頭に戻る</a>
+</p>
+</body>
+</html>

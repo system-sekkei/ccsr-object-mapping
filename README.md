@@ -4,6 +4,7 @@ CCSR(Continuous Concurrent Stepwise Refinement)手法を学ぶための参照プ
 
 ## CCSR手法
 CCSR手法は、ソフトウェアのもっとも重要な品質は発展性であるという考え方に基づく開発手法です。  
+##### CCSR:Continuous Concurrent Stepwise Refinement (継続的・並行的・段階的な発展)
 
 #### 基本コンセプト
 - 要件定義・仕様化・実装の**継ぎ目をなくす**
