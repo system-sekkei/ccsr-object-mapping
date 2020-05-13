@@ -21,8 +21,7 @@
 </g>
 <!-- example.application.service.StarterKitRegisterService.register(example.domain.model.kit.StarterKit)&#45;&gt;example.domain.model.kit.StarterKit -->
 <g id="edge1" class="edge"><title>example.application.service.StarterKitRegisterService.register(example.domain.model.kit.StarterKit)&#45;&gt;example.domain.model.kit.StarterKit</title>
-<path fill="none" stroke="black" stroke-dasharray="5,2" d="M299.127,-263.495C299.142,-263.274 299.158,-263.053 299.174,-262.832"/>
-<polygon fill="black" stroke="black" points="299.89,-252.734 303.671,-263.027 299.536,-257.722 299.182,-262.709 299.182,-262.709 299.182,-262.709 299.536,-257.722 294.694,-262.391 299.89,-252.734 299.89,-252.734"/>
+<path fill="none" stroke="black" stroke-dasharray="5,2" d="M299.127,-263.495C299.377,-259.968 299.639,-256.267 299.89,-252.734"/>
 </g>
 <!-- example.presentation.api.kit.StarterKitController -->
 <g id="node3" class="node"><title>example.presentation.api.kit.StarterKitController</title>
@@ -34,8 +33,7 @@
 </g>
 <!-- example.presentation.api.kit.StarterKitController&#45;&gt;example.application.service.StarterKitRegisterService.register(example.domain.model.kit.StarterKit) -->
 <g id="edge2" class="edge"><title>example.presentation.api.kit.StarterKitController&#45;&gt;example.application.service.StarterKitRegisterService.register(example.domain.model.kit.StarterKit)</title>
-<path fill="none" stroke="black" stroke-dasharray="1,5" d="M455.641,-305.838C435.261,-302.703 412.809,-299.249 391.393,-295.955"/>
-<polygon fill="black" stroke="black" points="381.308,-294.403 391.876,-291.476 386.25,-295.164 391.191,-295.924 391.191,-295.924 391.191,-295.924 386.25,-295.164 390.507,-300.371 381.308,-294.403 381.308,-294.403"/>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M455.641,-305.838C432.034,-302.206 405.646,-298.147 381.308,-294.403"/>
 </g>
 <!-- example.application.service.StarterKitService.listAll() -->
 <g id="node5" class="node"><title>example.application.service.StarterKitService.listAll()</title>
@@ -47,8 +45,7 @@
 </g>
 <!-- example.presentation.api.kit.StarterKitController&#45;&gt;example.application.service.StarterKitService.listAll() -->
 <g id="edge5" class="edge"><title>example.presentation.api.kit.StarterKitController&#45;&gt;example.application.service.StarterKitService.listAll()</title>
-<path fill="none" stroke="black" stroke-dasharray="1,5" d="M523.209,-335.103C523.186,-335.187 523.163,-335.271 523.139,-335.356"/>
-<polygon fill="black" stroke="black" points="520.949,-343.275 519.278,-332.437 522.282,-338.456 523.615,-333.637 523.615,-333.637 523.615,-333.637 522.282,-338.456 527.952,-334.837 520.949,-343.275 520.949,-343.275"/>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M523.209,-335.103C522.464,-337.798 521.695,-340.577 520.949,-343.275"/>
 </g>
 <!-- example.presentation.web.kit.StarterKitController -->
 <g id="node4" class="node"><title>example.presentation.web.kit.StarterKitController</title>
@@ -60,8 +57,7 @@
 </g>
 <!-- example.presentation.web.kit.StarterKitController&#45;&gt;example.application.service.StarterKitRegisterService.register(example.domain.model.kit.StarterKit) -->
 <g id="edge3" class="edge"><title>example.presentation.web.kit.StarterKitController&#45;&gt;example.application.service.StarterKitRegisterService.register(example.domain.model.kit.StarterKit)</title>
-<path fill="none" stroke="black" stroke-dasharray="1,5" d="M285.134,-307.417C285.213,-307.257 285.292,-307.097 285.371,-306.937"/>
-<polygon fill="black" stroke="black" points="288.941,-299.675 288.567,-310.635 286.735,-304.162 284.528,-308.649 284.528,-308.649 284.528,-308.649 286.735,-304.162 280.49,-306.664 288.941,-299.675 288.941,-299.675"/>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M285.134,-307.417C286.392,-304.86 287.684,-302.231 288.941,-299.675"/>
 </g>
 <!-- example.domain.model.kit.StarterKitList -->
 <g id="node6" class="node"><title>example.domain.model.kit.StarterKitList</title>
@@ -93,8 +89,7 @@
 </g>
 <!-- example.application.service.VarietyRegisterService.register(example.domain.model.kit.row.Variety)&#45;&gt;example.domain.model.kit.row.Variety -->
 <g id="edge6" class="edge"><title>example.application.service.VarietyRegisterService.register(example.domain.model.kit.row.Variety)&#45;&gt;example.domain.model.kit.row.Variety</title>
-<path fill="none" stroke="black" stroke-dasharray="5,2" d="M216.456,-45.4211C216.41,-45.325 216.363,-45.2287 216.317,-45.1324"/>
-<polygon fill="black" stroke="black" points="211.963,-36.0696 220.35,-43.1346 214.128,-40.5764 216.293,-45.0833 216.293,-45.0833 216.293,-45.0833 214.128,-40.5764 212.237,-47.032 211.963,-36.0696 211.963,-36.0696"/>
+<path fill="none" stroke="black" stroke-dasharray="5,2" d="M216.456,-45.4211C214.978,-42.346 213.442,-39.149 211.963,-36.0696"/>
 </g>
 <!-- example.presentation.api.kit.VarietyController -->
 <g id="node9" class="node"><title>example.presentation.api.kit.VarietyController</title>
@@ -106,8 +101,7 @@
 </g>
 <!-- example.presentation.api.kit.VarietyController&#45;&gt;example.application.service.VarietyRegisterService.register(example.domain.model.kit.row.Variety) -->
 <g id="edge7" class="edge"><title>example.presentation.api.kit.VarietyController&#45;&gt;example.application.service.VarietyRegisterService.register(example.domain.model.kit.row.Variety)</title>
-<path fill="none" stroke="black" stroke-dasharray="1,5" d="M369.478,-90.0738C349.022,-86.2913 325.262,-81.898 302.994,-77.7806"/>
-<polygon fill="black" stroke="black" points="292.885,-75.9114 303.536,-73.3047 297.801,-76.8206 302.718,-77.7297 302.718,-77.7297 302.718,-77.7297 297.801,-76.8206 301.9,-82.1547 292.885,-75.9114 292.885,-75.9114"/>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M369.478,-90.0738C345.889,-85.712 317.907,-80.538 292.885,-75.9114"/>
 </g>
 <!-- example.application.service.VarietyService.listAll() -->
 <g id="node11" class="node"><title>example.application.service.VarietyService.listAll()</title>
@@ -119,8 +113,7 @@
 </g>
 <!-- example.presentation.api.kit.VarietyController&#45;&gt;example.application.service.VarietyService.listAll() -->
 <g id="edge10" class="edge"><title>example.presentation.api.kit.VarietyController&#45;&gt;example.application.service.VarietyService.listAll()</title>
-<path fill="none" stroke="black" stroke-dasharray="1,5" d="M426.127,-118.133C426.154,-118.293 426.181,-118.453 426.208,-118.614"/>
-<polygon fill="black" stroke="black" points="427.438,-125.875 421.332,-116.767 426.603,-120.946 425.768,-116.016 425.768,-116.016 425.768,-116.016 426.603,-120.946 430.205,-115.264 427.438,-125.875 427.438,-125.875"/>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M426.127,-118.133C426.56,-120.69 427.005,-123.319 427.438,-125.875"/>
 </g>
 <!-- example.presentation.web.kit.VarietyController -->
 <g id="node10" class="node"><title>example.presentation.web.kit.VarietyController</title>
@@ -132,8 +125,7 @@
 </g>
 <!-- example.presentation.web.kit.VarietyController&#45;&gt;example.application.service.VarietyRegisterService.register(example.domain.model.kit.row.Variety) -->
 <g id="edge8" class="edge"><title>example.presentation.web.kit.VarietyController&#45;&gt;example.application.service.VarietyRegisterService.register(example.domain.model.kit.row.Variety)</title>
-<path fill="none" stroke="black" stroke-dasharray="1,5" d="M117.317,-106.184C135.363,-99.0153 156.172,-90.7486 174.664,-83.4026"/>
-<polygon fill="black" stroke="black" points="184.096,-79.6557 176.464,-87.5298 179.449,-81.5017 174.803,-83.3477 174.803,-83.3477 174.803,-83.3477 179.449,-81.5017 173.141,-79.1656 184.096,-79.6557 184.096,-79.6557"/>
+<path fill="none" stroke="black" stroke-dasharray="1,5" d="M117.317,-106.184C138.508,-97.7657 163.511,-87.8332 184.096,-79.6557"/>
 </g>
 <!-- example.domain.model.kit.row.Varieties -->
 <g id="node12" class="node"><title>example.domain.model.kit.row.Varieties</title>
