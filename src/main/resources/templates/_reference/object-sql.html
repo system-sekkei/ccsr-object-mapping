@@ -8,10 +8,10 @@
 <body>
 <header>
   <nav>
-    <a target="object-mapping" th:href="@{/references/object-mapping}">オブジェクトマッピングの概要に戻る</a>
-    | <a target="object-html" th:href="@{/references/object-html}">オブジェクト ⇔ HTML</a>
-    | <a target="_self" th:href="@{/references/object-sql}">オブジェクト ⇔ SQL</a>
-    | <a target="object-json" th:href="@{/references/object-json}">オブジェクト ⇔ JSON</a>
+    <a th:href="@{/references/object-mapping}">オブジェクトマッピングの概要に戻る</a>
+    | <a th:href="@{/references/object-html}">オブジェクト ⇔ HTML</a>
+    | <a th:href="@{/references/object-sql}">オブジェクト ⇔ SQL</a>
+    | <a th:href="@{/references/object-json}">オブジェクト ⇔ JSON</a>
   </nav>
 </header>
 <h1>オブジェクト ⇔ SQLのマッピング</h1>
@@ -206,7 +206,7 @@ public class VarietyDatasource <mark>implements VarietyRepository</mark> {
   </code>
 </pre>
 <p>
-  Mapper XMLファイルの詳細は、<a target="mybatis-document" href="https://mybatis.org/mybatis-3/ja/sqlmap-xml.html">公式ドキュメント</a>を参考にしてください。
+  Mapper XMLファイルの詳細は、<a target="external-document" href="https://mybatis.org/mybatis-3/ja/sqlmap-xml.html">公式ドキュメント</a>を参考にしてください。
 </p>
 <p>記述方法の要点は以下の通りです。</p>
 <h3>XML宣言</h3>

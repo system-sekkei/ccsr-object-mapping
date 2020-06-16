@@ -7,13 +7,13 @@
 </head>
 <body>
 <nav>
-  <a target="object-html" th:href="@{/references/object-html#http-response}">オブジェクト ⇔ HTMLに戻る</a>
+  <a th:href="@{/references/object-html#http-response}">オブジェクト ⇔ HTMLに戻る</a>
 </nav>
 <br />
 <h1>シンプルなHTMLを書く</h1>
 <p>
   この画面は、最小限のスタイルを指定した
-  <a href="https://kognise.github.io/water.css/" target="_blank">Water.css</a>
+  <a target="external-document" href="https://kognise.github.io/water.css/" >Water.css</a>
   を使用しています。<br />
   HTML要素を記述するだけで、このような画面を作成できます。<br />
   レイアウトや体裁を整えるためのclass属性の記述は不要です。
@@ -22,10 +22,10 @@
 <header>
   <h2>ナビゲーション</h2>
   <nav>
-    <a target="top" th:href="@{/}">トップに戻る</a>
-    | <a target="object-html" th:href="@{/references/object-html}">オブジェクト ⇔ HTML</a>
-    | <a target="object-sql"  th:href="@{/references/object-sql}">オブジェクト ⇔ SQL</a>
-    | <a target="object-json"  th:href="@{/references/object-json}">オブジェクト ⇔ JSON</a>
+    <a th:href="@{/}">トップに戻る</a>
+    | <a th:href="@{/references/object-html}">オブジェクト ⇔ HTML</a>
+    | <a th:href="@{/references/object-sql}">オブジェクト ⇔ SQL</a>
+    | <a th:href="@{/references/object-json}">オブジェクト ⇔ JSON</a>
   </nav>
 </header>
 <p>

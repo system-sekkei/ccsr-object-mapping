@@ -8,15 +8,15 @@
 <body>
 <header>
   <nav>
-    <a target="object-mapping" th:href="@{/references/object-mapping}">オブジェクトマッピングの概要に戻る</a>
-    | <a target="_self" th:href="@{/references/object-html}">オブジェクト ⇔ HTML</a>
-    | <a target="object-sql" th:href="@{/references/object-sql}">オブジェクト ⇔ SQL</a>
-    | <a target="object-json" th:href="@{/references/object-json}">オブジェクト ⇔ JSON</a>
+    <a th:href="@{/references/object-mapping}">オブジェクトマッピングの概要に戻る</a>
+    | <a th:href="@{/references/object-html}">オブジェクト ⇔ HTML</a>
+    | <a th:href="@{/references/object-sql}">オブジェクト ⇔ SQL</a>
+    | <a th:href="@{/references/object-json}">オブジェクト ⇔ JSON</a>
   </nav>
 </header>
 <h1>オブジェクト ⇔ HTMLのマッピング</h1>
 <p>
-  <a target="varieties" th:href="@{/varieties}">ハーブの品種を一覧・登録する画面</a>を例に、オブジェクトとHTMLとのマッピングを説明します。<br />
+  <a th:href="@{/varieties}">ハーブの品種を一覧・登録する画面</a>を例に、オブジェクトとHTMLとのマッピングを説明します。<br />
   マッピングの対象は、下記のVarietyクラスのオブジェクトです。
 </p>
 <pre>
@@ -314,10 +314,10 @@ public String list(<mark>@ModelAttribute("variety")</mark> Variety variety) {
 </details>
 <p>
   このサンプルアプリケーションの画面は最小限のスタイルだけを指定した<code>Water.css</code>で作成しています。<br />
-  <code>Water.css</code>を使った画面の例 ⇒ <a target="plain-html" th:href="@{/references/plain-html}">シンプルなHTMLを書く</a>
+  <code>Water.css</code>を使った画面の例 ⇒ <a th:href="@{/references/plain-html}">シンプルなHTMLを書く</a>
 </p>
 <p>
-  Thymeleafの詳細は、<a target="thymeleaf-document" href="https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf_ja.html">日本語ドキュメント</a>を参考にしてください。
+  Thymeleafの詳細は、<a target="external-document" href="https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf_ja.html">日本語ドキュメント</a>を参考にしてください。
 </p>
 <hr>
 <h2>POSTリクエストの処理：@PostMapping</h2>
@@ -397,7 +397,7 @@ public class VarietyName {
 </p>
 <p>
   オブジェクトをデータベースに保存する方法は
-  <a target="object-sql" th:href="@{/references/object-sql}">オブジェクト ⇔ SQL</a>
+  <a th:href="@{/references/object-sql}">オブジェクト ⇔ SQL</a>
   の説明を参照してください。
 </p>
 <h3>POST処理後の画面遷移</h3>

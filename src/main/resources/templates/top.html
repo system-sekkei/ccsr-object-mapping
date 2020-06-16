@@ -8,12 +8,12 @@
 <body>
 <header>
   <nav>
-    <a target="_self" th:href="@{/}">トップに戻る</a>
-    | <a target="application" th:href="@{/references/application}">アプリケーションの紹介</a>
-    | <a target="object-mapping" th:href="@{/references/object-mapping}">オブジェクトマッピングの概要</a>
-    | <a target="architecture" th:href="@{/references/architecture}">技術方式と設計ガイドライン</a>
-    | <a target="ccsr" th:href="@{/references/ccsr}">CCSR手法</a>
-    | <a target="jig" th:href="@{/references/jig}">JIGドキュメント</a>
+    <a th:href="@{/}">トップに戻る</a>
+    | <a th:href="@{/references/application}">アプリケーションの紹介</a>
+    | <a th:href="@{/references/object-mapping}">オブジェクトマッピングの概要</a>
+    | <a th:href="@{/references/architecture}">技術方式と設計ガイドライン</a>
+    | <a th:href="@{/references/ccsr}">CCSR手法</a>
+    | <a th:href="@{/references/jig}">JIGドキュメント</a>
   </nav>
 </header>
 <h1>ハーブ栽培キット管理アプリケーション</h1>
@@ -21,34 +21,34 @@
 <p>
   アプリケーションの目的、ドメインモデルの概要、画面イメージ、データモデルを説明します。<br/>
   <strong>
-    ⇒ <a target="application" th:href="@{/references/application}">アプリケーションの紹介</a>
+    ⇒ <a th:href="@{/references/application}">アプリケーションの紹介</a>
   </strong>
 </p>
 <h2>オブジェクトマッピング</h2>
 <p>
   このアプリケーションはドメイン層のオブジェクトと画面・テーブル・JSONとのマッピングのやり方の学習用に作成しました。<br />
   <strong>
-    ⇒ <a target="object-mapping" th:href="@{/references/object-mapping}">オブジェクトマッピングの概要</a>
+    ⇒ <a th:href="@{/references/object-mapping}">オブジェクトマッピングの概要</a>
   </strong>
 </p>
 <p>
   それぞれのマッピングの説明は以下を参考にしてください。<br />
-  　<a target="object-html" th:href="@{/references/object-html}">オブジェクト ⇔ HTMLのマッピング</a>
-  | <a target="object-sql" th:href="@{/references/object-sql}">オブジェクト ⇔ SQLのマッピング</a>
-  | <a target="object-json" th:href="@{/references/object-json}">オブジェクト ⇔ JSONのマッピング</a>
+  　<a th:href="@{/references/object-html}">オブジェクト ⇔ HTMLのマッピング</a>
+  | <a th:href="@{/references/object-sql}">オブジェクト ⇔ SQLのマッピング</a>
+  | <a th:href="@{/references/object-json}">オブジェクト ⇔ JSONのマッピング</a>
 </p>
   <h2>アーキテクチャ</h2>
 <p>
   レイヤー構造、使用している技術、設計方針の説明です。<br />
 <strong>
-   ⇒ <a target="architecture" th:href="@{/references/architecture}">技術方式と設計ガイドライン</a>
+   ⇒ <a target="external-document" th:href="@{/references/architecture}">技術方式と設計ガイドライン</a>
 </strong>
 </p>
 <h2>CCSR手法</h2>
 <p>
   このアプリケーションは、要件定義・仕様化・実装の継ぎ目をなくすCCSR開発手法に基づいています。<br />
   <strong>
-    ⇒ <a target="ccsr" th:href="@{/references/ccsr}">CCSR手法</a>
+    ⇒ <a th:href="@{/references/ccsr}">CCSR手法</a>
   </strong>
 </p>
 <h2>JIGドキュメント</h2>
@@ -56,7 +56,7 @@
   ソースコードから各種のドキュメントを自動生成するツール JIG の説明です。<br />
   このアプリケーションの設計内容を理解するために役に立ちます。<br />
   <strong>
-   ⇒ <a target="jig" th:href="@{/references/jig}">JIGドキュメント</a>
+   ⇒ <a th:href="@{/references/jig}">JIGドキュメント</a>
   </strong>
 </p>
 </body>

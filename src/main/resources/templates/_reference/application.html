@@ -8,19 +8,19 @@
 <body>
 <header>
   <nav>
-    <a target="top" th:href="@{/}">トップに戻る</a>
-    | <a target="_self" th:href="@{/references/application}">アプリケーションの紹介</a>
-    | <a target="object-mapping" th:href="@{/references/object-mapping}">オブジェクトマッピングの概要</a>
-    | <a target="architecture" th:href="@{/references/architecture}">技術方式と設計ガイドライン</a>
-    | <a target="ccsr" th:href="@{/references/ccsr}">CCSR手法</a>
-    | <a target="jig" th:href="@{/references/jig}">JIGドキュメント</a>
+    <a th:href="@{/}">トップに戻る</a>
+    | <a th:href="@{/references/application}">アプリケーションの紹介</a>
+    | <a th:href="@{/references/object-mapping}">オブジェクトマッピングの概要</a>
+    | <a th:href="@{/references/architecture}">技術方式と設計ガイドライン</a>
+    | <a th:href="@{/references/ccsr}">CCSR手法</a>
+    | <a th:href="@{/references/jig}">JIGドキュメント</a>
   </nav>
 </header>
 
 <h1>アプリケーションの紹介</h1>
 <p>
   ハーブ栽培キットの販売会社が、商品を管理するための社内アプリケーションです。<br />
-  <a target="Thymeleaf-Spring Document" href="https://www.thymeleaf.org/doc/tutorials/3.0/thymeleafspring.html#spring-thyme-seed-starter-manager">
+  <a target="external-document" href="https://www.thymeleaf.org/doc/tutorials/3.0/thymeleafspring.html#spring-thyme-seed-starter-manager">
     Thymeleaf-Springのドキュメント(英語)
   </a>
   に登場するアプリケーションを参考にしました。
@@ -32,7 +32,7 @@
 <p>
   技術方式は、CCSR(Continuous Concurrent Stepwise Refinement)開発手法で使っているレイヤ構造と設計方針に基づいています。
   CCSR手法を学ぶためのさまざまな参考資料の一つです。<br />
-  ⇒ <a target="ccsr" th:href="@{/references/ccsr}">CCSR手法</a>
+  ⇒ <a th:href="@{/references/ccsr}">CCSR手法</a>
 </p>
 
 <h2>ドメインモデル</h2>
@@ -47,7 +47,7 @@
 <h2>画面</h2>
 <p>
   ハーブの栽培キットを一覧したり追加するための管理画面です。<br />
-<a target="kits" th:href="@{/kits}">栽培キットの管理画面</a>
+<a th:href="@{/kits}">栽培キットの管理画面</a>
 </p>
 <h4>画面イメージ</h4>
 <img src="/diagram/starterkit-screen.png">

@@ -8,12 +8,12 @@
 <body>
 <header>
   <nav>
-    <a target="top" th:href="@{/}">トップに戻る</a>
-    | <a target="application" th:href="@{/references/application}">アプリケーションの紹介</a>
-    | <a target="_self" th:href="@{/references/object-mapping}">オブジェクトマッピングの概要</a>
-    | <a target="architecture" th:href="@{/references/architecture}">技術方式と設計ガイドライン</a>
-    | <a target="ccsr" th:href="@{/references/ccsr}">CCSR手法</a>
-    | <a target="jig" th:href="@{/references/jig}">JIGドキュメント</a>
+    <a th:href="@{/}">トップに戻る</a>
+    | <a th:href="@{/references/application}">アプリケーションの紹介</a>
+    | <a th:href="@{/references/object-mapping}">オブジェクトマッピングの概要</a>
+    | <a th:href="@{/references/architecture}">技術方式と設計ガイドライン</a>
+    | <a th:href="@{/references/ccsr}">CCSR手法</a>
+    | <a th:href="@{/references/jig}">JIGドキュメント</a>
   </nav>
 </header>
 
@@ -41,9 +41,9 @@ public class Variety {
 </pre>
 <nav>
   <h4>マッピングする対象ごとの説明</h4>
-  <a target="object-html" th:href="@{/references/object-html}">オブジェクト ⇔ HTMLのマッピング</a>
-  | <a target="object-sql" th:href="@{/references/object-sql}">オブジェクト ⇔ SQLのマッピング</a>
-  | <a target="object-json" th:href="@{/references/object-json}">オブジェクト ⇔ JSONのマッピング</a>
+  <a th:href="@{/references/object-html}">オブジェクト ⇔ HTMLのマッピング</a>
+  | <a th:href="@{/references/object-sql}">オブジェクト ⇔ SQLのマッピング</a>
+  | <a th:href="@{/references/object-json}">オブジェクト ⇔ JSONのマッピング</a>
 </nav>
 <h2>ドメインオブジェクトと外部データ形式とのマッピング</h2>
 <p>
@@ -105,22 +105,22 @@ public class Variety {
 <h3>フォームデータをドメインオブジェクトとのマッピング</h3>
 <p>
   Spring MVCの<code>WebDataBinder</code>クラスのDirect Field Access機能を使います。<br />
-  ⇒ <a target="object-html" th:href="@{/references/object-html#direct-field-access}">オブジェクト ⇔ HTMLのマッピング [ダイレクトフィールドアクセスの設定]</a>
+  ⇒ <a th:href="@{/references/object-html#direct-field-access}">オブジェクト ⇔ HTMLのマッピング [ダイレクトフィールドアクセスの設定]</a>
 </p>
 <h3>ドメインオブジェクトの内部データをHTMLテンプレートから参照する</h3>
 <p>
   Spring MVCとThymeleafテンプレートエンジンを組み合わせることで、ドメインオブジェクトの<code>toString()</code>メソッドを自動的に呼び出します。<br />
-  ⇒ <a target="object-html" th:href="@{/references/object-html#http-response}">オブジェクト ⇔ HTMLのマッピング [HTTPレスポンスの生成]</a>
+  ⇒ <a th:href="@{/references/object-html#http-response}">オブジェクト ⇔ HTMLのマッピング [HTTPレスポンスの生成]</a>
 </p>
 <h3>データベーステーブルとドメインオブジェクトとのマッピング</h3>
 <p>
   MyBatis SQL Mapperを使うと、public でないフィールドも標準で参照と設定が可能です。<br />
-  ⇒ <a target="object-sql" th:href="@{/references/object-sql}">オブジェクト ⇔ SQLのマッピング</a>
+  ⇒ <a th:href="@{/references/object-sql}">オブジェクト ⇔ SQLのマッピング</a>
 </p>
 <h3>JSONデータとドメインオブジェクトとのマッピング</h3>
 <p>
   Spring MVCに組み込まれているJackson ObjectMapperクラスの対象オブジェクトへの可視性(visibility)をフィールドレベルに設定します。<br />
-  ⇒ <a target="object-json" th:href="@{/references/object-json}">オブジェクト ⇔ JSONのマッピング</a>
+  ⇒ <a th:href="@{/references/object-json}">オブジェクト ⇔ JSONのマッピング</a>
 </p>
 <p>
   <a href="#">ページの先頭に戻る</a>
