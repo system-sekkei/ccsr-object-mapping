@@ -1,8 +1,8 @@
 plugins {
     id 'java'
     id 'idea'
-    id 'org.springframework.boot' version '2.2.6.RELEASE'
-    id 'org.dddjava.jig-gradle-plugin' version '2020.6.2.1'
+    id 'org.springframework.boot' version '2.3.3.RELEASE'
+    id 'org.dddjava.jig-gradle-plugin' version '2020.11.2.1'
 }
 
 group 'org.example'
@@ -10,7 +10,7 @@ version '1.0-SNAPSHOT'
 
 description = 'mapping sample'
 
-sourceCompatibility = '1.8'
+sourceCompatibility = '11'
 
 //　MyBatisのMapper.xmlを、Mapper.javaと同じディレクトリに置く
 sourceSets {
@@ -24,9 +24,10 @@ repositories {
 }
 
 dependencies {
-    implementation platform("org.springframework.boot:spring-boot-dependencies:2.2.6.RELEASE")
+    implementation platform("org.springframework.boot:spring-boot-dependencies:2.3.3.RELEASE")
     implementation("org.springframework.boot:spring-boot-starter-web")
     runtimeOnly("org.springframework.boot:spring-boot-starter-thymeleaf")
+    implementation("org.springframework.boot:spring-boot-starter-validation")
 
     implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.2")
     runtimeOnly("com.h2database:h2")
