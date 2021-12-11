@@ -1,8 +1,9 @@
 plugins {
     id 'java'
     id 'idea'
-    id 'org.springframework.boot' version '2.3.3.RELEASE'
-    id 'org.dddjava.jig-gradle-plugin' version '2020.11.2.1'
+    id "io.spring.dependency-management" version "1.0.11.RELEASE"
+    id 'org.springframework.boot' version '2.6.1'
+    id 'org.dddjava.jig-gradle-plugin' version '2021.12.1'
 }
 
 group 'org.example'
@@ -20,21 +21,22 @@ sourceSets {
 }
 
 repositories {
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {
-    implementation platform("org.springframework.boot:spring-boot-dependencies:2.3.3.RELEASE")
+    //implementation platform("org.springframework.boot:spring-boot-dependencies:2.3.3.RELEASE")
     implementation("org.springframework.boot:spring-boot-starter-web")
     runtimeOnly("org.springframework.boot:spring-boot-starter-thymeleaf")
     implementation("org.springframework.boot:spring-boot-starter-validation")
 
-    implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.2")
+    implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.0")
     runtimeOnly("com.h2database:h2")
     runtimeOnly("org.flywaydb:flyway-core")
 
-    implementation ("io.springfox:springfox-swagger2:2.9.2")
-    runtimeOnly ("io.springfox:springfox-swagger-ui:2.9.2")
+    implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.5.13'
+//    implementation ("io.springfox:springfox-swagger2:2.9.2")
+//    runtimeOnly ("io.springfox:springfox-swagger-ui:2.9.2")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude(group: 'org.junit.vintage')
